@@ -13,6 +13,10 @@
 		9C26A92224D8424E000E131B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C26A92024D8424E000E131B /* Main.storyboard */; };
 		9C26A92424D84251000E131B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C26A92324D84251000E131B /* Assets.xcassets */; };
 		9C26A92724D84251000E131B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C26A92524D84251000E131B /* LaunchScreen.storyboard */; };
+		9C26A92F24D842B8000E131B /* Protein.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C26A92E24D842B8000E131B /* Protein.swift */; };
+		9C26A93124D842C3000E131B /* ProteinArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C26A93024D842C3000E131B /* ProteinArray.swift */; };
+		9C26A93324D842EC000E131B /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C26A93224D842EC000E131B /* AlertService.swift */; };
+		9C26A93824D983D8000E131B /* models.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C26A93724D983D8000E131B /* models.scnassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +28,10 @@
 		9C26A92324D84251000E131B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9C26A92624D84251000E131B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9C26A92824D84251000E131B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9C26A92E24D842B8000E131B /* Protein.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protein.swift; sourceTree = "<group>"; };
+		9C26A93024D842C3000E131B /* ProteinArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProteinArray.swift; sourceTree = "<group>"; };
+		9C26A93224D842EC000E131B /* AlertService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlertService.swift; path = ../../Protein.v3/Protein.v3/AlertService.swift; sourceTree = "<group>"; };
+		9C26A93724D983D8000E131B /* models.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = models.scnassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +48,7 @@
 		9C26A90E24D8424E000E131B = {
 			isa = PBXGroup;
 			children = (
+				9C26A93724D983D8000E131B /* models.scnassets */,
 				9C26A91924D8424E000E131B /* Protein.v3.1 */,
 				9C26A91824D8424E000E131B /* Products */,
 			);
@@ -57,9 +66,12 @@
 			isa = PBXGroup;
 			children = (
 				9C26A91A24D8424E000E131B /* AppDelegate.swift */,
+				9C26A93224D842EC000E131B /* AlertService.swift */,
 				9C26A91C24D8424E000E131B /* SceneDelegate.swift */,
 				9C26A91E24D8424E000E131B /* ViewController.swift */,
 				9C26A92024D8424E000E131B /* Main.storyboard */,
+				9C26A92E24D842B8000E131B /* Protein.swift */,
+				9C26A93024D842C3000E131B /* ProteinArray.swift */,
 				9C26A92324D84251000E131B /* Assets.xcassets */,
 				9C26A92524D84251000E131B /* LaunchScreen.storyboard */,
 				9C26A92824D84251000E131B /* Info.plist */,
@@ -126,6 +138,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9C26A92724D84251000E131B /* LaunchScreen.storyboard in Resources */,
+				9C26A93824D983D8000E131B /* models.scnassets in Resources */,
 				9C26A92424D84251000E131B /* Assets.xcassets in Resources */,
 				9C26A92224D8424E000E131B /* Main.storyboard in Resources */,
 			);
@@ -139,7 +152,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				9C26A91F24D8424E000E131B /* ViewController.swift in Sources */,
+				9C26A92F24D842B8000E131B /* Protein.swift in Sources */,
 				9C26A91B24D8424E000E131B /* AppDelegate.swift in Sources */,
+				9C26A93124D842C3000E131B /* ProteinArray.swift in Sources */,
+				9C26A93324D842EC000E131B /* AlertService.swift in Sources */,
 				9C26A91D24D8424E000E131B /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -1,8 +1,8 @@
 //
 //  SceneDelegate.swift
-//  Protein.v3.1
+//  Protein.v3
 //
-//  Created by Thao P Le on 03/08/2020.
+//  Created by Thao P Le on 14/07/2020.
 //  Copyright © 2020 Thao P Le. All rights reserved.
 //
 

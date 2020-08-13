@@ -54,7 +54,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegate {
         
         for node in scene.rootNode.childNodes
         {
-            print(node.name as Any)
+            print(node.name)
             if (node != nil)
             {
                 node.removeFromParentNode()
@@ -74,27 +74,24 @@ class ViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegate {
     }
     
     
-    
-    
-    //Functions to show options for the menu
     func showOptions(){
         let fCoilAction = UIAlertAction(title: "Help", style: .default){
             (ACTION) in
             self.addProtein(name: "flexCoil")
         }
         
-        let rCoilAction = UIAlertAction(title: "Information", style: .default) {
+        let rCoilAction = UIAlertAction(title: "", style: .default) {
             (ACTION) in
             self.addProtein(name: "rigCoil")
             
         }
         
-        let helixAction = UIAlertAction(title: "About us", style: .default){
+        let helixAction = UIAlertAction(title: "Helix", style: .default){
             (ACTION) in
             self.addProtein(name: "helix")
         }
         
-        let sheetAction = UIAlertAction(title: "Whatever", style: .default) {
+        let sheetAction = UIAlertAction(title: "Sheet", style: .default) {
             (ACTION) in self.addProtein(name:"sheet")
         }
         
@@ -106,28 +103,17 @@ class ViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegate {
         
     }
     
-   // Create functions for the menu button
-    
   // TRY AND FETCH SOMETHING FROM THE WEB
-    //textView for inputting data
-    @IBOutlet weak var textInputView: UITextView!
-
-    
-    
-    
-    //textView for displaying fetched data
     @IBOutlet weak var textView: UITextView!
    
-    //Post Button
+    
     @IBAction func postButton(_ sender: UIButton) {
         post()
     }
     
-   /* //Get button
     @IBAction func getButton(_ sender: UIButton) {
         get(dataString: "userId")
-    }*/
-    
+    }
     struct ResponseModel: Codable{
     var userId: Int
     var id: Int?
@@ -135,15 +121,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegate {
     var completed: Bool
 }
     
-    //Create POST function for both posting and getting the information from the web
-    
     func post() {
         
-        textInputView.isEditable = true
-        textInputView.isUserInteractionEnabled = true
-        
-        let url = URL(string: "https://www.rcsb.org")
-            //structure/\( String(describing: textInputView.text))")
+        let url = URL(string: "https://web.expasy.org/protparam/")
         guard let requestURL = url else { fatalError() }
 
 
@@ -152,14 +132,13 @@ class ViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegate {
         request.httpMethod = "POST"
 
         //HTTP Request Parameters which will be sent in HTTP Request Body
-        let postString = "search-bar-input-text=\(String(describing: textInputView.text))";
+        let postString = "P05130";
 
         //Set HTTP Request Body
         request.httpBody = postString.data(using: String.Encoding.utf8);
 
         //Perform HTTP Request
         let task = URLSession.shared.dataTask(with: request) {(data, response, error) in
-            DispatchQueue.main.async {
             //Check for Error
             if let error = error {
                 print ("Error took place \(error)")
@@ -167,24 +146,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegate {
             }
             //Convert HTTP Response Data to a String
             if let data = data, let dataString = String(data: data, encoding: .utf8){
-                //print("Response data string:\n \(dataString)")
-                if let range = dataString.range(of: " weight:</B>") {
-                    
-                    _ = dataString[range]
-                    
-                    // get more data
-                    let endIndex = dataString.index(range.upperBound, offsetBy: 10)
-                    let mySubstring = dataString[range.upperBound..<endIndex]
-                    
-                  
-                    print(String(mySubstring))
-                    self.textView.text = "Molecular weight:" + String(mySubstring)
-                }
-                else {
-                  print("String not present")
-                }
+                print("Response data string:\n \(dataString)")
             }
-        }
         }
         task.resume()
         
@@ -194,7 +157,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegate {
     
     func get(dataString: String) {
         // Create URL
-        let url = URL(string: "https://files.rcsb.org/download/6MK1\( String(describing: textInputView.text)).pdb")
+        let url = URL(string: "https://jsonplaceholder.typicode.com/todos/1")
         guard let requestUrl = url else { fatalError() }
         // Create URL Request
         var request = URLRequest(url: requestUrl)
@@ -218,17 +181,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegate {
             
             // Convert HTTP Response Data to a simple String
             if let data = data, let dataString = String(data: data, encoding: .utf8) {
-                
-                /*
-                if let range = dataString.range(of: "weight:") {
-                    let substring = dataString[dataString.startIndex..<range.lowerBound]
-                  //let substring = dataString[..<range.lowerBound] // or str[str.startIndex..<range.lowerBound]
-                  print(substring)  // Prints ab
-                }
-                else {
-                  print("String not present")
-                }
- */
                 print("Response data string:\n \(dataString)")
                 self.textView.text = dataString
             }
@@ -278,7 +230,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegate {
     }
     
     
-   /* func showChoices(){
+    func showChoices(){
         let fCoilAction = UIAlertAction(title: "fCoil", style: .default){
             (ACTION) in
             self.removeProtein(name: "flexCoil")
@@ -305,9 +257,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegate {
         
         AlertService.showAlert(style: .actionSheet, title: nil, message: nil, actions: [fCoilAction, rCoilAction, helixAction, sheetAction, cancelAction], completion: nil)
         
-    }*/
+    }
     
-  // Create function for removing all protein from screen
+    
     func removeProtein(name: String){
         //let proteinScene = SCNScene(named: "models.scnassets/" + name + ".scn")!
         //let nodeName = proteinScene.rootNode.childNodes[0].name
@@ -318,7 +270,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegate {
         
     }
     
-   /* //DISPLAYING TEXT ON SCREEN
+    //DISPLAYING TEXT ON SCREEN
     func showText() {
     let text = SCNText(string: "Hello", extrusionDepth: 1)
     let material = SCNMaterial()
@@ -331,7 +283,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegate {
     textNode.geometry = text
 
     sceneView.scene.rootNode.addChildNode(textNode)
-    }*/
+    }
     
     
     override func viewDidLoad() {
