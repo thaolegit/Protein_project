@@ -22,57 +22,14 @@ class ViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegate {
     
     @IBOutlet weak var sceneView: ARSCNView!
     
+    @IBOutlet weak var exitButton: UIButton!
     
-    @IBAction func fCoilButton(_ sender: Any) {
-        addProtein(name: "flexCoil")
-    }
+  
 
-    @IBAction func rCoilButton(_ sender: Any) {
-        addProtein(name: "rigCoil")
-    }
-    
-    @IBAction func helixButton(_ sender: Any) {
-        addProtein(name: "helix")
-    }
-    
-    
-    @IBAction func sheetButton(_ sender: Any) {
-        addProtein(name: "flexCoil")
-    }
-    
-    
-        
-    
     
     @IBAction func showButton(_ sender: UIButton) {
         showOptions()
     }
-    
-    @IBAction func clearButton(_ sender: UIButton) {
-        //showChoices()
-        print("deleting " + String(scene.rootNode.childNodes.count))
-        
-        for node in scene.rootNode.childNodes
-        {
-            print(node.name as Any)
-            if (node != nil)
-            {
-                node.removeFromParentNode()
-            }
-        }
-        
-        /*
-        var size = scene.rootNode.childNodes.count
-        if (size > 0)
-        {
-            scene.rootNode.childNodes.prefix(size - 2)
-        }
-        */
-        
-        
-        // scene.rootNode.childNodes[scene.rootNode.childNodes.count - 1].removeFromParentNode()
-    }
-    
     
     
     
@@ -365,7 +322,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegate {
     }
     
 }
-extension UIButton {
+/*extension UIButton {
     open override func draw(_ rect: CGRect) {
         //provide custom style
         self.layer.cornerRadius = 20
@@ -375,10 +332,10 @@ extension UIButton {
         
     }
 }
+*/
 
 
-
-//WEB FETCHING EXTENSION
+/*//WEB FETCHING EXTENSION
 extension Dictionary {
     func percentEncoded() -> Data? {
         return map { key, value in
@@ -401,4 +358,4 @@ extension CharacterSet {
         return allowed
     }()
 }
-
+*/

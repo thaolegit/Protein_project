@@ -17,6 +17,10 @@
 		9C26A93124D842C3000E131B /* ProteinArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C26A93024D842C3000E131B /* ProteinArray.swift */; };
 		9C26A93324D842EC000E131B /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C26A93224D842EC000E131B /* AlertService.swift */; };
 		9C26A93824D983D8000E131B /* models.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C26A93724D983D8000E131B /* models.scnassets */; };
+		9C5486C124E6BC54002E8408 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C5486C024E6BC54002E8408 /* FirstViewController.swift */; };
+		9C5486C324E6CDBE002E8408 /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C5486C224E6CDBE002E8408 /* IntroViewController.swift */; };
+		9C5486C524E6CDCE002E8408 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C5486C424E6CDCE002E8408 /* GameViewController.swift */; };
+		9C5486E924E6DDEA002E8408 /* EduViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C5486E824E6DDEA002E8408 /* EduViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +36,10 @@
 		9C26A93024D842C3000E131B /* ProteinArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProteinArray.swift; sourceTree = "<group>"; };
 		9C26A93224D842EC000E131B /* AlertService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlertService.swift; path = ../../Protein.v3/Protein.v3/AlertService.swift; sourceTree = "<group>"; };
 		9C26A93724D983D8000E131B /* models.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = models.scnassets; sourceTree = "<group>"; };
+		9C5486C024E6BC54002E8408 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		9C5486C224E6CDBE002E8408 /* IntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
+		9C5486C424E6CDCE002E8408 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		9C5486E824E6DDEA002E8408 /* EduViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EduViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +78,10 @@
 				9C26A91C24D8424E000E131B /* SceneDelegate.swift */,
 				9C26A91E24D8424E000E131B /* ViewController.swift */,
 				9C26A92024D8424E000E131B /* Main.storyboard */,
+				9C5486E824E6DDEA002E8408 /* EduViewController.swift */,
+				9C5486C224E6CDBE002E8408 /* IntroViewController.swift */,
+				9C5486C424E6CDCE002E8408 /* GameViewController.swift */,
+				9C5486C024E6BC54002E8408 /* FirstViewController.swift */,
 				9C26A92E24D842B8000E131B /* Protein.swift */,
 				9C26A93024D842C3000E131B /* ProteinArray.swift */,
 				9C26A92324D84251000E131B /* Assets.xcassets */,
@@ -154,9 +166,13 @@
 				9C26A91F24D8424E000E131B /* ViewController.swift in Sources */,
 				9C26A92F24D842B8000E131B /* Protein.swift in Sources */,
 				9C26A91B24D8424E000E131B /* AppDelegate.swift in Sources */,
+				9C5486E924E6DDEA002E8408 /* EduViewController.swift in Sources */,
 				9C26A93124D842C3000E131B /* ProteinArray.swift in Sources */,
+				9C5486C524E6CDCE002E8408 /* GameViewController.swift in Sources */,
 				9C26A93324D842EC000E131B /* AlertService.swift in Sources */,
 				9C26A91D24D8424E000E131B /* SceneDelegate.swift in Sources */,
+				9C5486C124E6BC54002E8408 /* FirstViewController.swift in Sources */,
+				9C5486C324E6CDBE002E8408 /* IntroViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
