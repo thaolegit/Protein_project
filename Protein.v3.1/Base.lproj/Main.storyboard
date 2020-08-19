@@ -39,16 +39,6 @@
                                     <action selector="postButton:" destination="BCM-N0-cEq" eventType="touchUpInside" id="jhd-ws-XLg"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.5" contentMode="scaleToFill" text="Protein information will appear here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gNt-MH-ni0">
-                                <rect key="frame" x="40" y="445" width="295" height="95"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="95" id="RWi-9C-P6v"/>
-                                </constraints>
-                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                             <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Alt-AY-Nl3">
                                 <rect key="frame" x="278" y="550" width="57" height="41"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -119,6 +109,25 @@
                                     <segue destination="6jn-NR-72z" kind="show" id="1Hv-vb-k21"/>
                                 </connections>
                             </button>
+                            <wkWebView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aYt-7W-AJg">
+                                <rect key="frame" x="40" y="309" width="295" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.5" contentMode="scaleToFill" text="Protein information will appear here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gNt-MH-ni0">
+                                <rect key="frame" x="40" y="445" width="295" height="95"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="95" id="RWi-9C-P6v"/>
+                                </constraints>
+                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -157,11 +166,12 @@
                         <outlet property="secondSceneView" destination="Je4-cU-xTC" id="Dr0-9n-jco"/>
                         <outlet property="textInputView" destination="ALa-0g-ZzV" id="P1q-cB-BqY"/>
                         <outlet property="textView" destination="gNt-MH-ni0" id="y0G-xk-Pqt"/>
+                        <outlet property="webView" destination="aYt-7W-AJg" id="fHJ-TC-RMx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w8Y-T1-ivv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="438" y="-92"/>
+            <point key="canvasLocation" x="437.60000000000002" y="-92.203898050974516"/>
         </scene>
         <!--Intro View Controller-->
         <scene sceneID="0uN-Vi-Po8">

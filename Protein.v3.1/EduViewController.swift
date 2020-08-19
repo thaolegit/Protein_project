@@ -10,6 +10,7 @@ import UIKit
 import SceneKit
 import ARKit
 import Foundation
+import WebKit
 
 class EduViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegate {
     
@@ -44,14 +45,14 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegate
     
     //Functions to show options for the menu
     func showOptions(){
-        let fCoilAction = UIAlertAction(title: "Help", style: .default){
+        let fCoilAction = UIAlertAction(title: "More about protein", style: .default){
             (ACTION) in
-            self.addProtein(name: "flexCoil")
+            self.openLink()
         }
         
-        let rCoilAction = UIAlertAction(title: "Information", style: .default) {
+        let rCoilAction = UIAlertAction(title: "Help", style: .default) {
             (ACTION) in
-            self.addProtein(name: "rigCoil")
+            self.helpScreen()
             
         }
         
@@ -73,7 +74,32 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegate
     }
     
    // Create functions for the menu button
+    // function to open link to RCSB
+    func openLink(){
+        guard let url = URL(string: "https://www.rcsb.org/") else { return }
+        UIApplication.shared.open(url)
+    }
+    // function to pop-up Help screen
+    func helpScreen (){
+
+        //let helpFrame = CGRect(x: 100, y: 200, width: 200, height: 200)
+        let helpView : UIView = UIView(frame:CGRect(x:0, y: 80, width: 400, height: 400))
+        let helpText = UITextView(frame:CGRect(x:0, y: 50, width: 350, height: 230))
+        helpText.text = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."
+     
+        
+        helpView.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1.0)
+        helpView.alpha=0.5
+        helpText.alpha=0.5
+        helpText.font = UIFont(name: "Apple SD Gothic Neo Medium", size: 25)
     
+        self.view.addSubview(helpView)
+        helpView.addSubview(helpText)
+        helpText.center = helpView.center
+        helpText.centerXAnchor.constraint(equalTo: helpView.centerXAnchor).isActive = true
+        helpText.centerYAnchor.constraint(equalTo: helpView.centerYAnchor).isActive = true
+    }
+        
     
     
     //Functions for the camera button
@@ -143,8 +169,16 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegate
     var completed: Bool
 }
     
-    //Create POST function for both posting and getting the information from the web
     
+    @IBOutlet weak var webView: WKWebView!
+    
+    //Create POST function for both posting and getting the information from the web
+    /*func evaluateJavaScript(_ javaScriptString: String,
+    completionHandler: ((Any?, Error?) -> Void)? = nil)
+    {*/
+      
+        
+
     func post() {
         
         textInputView.isEditable = true
@@ -198,12 +232,30 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegate
         
     }
     
-    
-    
+    /*struct Website {
+
+        var url: URL
+        var img: URL
+        var title: String
+
+        init(url: URL, img: URL, text: String) {
+            self.url = url
+            self.img = img
+            self.title = text
+        }
+    }*/
     func get() {
+
+        
         // Create URL
         let url = URL(string: "https://files.rcsb.org/download/6MK1\( String(describing: textInputView.text)).pdb")
         guard let requestUrl = url else { fatalError() }
+        
+         webView.evaluateJavaScript("document.getElementById(\"contentStructureWeight\").innerHtml;") {(response, Error) in
+            if (response != nil) {
+                self.textView.text = response as? String
+            }
+        }
         // Create URL Request
         var request = URLRequest(url: requestUrl)
         // Specify HTTP Method to use
