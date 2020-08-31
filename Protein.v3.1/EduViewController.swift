@@ -12,7 +12,7 @@ import ARKit
 import Foundation
 import WebKit
 
-class EduViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegate {
+class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegate, UITextViewDelegate {
     
     var proteinData: Protein!
     
@@ -141,8 +141,9 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegate
     
   // TRY AND FETCH SOMETHING FROM THE WEB
     //textView for inputting data
-    @IBOutlet weak var textInputView: UITextView!
 
+
+    @IBOutlet weak var textField: UITextField!
     
     
     
@@ -155,8 +156,32 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegate
     }
     
     @IBAction func getButton(_ sender: UIButton) {
-        get()
+        getTry()
     }
+    
+    
+    func getTry(){
+        
+        let domain = "https://www.rcsb.org/structure/"
+        let parameter = "\(textField.text ?? "1111")"
+        let myURLString:NSURL = NSURL(string: "\(domain)\(parameter)")!
+        print(myURLString)
+       // let userType =
+        //let myURLString = (userType)"
+        guard let myURL:NSURL = NSURL(string: "\(myURLString)") else {
+            print ("Error: \(myURLString) doesn't seem to be valid")
+            return
+        }
+    
+    
+    do{
+        let myHTMLString = try String(contentsOf: myURL as URL,  encoding: .ascii)
+        print("HTML : \(myHTMLString)")
+    } catch let error {
+        print("Error: \(error)")
+    }
+    }
+
     /* //Get button
     @IBAction func getButton(_ sender: UIButton) {
         get(dataString: "userId")
@@ -170,7 +195,7 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegate
 }
     
     
-    @IBOutlet weak var webView: WKWebView!
+
     
     //Create POST function for both posting and getting the information from the web
     /*func evaluateJavaScript(_ javaScriptString: String,
@@ -179,13 +204,62 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegate
       
         
 
+    
+ 
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true;
+    }
+    
+    /*
+    func download(){
+        // Create destination URL
+        let documentsUrl:URL =  (FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first as URL?)!
+           let destinationFileUrl = documentsUrl.appendingPathComponent("downloadedFile.pdb")
+           
+           //Create URL to the source file you want to download
+           let fileURL = URL(string: "https://files.rcsb.org/download/6MK1.pdb")
+           
+           let sessionConfig = URLSessionConfiguration.default
+           let session = URLSession(configuration: sessionConfig)
+        
+           let request = URLRequest(url:fileURL!)
+           
+           let task = session.downloadTask(with: request) { (tempLocalUrl, response, error) in
+               if let tempLocalUrl = tempLocalUrl, error == nil {
+                   // Success
+                   if let statusCode = (response as? HTTPURLResponse)?.statusCode {
+                       print("Successfully downloaded. Status code: \(statusCode)")
+                   }
+                   
+                   do {
+                       try FileManager.default.copyItem(at: tempLocalUrl, to: destinationFileUrl)
+                   } catch (let writeError) {
+                       print("Error creating a file \(destinationFileUrl) : \(writeError)")
+                   }
+                   
+               } else {
+                print("Error took place while downloading a file. Error description: %@", error?.localizedDescription as Any);
+               }
+           }
+           task.resume()
+           
+         }
+
+    */
+    
+    
     func post() {
         
-        textInputView.isEditable = true
-        textInputView.isUserInteractionEnabled = true
+       textField.isUserInteractionEnabled = true
+        //textField.isEditable = true
+        //textInputView.endEditing(true)
         
-        let url = URL(string: "https://www.rcsb.org")
-            //structure/\( String(describing: textInputView.text))")
+       /* let tap = UITapGestureRecognizer(target:self.view, action: #selector(UIView.endEditing(_:)))
+        secondSceneView.addGestureRecognizer(tap)*/
+        
+        let url = URL(string: "https://www.rcsb.org/")// files.rcsb.org/download/6MK1.pdb
+        
         guard let requestURL = url else { fatalError() }
 
 
@@ -194,11 +268,11 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegate
         request.httpMethod = "POST"
 
         //HTTP Request Parameters which will be sent in HTTP Request Body
-        let postString = "search-bar-input-text=\(String(describing: textInputView.text))";
+        let postString = "search-bar-input-text=\(String(describing: textField.text))";
 
         //Set HTTP Request Body
         request.httpBody = postString.data(using: String.Encoding.utf8);
-
+        print(url!)
         //Perform HTTP Request
         let task = URLSession.shared.dataTask(with: request) {(data, response, error) in
             DispatchQueue.main.async {
@@ -207,25 +281,25 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegate
                 print ("Error took place \(error)")
                 return
             }
-            //Convert HTTP Response Data to a String
-            if let data = data, let dataString = String(data: data, encoding: .utf8){
-                //print("Response data string:\n \(dataString)")
-                if let range = dataString.range(of: " weight:</B>") {
-                    
-                    _ = dataString[range]
-                    
-                    // get more data
-                    let endIndex = dataString.index(range.upperBound, offsetBy: 10)
-                    let mySubstring = dataString[range.upperBound..<endIndex]
-                    
-                  
-                    print(String(mySubstring))
-                    self.textView.text = "Molecular weight:" + String(mySubstring)
-                }
-                else {
-                  print("String not present")
-                }
-            }
+         //Convert HTTP Response Data to a String
+                 /* if let data = data, let dataString = String(data: data, encoding: .utf8){
+                      //print("Response data string:\n \(dataString)")
+                      if let range = dataString.range(of: " weight:</B>") {
+                          
+                          _ = dataString[range]
+                          
+                          // get more data
+                          let endIndex = dataString.index(range.upperBound, offsetBy: 10)
+                          let mySubstring = dataString[range.upperBound..<endIndex]
+                         
+                        
+                          print(String(mySubstring))
+                          self.textView.text = "Molecular weight:" + String(mySubstring)
+                      }
+                      else {
+                        print("String not present")
+                      }
+                  }*/
         }
         }
         task.resume()
@@ -244,18 +318,23 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegate
             self.title = text
         }
     }*/
+    
+        
+    
+    
     func get() {
 
         
         // Create URL
-        let url = URL(string: "https://files.rcsb.org/download/6MK1\( String(describing: textInputView.text)).pdb")
+        let url = URL(string: "https://www.rcsb.org/structure/\( String(describing: textField.text))")
+       // print(url!)
         guard let requestUrl = url else { fatalError() }
         
-         webView.evaluateJavaScript("document.getElementById(\"contentStructureWeight\").innerHtml;") {(response, Error) in
+        /* webView.evaluateJavaScript("document.getElementById(\"contentStructureWeight\").innerHtml;") {(response, Error) in
             if (response != nil) {
                 self.textView.text = response as? String
             }
-        }
+        }*/
         // Create URL Request
         var request = URLRequest(url: requestUrl)
         // Specify HTTP Method to use
@@ -279,18 +358,24 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegate
             // Convert HTTP Response Data to a simple String
             if let data = data, let dataString = String(data: data, encoding: .utf8) {
                 
-                /*
-                if let range = dataString.range(of: "weight:") {
-                    let substring = dataString[dataString.startIndex..<range.lowerBound]
-                  //let substring = dataString[..<range.lowerBound] // or str[str.startIndex..<range.lowerBound]
-                  print(substring)  // Prints ab
+                if let range = dataString.range(of: "Structure weight:") {
+                    
+                    _ = dataString[range]
+                   
+                    let endIndex = dataString.index(range.upperBound, offsetBy: 10)
+                    
+                    let mySubString = dataString[range.upperBound..<endIndex]
+                 
+                    //let substring = dataString[..<range.lowerBound] // or str[str.startIndex..<range.lowerBound]
+                  print(String(mySubString))
+                    self.textView.text = "Weight:" + String(mySubString)// Prints ab
                 }
                 else {
                   print("String not present")
                 }
- */
-                print("Response data string:\n \(dataString)")
-                self.textView.text = dataString
+ 
+               /* print("Response data string:\n \(dataString)")
+                self.textView.text = dataString*/
             }
             
         }
@@ -401,6 +486,8 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegate
         
         textView.delegate = self
         self.textView.reloadInputViews()
+        
+        textField.delegate = self
 
         secondSceneView.delegate = self
         secondSceneView.showsStatistics = true
