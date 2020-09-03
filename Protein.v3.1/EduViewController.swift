@@ -12,8 +12,9 @@ import ARKit
 import Foundation
 import WebKit
 import CoreData
+import ReplayKit
 
-class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegate, UITextViewDelegate, NSFetchedResultsControllerDelegate {
+class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegate, UITextViewDelegate, NSFetchedResultsControllerDelegate, RPPreviewViewControllerDelegate {
     
  // ------------------VARIABLES DECLARTION-----------------------
      let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -56,8 +57,11 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
     }
     
     //Record Butotn to record 3D onscreen
+    
     @IBAction func recordButton(_ sender: UIButton) {
+        handleLongPress(gestureRecognizer: longPressGesture)
     }
+   
     
     //Camera Button to capture the screen and save to Photo Library
     @IBAction func cameraButton(_ sender: UIButton) {
@@ -143,10 +147,47 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
         
         
     //2. Record Button Function: Function to record the screen
-        // 2.1. Record Screen Function
-        // 2.2. Save video Function
-        
+ 
+    let longPressGesture = UILongPressGestureRecognizer.init(target: self, action: #selector(handleLongPress))
+    
+    @objc func handleLongPress(gestureRecognizer: UILongPressGestureRecognizer) {
 
+        if gestureRecognizer.state == UIGestureRecognizer.State.began {
+                debugPrint("long press started")
+                startRecording()
+            }
+        else if gestureRecognizer.state == UIGestureRecognizer.State.ended {
+                debugPrint("longpress ended")
+                stopRecording()
+            }
+    }
+        // 2.1. Record Screen Function
+    let recorder = RPScreenRecorder.shared()
+    func startRecording(){
+        recorder.startRecording{(error) in
+            if let error = error {
+                print(error)
+            }
+        }
+    }
+        // 2.2. Stop recording Function
+    func stopRecording(){
+        recorder.stopRecording {(previewVC, error) in
+            if let previewVC = previewVC {
+            previewVC.previewControllerDelegate = self
+            self.present(previewVC, animated: true, completion: nil)
+        }
+        if let error = error {
+            print(error)
+        }
+        }
+    }
+ func previewControllerDidFinish(_ previewController: RPPreviewViewController) {
+       dismiss(animated: true, completion: nil)
+   }
+   
+     
+        
     //3. Camera Button Function: take a photo of the screen
         // 3.1. Objective C function to save Image
         @objc func saveImage(_ image:UIImage, error:Error?, context: UnsafeMutableRawPointer) {
@@ -580,6 +621,7 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
     }
     
 }
+
 /*extension UIButton {
     open override func draw(_ rect: CGRect) {
         //provide custom style
