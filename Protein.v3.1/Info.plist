@@ -65,5 +65,11 @@
 	<string>AR needs to access the camera</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Needs access to the photo library </string>
+	<key>UIFileSharingEnabled</key>
+	<true/>
+	<key>LSSupportsOpeningDocumentsInPlace</key>
+	<true/>
+	<key>NSMainStoryboardFile</key>
+	<string>Main</string>
 </dict>
 </plist>

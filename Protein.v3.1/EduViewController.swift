@@ -11,126 +11,257 @@ import SceneKit
 import ARKit
 import Foundation
 import WebKit
+import CoreData
 
-class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegate, UITextViewDelegate {
+class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegate, UITextViewDelegate, NSFetchedResultsControllerDelegate {
     
-    var proteinData: Protein!
+ // ------------------VARIABLES DECLARTION-----------------------
+     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+      
+     /* var proteinManagedObject : Protein! = nil
+      
+      var entity: NSEntityDescription!=nil
+      
+      var frc : NSFetchedResultsController<NSFetchRequestResult>! = nil
+      
+      func makeRequest() -> NSFetchRequest<NSFetchRequestResult>{
+          let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Protein")
+          let sorter = NSSortDescriptor(key: "name", ascending: true)
+          request.sortDescriptors = [sorter]
+          
+          return request
+      }*/
     
     let configuration = ARWorldTrackingConfiguration()
     
     let scene = SCNScene()
-    
-    
+
+//----------------------OUTLET CONNECTIONS-------------------------
+    //AR Scene
     @IBOutlet weak var secondSceneView: ARSCNView!
     
-    @IBAction func cameraButton(_ sender: UIButton) {        takeScreenshot()
-    }
+    //TextField to input the Protein Name
+    @IBOutlet weak var textField: UITextField!
+     
+     
+     //textView for displaying fetched data
+     @IBOutlet weak var textView: UITextView!
     
     
+//----------------------BUTTON CONNECTIONS--------------------------
     
-    @IBAction func recordButton(_ sender: UIButton) {
-    }
-    
-    
-    @IBAction func exitButton(_ sender: UIButton) {
-    }
-    
-
-    
+    //Menu Button with options using Alert Service
     @IBAction func menuButton(_ sender: UIButton) {
         showOptions()
     }
     
-    
-    
-    //Functions to show options for the menu
-    func showOptions(){
-        let fCoilAction = UIAlertAction(title: "More about protein", style: .default){
-            (ACTION) in
-            self.openLink()
-        }
-        
-        let rCoilAction = UIAlertAction(title: "Help", style: .default) {
-            (ACTION) in
-            self.helpScreen()
-            
-        }
-        
-        let helixAction = UIAlertAction(title: "About us", style: .default){
-            (ACTION) in
-            self.addProtein(name: "helix")
-        }
-        
-        let sheetAction = UIAlertAction(title: "Whatever", style: .default) {
-            (ACTION) in self.addProtein(name:"sheet")
-        }
-        
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        
-        
-        AlertService.showAlert(style: .actionSheet, title: nil, message: nil, actions: [fCoilAction, rCoilAction, helixAction, sheetAction, cancelAction], completion: nil)
-        
+    //Record Butotn to record 3D onscreen
+    @IBAction func recordButton(_ sender: UIButton) {
     }
     
-   // Create functions for the menu button
-    // function to open link to RCSB
-    func openLink(){
-        guard let url = URL(string: "https://www.rcsb.org/") else { return }
-        UIApplication.shared.open(url)
+    //Camera Button to capture the screen and save to Photo Library
+    @IBAction func cameraButton(_ sender: UIButton) {
+        takeScreenshot()
     }
-    // function to pop-up Help screen
-    func helpScreen (){
-
-        //let helpFrame = CGRect(x: 100, y: 200, width: 200, height: 200)
-        let helpView : UIView = UIView(frame:CGRect(x:0, y: 80, width: 400, height: 400))
-        let helpText = UITextView(frame:CGRect(x:0, y: 50, width: 350, height: 230))
-        helpText.text = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."
      
-        
-        helpView.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1.0)
-        helpView.alpha=0.5
-        helpText.alpha=0.5
-        helpText.font = UIFont(name: "Apple SD Gothic Neo Medium", size: 25)
+    //Get Button to get the pDB files and display
+     @IBAction func getButton(_ sender: UIButton) {
+        download()
+     }
     
-        self.view.addSubview(helpView)
-        helpView.addSubview(helpText)
-        helpText.center = helpView.center
-        helpText.centerXAnchor.constraint(equalTo: helpView.centerXAnchor).isActive = true
-        helpText.centerYAnchor.constraint(equalTo: helpView.centerYAnchor).isActive = true
+    //Exit Button
+    @IBAction func exitButton(_ sender: UIButton) {
     }
+    
+//------------FUNCTIONS THAT MAKE ACTIONS BELOW------------------------
+    
+    //1. Menu Button Functions: Show options when Menu button is clicked
+        func showOptions(){
+                let openLinkAction = UIAlertAction(title: "More about protein", style: .default){
+                    (ACTION) in
+                    self.openLink()
+                }
+                
+                let helpScreenAction = UIAlertAction(title: "Help", style: .default) {
+                    (ACTION) in
+                    self.helpScreen()
+                }
+            
+                let pDB101Action = UIAlertAction(title: "PDB 101", style: .default) {
+                                   (ACTION) in
+                    self.pdb101()
+                }
+                
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                
+                
+                AlertService.showAlert(style: .actionSheet, title: nil, message: nil, actions: [openLinkAction, helpScreenAction, pDB101Action, cancelAction], completion: nil)
+                
+            }
+           
+         // Create functions inside of Menu Button
+      
+            // 1.1. Function to open link to RCSB
+                func openLink(){
+                    guard let url = URL(string: "https://www.rcsb.org/") else { return }
+             UIApplication.shared.open(url)
+         }
+    
+    
+        // 1.2. Function to pop-up Help screen
+                //Make helpView a global variable for usage later.
+                let helpView : UIView = UIView(frame:CGRect(x:0, y: 0, width: 400, height: 300))
+                func helpScreen (){
+                    let helpText = UITextView(frame:CGRect(x:20, y: 20, width: 350, height: 230))
+                    helpText.text = "If you already know a protein's name and want to see it on AR Display, type the name into input box.\n\nIf you don't have any specific name in mind, check out PDB 101 by clicking the other tab inside Menu. \n\n     Have fun!"
         
+                    helpView.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1.0)
+                    helpView.alpha=0.8
+                    helpText.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1.0)
+                    helpText.alpha=0.8
+                    helpText.textAlignment = .left
+                    //helpText.font = UIFont(name: "Apple SD Gothic Neo Medium", size: 25)
+                    helpText.font = .boldSystemFont(ofSize: 20)
+                    helpText.textColor = UIColor.black
+                    
+                    self.view.addSubview(helpView)
+                    helpView.center = self.view.center
+                    helpView.addSubview(helpText)
+                    
+                    helpText.layer.cornerRadius = 5
+                    
+                    //helpText.centerXAnchor.constraint(equalTo: helpView.centerXAnchor).isActive = true
+                    //helpText.centerYAnchor.constraint(equalTo: helpView.centerYAnchor).isActive = true
+                
+                    
+         }
+            // 1.3. Functions to open pDB 101
+                func pdb101(){
+                    guard let url = URL(string: "http://pdb101.rcsb.org/") else { return }
+                    UIApplication.shared.open(url)
+                }
+        
+        
+    //2. Record Button Function: Function to record the screen
+        // 2.1. Record Screen Function
+        // 2.2. Save video Function
+        
+
+    //3. Camera Button Function: take a photo of the screen
+        // 3.1. Objective C function to save Image
+        @objc func saveImage(_ image:UIImage, error:Error?, context: UnsafeMutableRawPointer) {
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+
+            print("Image was saved in the photo gallery")
+            //UIApplication.shared.open(URL(string:"photos-redirect://")!): open Camera Library every time after photo is taken
+        }
+        // 3.2. Functions to take screen shot
+        func takeScreenshot(){
+            let capturedImage = ARSCNView.snapshot(secondSceneView!)
+            
+            UIImageWriteToSavedPhotosAlbum(capturedImage(), self, #selector(saveImage(_:error:context:)), nil)
+        }
     
+//4. Get Button Functions: Download PDB files from the PDB Bank and Display them
+    //4.1. Download Functions: To download and save PDB files to Documents Directory after user input text
+    func download(){
+                let proteinName = textField.text
+              // Create destination URL
+              let documentsUrl:URL =  (FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first as URL?)!
+                 //let destinationFileUrl = documentsUrl.appendingPathComponent("downloadedFile.pdb")
+                 print("docDire" + String(describing: documentsUrl))
+                 let dataPath = documentsUrl.appendingPathComponent("pDBFiles")
+            let destinationURL = dataPath.appendingPathComponent("/" + proteinName! + ".pdb")
+                 let FileExists = FileManager().fileExists(atPath: destinationURL.path)
+                 
+                 //Create URL to the source file you want to download
+                   let domain = "https://files.rcsb.org/download/"
+                   //let parameter = "\(textField.text ?? "1111")"
+                   let fileExt = ".pdb"
+                   let fileURL:NSURL = NSURL(string: "\(domain)" + proteinName! + "\(fileExt)")!
+                  //let fileURL:NSURL = NSURL(string: "\(domain)\(parameter)\(fileExt)")!
+                 //let fileURL = URL(string: "https://files.rcsb.org/download/6MK1.pdb")
+                 
+                 let sessionConfig = URLSessionConfiguration.default
+                 let session = URLSession(configuration: sessionConfig)
+              
+                    let request = URLRequest(url:fileURL as URL)
+                 
+                 let task = session.downloadTask(with: request) { (tempLocalUrl, response, error) in
+                    DispatchQueue.main.async {
+                    
+                     if let tempLocalUrl = tempLocalUrl, error == nil {
+                         // Success
+                         if let statusCode = (response as? HTTPURLResponse)?.statusCode {
+                             print("Successfully downloaded. Status code: \(statusCode)")
+                         }
+                        
+                       do {
+                       
+                             try FileManager.default.copyItem(at: tempLocalUrl, to: destinationURL)
+                         } catch (let writeError) {
+                             print("Error creating a file \(destinationURL) : \(writeError)")
+                         }
+                         
+                     } else {
+                      print("Error took place while downloading a file. Error description: %@", error?.localizedDescription as Any);
+                     }
+                 }
+               }
+             //Check if File exists. If it does, print and do not download
+                 if FileExists == true {
+                   print("This file was already downloaded.")
+                   task.cancel()
+                   }
+               
+           task.resume()
+                 
+               }
+       //4.2. Function to Display pDB file as 3D Models in AR
+       //4.3. Function to link downloaded file information to CoreData
+       //4.4. Function to fetch some data from the sites (text data)
+       
     
-    //Functions for the camera button
-        //Function to save the image
-    @objc func saveImage(_ image:UIImage, error:Error?, context: UnsafeMutableRawPointer) {
-        if let error = error {
-            print(error.localizedDescription)
-            return
+//---------FUNCTIONS FOR INTERACTION AND DESIGN-------
+ //1. Dismiss after entering protein's name
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+          textField.resignFirstResponder()
+          return true;
+      }
+//2. Dismiss Help Screen by touching other part of the screen
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch: UITouch? = (touches.first!)
+        if touch?.view != helpView{
+            self.helpView.isHidden = true
+            }
         }
 
-        print("Image was saved in the photo gallery")
-        //UIApplication.shared.open(URL(string:"photos-redirect://")!)
-    }
-      
-    func takeScreenshot(){
-        let capturedImage = ARSCNView.snapshot(secondSceneView!)
-        
-        UIImageWriteToSavedPhotosAlbum(capturedImage(), self, #selector(saveImage(_:error:context:)), nil)
-        /*UIGraphicsBeginImageContextWithOptions(
-            CGSize(width: view.bounds.width, height: view.bounds.height),
-            false,
-            2
-        )
-
-        view.layer.render(in: UIGraphicsGetCurrentContext()!)
-        let screenshot = UIGraphicsGetImageFromCurrentImageContext()!
-        UIGraphicsEndImageContext()
-
-        UIImageWriteToSavedPhotosAlbum(screenshot, self, #selector(saveImage(_:error:context:)), nil)*/
-    }
-      
+    
+//3. Make Camera Button change after clicked
+    
+//4. Lighting and Shading functions
+    
+//5. Functions to interact with Protein Models on screen
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -143,56 +274,20 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
     //textView for inputting data
 
 
-    @IBOutlet weak var textField: UITextField!
     
-    
-    
-    //textView for displaying fetched data
-    @IBOutlet weak var textView: UITextView!
    
-    //Post Button
-    @IBAction func postButton(_ sender: UIButton) {
-        post()
-    }
-    
-    @IBAction func getButton(_ sender: UIButton) {
-        getTry()
-    }
-    
-    
-    func getTry(){
-        
-        let domain = "https://www.rcsb.org/structure/"
-        let parameter = "\(textField.text ?? "1111")"
-        let myURLString:NSURL = NSURL(string: "\(domain)\(parameter)")!
-        print(myURLString)
-       // let userType =
-        //let myURLString = (userType)"
-        guard let myURL:NSURL = NSURL(string: "\(myURLString)") else {
-            print ("Error: \(myURLString) doesn't seem to be valid")
-            return
-        }
-    
-    
-    do{
-        let myHTMLString = try String(contentsOf: myURL as URL,  encoding: .ascii)
-        print("HTML : \(myHTMLString)")
-    } catch let error {
-        print("Error: \(error)")
-    }
-    }
 
     /* //Get button
     @IBAction func getButton(_ sender: UIButton) {
         get(dataString: "userId")
     }*/
     
-    struct ResponseModel: Codable{
+    /*struct ResponseModel: Codable{
     var userId: Int
     var id: Int?
     var title: String
     var completed: Bool
-}
+}*/
     
     
 
@@ -206,10 +301,7 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
 
     
  
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true;
-    }
+  
     
     /*
     func download(){
@@ -306,6 +398,29 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
         
     }
     
+    func getTry(){
+           
+           let domain = "https://www.rcsb.org/structure/"
+           let parameter = "\(textField.text ?? "1111")"
+           let myURLString:NSURL = NSURL(string: "\(domain)\(parameter)")!
+           print(myURLString)
+          // let userType =
+           //let myURLString = (userType)"
+           guard let myURL:NSURL = NSURL(string: "\(myURLString)") else {
+               print ("Error: \(myURLString) doesn't seem to be valid")
+               return
+           }
+       
+       
+       do{
+           let myHTMLString = try String(contentsOf: myURL as URL,  encoding: .ascii)
+           print("HTML : \(myHTMLString)")
+       } catch let error {
+           print("Error: \(error)")
+       }
+       }
+    
+   
     /*struct Website {
 
         var url: URL
@@ -322,13 +437,16 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
         
     
     
-    func get() {
+   /* func get() {
 
         
         // Create URL
-        let url = URL(string: "https://www.rcsb.org/structure/\( String(describing: textField.text))")
+        let domain = "https://www.rcsb.org/structure/"
+        let parameter = "\(textField.text ?? "1111")"
+        let myURLString:NSURL = NSURL(string: "\(domain)\(parameter)")!
+        print(myURLString)
        // print(url!)
-        guard let requestUrl = url else { fatalError() }
+        guard let requestUrl = myURLString else { fatalError() }
         
         /* webView.evaluateJavaScript("document.getElementById(\"contentStructureWeight\").innerHtml;") {(response, Error) in
             if (response != nil) {
@@ -383,85 +501,12 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
         task.resume()
         
         
-    }
+    }*/
     
    
     
 
-    
-    func addProtein(name: String) {
-        secondSceneView.delegate = self
-        secondSceneView.showsStatistics = true
-        
-        let proteinScene = SCNScene(named: "models.scnassets/" + name + ".scn")!
-        
-        // proteinData.name = name
-        
-        let cameraNode = SCNNode()
-        cameraNode.camera = SCNCamera()
-        cameraNode.position = SCNVector3(x: 0, y: 0, z: 0)
-        scene.rootNode.addChildNode(cameraNode)
-        
-        
-        let nodeName = proteinScene.rootNode.childNodes[0].name
-        
-        let proteinNode = proteinScene.rootNode.childNode(withName: nodeName!, recursively: true)
-        
-        
-        
-        
-        proteinNode!.scale = SCNVector3(x: 0.01, y: 0.01, z: 0.01)
-        proteinNode!.position = SCNVector3(x: -0.005, y: 0, z: -0.005)
-        scene.rootNode.addChildNode(proteinNode!)
-        
-        let centerConstraint = SCNLookAtConstraint(target: proteinNode)
-        cameraNode.constraints = [centerConstraint]
-        
-        secondSceneView.scene = scene
-        
-        
-    }
-    
-    
-   /* func showChoices(){
-        let fCoilAction = UIAlertAction(title: "fCoil", style: .default){
-            (ACTION) in
-            self.removeProtein(name: "flexCoil")
-        }
-    
-        let rCoilAction = UIAlertAction(title: "rCoil", style: .default) {
-            (ACTION) in
-            self.removeProtein(name: "rigCoil")
-     
-        }
-        
-        let helixAction = UIAlertAction(title: "Helix", style: .default){
-            (ACTION) in
-            self.removeProtein(name: "helix")
-        }
-        
-        let sheetAction = UIAlertAction(title: "Sheet", style: .default) {
-            (ACTION) in self.removeProtein(name:"sheet")
-        }
-        
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        
-        
-        AlertService.showAlert(style: .actionSheet, title: nil, message: nil, actions: [fCoilAction, rCoilAction, helixAction, sheetAction, cancelAction], completion: nil)
-        
-    }*/
-    
-  // Create function for removing all protein from screen
-    func removeProtein(name: String){
-        //let proteinScene = SCNScene(named: "models.scnassets/" + name + ".scn")!
-        //let nodeName = proteinScene.rootNode.childNodes[0].name
-        
-        // let proteinNode = proteinScene.rootNode.childNode(withName: nodeName!, recursively: true)
-        scene.rootNode.childNode(withName: name, recursively: true)?.removeFromParentNode()
-        //scene.rootNode.removeFromParentNode()
-        
-    }
+
     
    /* //DISPLAYING TEXT ON SCREEN
     func showText() {
@@ -492,6 +537,29 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
         secondSceneView.delegate = self
         secondSceneView.showsStatistics = true
         secondSceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin, ARSCNDebugOptions.showFeaturePoints]
+            /*
+        //make the frc and fetch
+               frc = NSFetchedResultsController(fetchRequest: makeRequest(), managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+               frc.delegate = self
+               
+               do {
+                   try frc.performFetch()
+               } catch {
+                   print("frc cannot fetch")
+               }
+        // populate the fileds if update
+            if proteinManagedObject != nil{
+                textField.text = proteinManagedObject.name
+                /*String(describing: destinationURL.path) = proteinManagedObject.location
+                imageTextField.text = proteinManagedObject.image
+                //urlTextField.text = personManagedObject.url
+                
+                if personManagedObject.image != nil {
+                    getImage(imageName: personManagedObject.image!)*/
+                }*/
+              
+
+
         
         }
     

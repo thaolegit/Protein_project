@@ -14,235 +14,119 @@ import Foundation
 class GameViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegate {
     
   
-    
+ //Outlets connections
     @IBOutlet weak var thirdSceneView: ARSCNView!
-    
-    
-    
         let configuration = ARWorldTrackingConfiguration()
         let scene = SCNScene()
-    
-        @IBAction func fCoilButton(_ sender: Any) {
+
+//Button connections
+    @IBAction func fCoilButton(_ sender: Any) {
+            clearAll()
             addProtein(name: "flexCoil")
         }
 
-        @IBAction func rCoilButton(_ sender: Any) {
+    @IBAction func rCoilButton(_ sender: Any) {
+            clearAll()
             addProtein(name: "rigCoil")
         }
         
-        @IBAction func helixButton(_ sender: Any) {
+    @IBAction func helixButton(_ sender: Any) {
+            clearAll()
             addProtein(name: "helix")
         }
         
         
-        @IBAction func sheetButton(_ sender: Any) {
+    @IBAction func sheetButton(_ sender: Any) {
+            clearAll()
             addProtein(name: "flexCoil")
         }
         
-        
-            
-        
-        
-        @IBAction func showButton(_ sender: UIButton) {
+    
+    @IBAction func showButton(_ sender: UIButton) {
             showOptions()
         }
         
-        @IBAction func clearButton(_ sender: UIButton) {
-            //showChoices()
-            print("deleting " + String(scene.rootNode.childNodes.count))
-            
-            for node in scene.rootNode.childNodes
-            {
-                print(node.name as Any)
-                if (node != nil)
-                {
-                    node.removeFromParentNode()
-                }
-            }
-            
-            /*
-            var size = scene.rootNode.childNodes.count
-            if (size > 0)
-            {
-                scene.rootNode.childNodes.prefix(size - 2)
-            }
-            */
-            
-            
-            // scene.rootNode.childNodes[scene.rootNode.childNodes.count - 1].removeFromParentNode()
+    @IBAction func clearButton(_ sender: UIButton) {
+            clearAll()
         }
-        
-        
-        
-        
-        //Functions to show options for the menu
-        func showOptions(){
-            let fCoilAction = UIAlertAction(title: "Help", style: .default){
+    
+//----------------------FUNCITONS BELOW-----------------------
+
+    
+//1. Menu Button Functions: Show options when Menu button is clicked
+    func showOptions(){
+            let openLinkAction = UIAlertAction(title: "More about protein", style: .default){
                 (ACTION) in
-                self.addProtein(name: "flexCoil")
+                self.openLink()
             }
             
-            let rCoilAction = UIAlertAction(title: "Information", style: .default) {
+            let helpScreenAction = UIAlertAction(title: "Help", style: .default) {
                 (ACTION) in
-                self.addProtein(name: "rigCoil")
+                self.helpScreen()
                 
             }
-            
-            let helixAction = UIAlertAction(title: "About us", style: .default){
-                (ACTION) in
-                self.addProtein(name: "helix")
-            }
-            
-            let sheetAction = UIAlertAction(title: "Whatever", style: .default) {
-                (ACTION) in self.addProtein(name:"sheet")
-            }
-            
             
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
             
             
-            AlertService.showAlert(style: .actionSheet, title: nil, message: nil, actions: [fCoilAction, rCoilAction, helixAction, sheetAction, cancelAction], completion: nil)
+            AlertService.showAlert(style: .actionSheet, title: nil, message: nil, actions: [openLinkAction, helpScreenAction,cancelAction], completion: nil)
             
         }
-        
-       // Create functions for the menu button
-        
-      // TRY AND FETCH SOMETHING FROM THE WEB
-        //textView for inputting data
-        @IBOutlet weak var textInputView: UITextView!
-
-        
-        
-        
-        //textView for displaying fetched data
-        @IBOutlet weak var textView: UITextView!
        
-        //Post Button
-        @IBAction func postButton(_ sender: UIButton) {
-            post()
+     // Create functions inside of Menu Button
+  
+        // 1.1. Function to open link to RCSB
+            func openLink(){
+                guard let url = URL(string: "https://www.rcsb.org/") else { return }
+         UIApplication.shared.open(url)
+     }
+        // 1.2. Function to pop-up Help screen
+            let helpView = UIView(frame:CGRect(x:0, y: 0, width: 400, height: 300))
+             func helpScreen (){
+                 let helpText = UITextView(frame:CGRect(x:20, y: 20, width: 350, height: 230))
+                helpText.text = "Click on fCoil, rCoil, Helix, Sheet to look at each individual polypeptide. \nHold and drag the polypeptide on top of each other to create a new Protein. Tap on TRY to create the new Protein! "
+      
+         
+                helpView.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1.0)
+                helpView.alpha=0.8
+                helpText.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1.0)
+                helpText.alpha=0.8
+                helpText.textAlignment = .left
+                helpText.font = .boldSystemFont(ofSize: 20)
+                helpText.textColor = UIColor.black
+                                   
+                self.view.addSubview(helpView)
+                helpView.center = self.view.center
+                helpView.addSubview(helpText)
+                                   
+                helpText.layer.cornerRadius = 5
+     }
+    
+    
+//2. Record Button Function: Function to record the screen
+    // 2.1. Record Screen Function
+    // 2.2. Save video Function
+    
+
+//3. Camera Button Function: take a photo of the screen
+    // 3.1. Objective C function to save Image
+    @objc func saveImage(_ image:UIImage, error:Error?, context: UnsafeMutableRawPointer) {
+        if let error = error {
+            print(error.localizedDescription)
+            return
         }
-        
-       /* //Get button
-        @IBAction func getButton(_ sender: UIButton) {
-            get(dataString: "userId")
-        }*/
-        
-        struct ResponseModel: Codable{
-        var userId: Int
-        var id: Int?
-        var title: String
-        var completed: Bool
+
+        print("Image was saved in the photo gallery")
+        //UIApplication.shared.open(URL(string:"photos-redirect://")!): open Camera Library every time after photo is taken
     }
+    // 3.2. Functions to take screen shot
+    func takeScreenshot(){
+        let capturedImage = ARSCNView.snapshot(thirdSceneView!)
         
-        //Create POST function for both posting and getting the information from the web
-        
-        func post() {
-            
-            textInputView.isEditable = true
-            textInputView.isUserInteractionEnabled = true
-            
-            let url = URL(string: "https://www.rcsb.org")
-                //structure/\( String(describing: textInputView.text))")
-            guard let requestURL = url else { fatalError() }
+        UIImageWriteToSavedPhotosAlbum(capturedImage(), self, #selector(saveImage(_:error:context:)), nil)
+    }
 
-
-            //Prepare URL Request Object
-            var request = URLRequest(url: requestURL)
-            request.httpMethod = "POST"
-
-            //HTTP Request Parameters which will be sent in HTTP Request Body
-            let postString = "search-bar-input-text=\(String(describing: textInputView.text))";
-
-            //Set HTTP Request Body
-            request.httpBody = postString.data(using: String.Encoding.utf8);
-
-            //Perform HTTP Request
-            let task = URLSession.shared.dataTask(with: request) {(data, response, error) in
-                DispatchQueue.main.async {
-                //Check for Error
-                if let error = error {
-                    print ("Error took place \(error)")
-                    return
-                }
-                //Convert HTTP Response Data to a String
-                if let data = data, let dataString = String(data: data, encoding: .utf8){
-                    //print("Response data string:\n \(dataString)")
-                    if let range = dataString.range(of: " weight:</B>") {
-                        
-                        _ = dataString[range]
-                        
-                        // get more data
-                        let endIndex = dataString.index(range.upperBound, offsetBy: 10)
-                        let mySubstring = dataString[range.upperBound..<endIndex]
-                        
-                      
-                        print(String(mySubstring))
-                        self.textView.text = "Molecular weight:" + String(mySubstring)
-                    }
-                    else {
-                      print("String not present")
-                    }
-                }
-            }
-            }
-            task.resume()
-            
-        }
-        
-        
-        
-        func get(dataString: String) {
-            // Create URL
-            let url = URL(string: "https://files.rcsb.org/download/6MK1\( String(describing: textInputView.text)).pdb")
-            guard let requestUrl = url else { fatalError() }
-            // Create URL Request
-            var request = URLRequest(url: requestUrl)
-            // Specify HTTP Method to use
-            request.httpMethod = "GET"
-            // Send HTTP Request
-            let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-               DispatchQueue.main.async {
-
-                // Check if Error took place
-                if let error = error {
-                    print("Error took place \(error)")
-                    return
-                }
-                
-                // Read HTTP Response Status code
-                if let response = response as? HTTPURLResponse {
-                    print("Response HTTP Status code: \(response.statusCode)")
-                
-                }
-                
-                // Convert HTTP Response Data to a simple String
-                if let data = data, let dataString = String(data: data, encoding: .utf8) {
-                    
-                    /*
-                    if let range = dataString.range(of: "weight:") {
-                        let substring = dataString[dataString.startIndex..<range.lowerBound]
-                      //let substring = dataString[..<range.lowerBound] // or str[str.startIndex..<range.lowerBound]
-                      print(substring)  // Prints ab
-                    }
-                    else {
-                      print("String not present")
-                    }
-     */
-                    print("Response data string:\n \(dataString)")
-                    self.textView.text = dataString
-                }
-                
-            }
-            }
-            task.resume()
-            
-            
-        }
-        
-       
-        
-
-        
+// 4. Polypeptide Button Functions: To add protein onto the screens when pressed
         func addProtein(name: String) {
             thirdSceneView.delegate = self
             thirdSceneView.showsStatistics = true
@@ -260,9 +144,7 @@ class GameViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegat
             let nodeName = proteinScene.rootNode.childNodes[0].name
             
             let proteinNode = proteinScene.rootNode.childNode(withName: nodeName!, recursively: true)
-            
-            
-            
+
             
             proteinNode!.scale = SCNVector3(x: 0.01, y: 0.01, z: 0.01)
             proteinNode!.position = SCNVector3(x: -0.005, y: 0, z: -0.005)
@@ -275,72 +157,45 @@ class GameViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegat
             
             
         }
-        
-        
-       /* func showChoices(){
-            let fCoilAction = UIAlertAction(title: "fCoil", style: .default){
-                (ACTION) in
-                self.removeProtein(name: "flexCoil")
+//5. Try Button Functions: Functions to create protein after being dragged
+    
+    
+    
+//6. Clear Button Functions: Clear All
+    func clearAll(){
+            print("deleting " + String(scene.rootNode.childNodes.count))
+            
+            for node in scene.rootNode.childNodes
+            {
+                print(node.name as Any)
+                //if (node != nil)
+                //{
+                node.removeFromParentNode()
+                //}
             }
-        
-            let rCoilAction = UIAlertAction(title: "rCoil", style: .default) {
-                (ACTION) in
-                self.removeProtein(name: "rigCoil")
-         
-            }
-            
-            let helixAction = UIAlertAction(title: "Helix", style: .default){
-                (ACTION) in
-                self.removeProtein(name: "helix")
-            }
-            
-            let sheetAction = UIAlertAction(title: "Sheet", style: .default) {
-                (ACTION) in self.removeProtein(name:"sheet")
-            }
-            
-            
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-            
-            
-            AlertService.showAlert(style: .actionSheet, title: nil, message: nil, actions: [fCoilAction, rCoilAction, helixAction, sheetAction, cancelAction], completion: nil)
-            
-        }*/
-        
-      // Create function for removing all protein from screen
-        func removeProtein(name: String){
-            //let proteinScene = SCNScene(named: "models.scnassets/" + name + ".scn")!
-            //let nodeName = proteinScene.rootNode.childNodes[0].name
-            
-            // let proteinNode = proteinScene.rootNode.childNode(withName: nodeName!, recursively: true)
-            scene.rootNode.childNode(withName: name, recursively: true)?.removeFromParentNode()
-            //scene.rootNode.removeFromParentNode()
             
         }
         
-       /* //DISPLAYING TEXT ON SCREEN
-        func showText() {
-        let text = SCNText(string: "Hello", extrusionDepth: 1)
-        let material = SCNMaterial()
-        material.diffuse.contents = UIColor.systemPink
-        text.materials = [material]
-            
-        let textNode = SCNNode()
-        textNode.position = SCNVector3(0,0,0)
-        textNode.scale = SCNVector3 (0.01, 0.01, 0.01)
-        textNode.geometry = text
+//---------FUNCTIONS FOR INTERACTION AND DESIGN-------
 
-        sceneView.scene.rootNode.addChildNode(textNode)
-        }*/
+    //1. Dismiss Help Screen by touching other part of the screen
+        override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+            let touch: UITouch? = (touches.first!)
+            if touch?.view != helpView{
+                self.helpView.isHidden = true
+                }
+            }
+
         
+    //2. Make Camera Button change after clicked
         
+    //3. Lighting and Shading functions
+        
+    //4. Functions to interact with Protein Models on screen
+//--------------OVERRIDE FUNCTIONS BELOW------------------------
         override func viewDidLoad() {
             super.viewDidLoad()
             // Do any additional setup after loading the view.
-            
-            
-            //textView.delegate = self
-            //self.textView.reloadInputViews()
-
             thirdSceneView.delegate = self
             thirdSceneView.showsStatistics = true
             thirdSceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin, ARSCNDebugOptions.showFeaturePoints]
@@ -377,34 +232,8 @@ class GameViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegat
 
 
 
-    //WEB FETCHING EXTENSION
-    extension Dictionary {
-        func percentEncoded() -> Data? {
-            return map { key, value in
-                let escapedKey = "\(key)".addingPercentEncoding(withAllowedCharacters: .urlQueryValueAllowed) ?? ""
-                let escapedValue = "\(value)".addingPercentEncoding(withAllowedCharacters: .urlQueryValueAllowed) ?? ""
-                return escapedKey + "=" + escapedValue
-            }
-            .joined(separator: "&")
-            .data(using: .utf8)
-        }
-    }
-
-    extension CharacterSet {
-        static let urlQueryValueAllowed: CharacterSet = {
-            let generalDelimitersToEncode = ":#[]@" // does not include "?" or "/" due to RFC 3986 - Section 3.4
-            let subDelimitersToEncode = "!$&'()*+,;="
-
-            var allowed = CharacterSet.urlQueryAllowed
-            allowed.remove(charactersIn: "\(generalDelimitersToEncode)\(subDelimitersToEncode)")
-            return allowed
-        }()
-    }
 
 
-
-
-    
 
     /*
     // MARK: - Navigation

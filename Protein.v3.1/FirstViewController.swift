@@ -26,10 +26,15 @@ class FirstViewController: UIViewController, ARSCNViewDelegate, UITextViewDelega
     @IBAction func EduButton(_ sender: UIButton) {
       
     }
-       func download(){
+    
+    func download(){
            // Create destination URL
            let documentsUrl:URL =  (FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first as URL?)!
-              let destinationFileUrl = documentsUrl.appendingPathComponent("downloadedFile.pdb")
+              //let destinationFileUrl = documentsUrl.appendingPathComponent("downloadedFile.pdb")
+              print("docDire" + String(describing: documentsUrl))
+              let dataPath = documentsUrl.appendingPathComponent("pDBFiles")
+              let destinationURL = dataPath.appendingPathComponent("/" + "downloaded.pdb")
+              let FileExists = FileManager().fileExists(atPath: destinationURL.path)
               
               //Create URL to the source file you want to download
               let fileURL = URL(string: "https://files.rcsb.org/download/6MK1.pdb")
@@ -40,23 +45,33 @@ class FirstViewController: UIViewController, ARSCNViewDelegate, UITextViewDelega
               let request = URLRequest(url:fileURL!)
               
               let task = session.downloadTask(with: request) { (tempLocalUrl, response, error) in
+                 DispatchQueue.main.async {
+                 
                   if let tempLocalUrl = tempLocalUrl, error == nil {
                       // Success
                       if let statusCode = (response as? HTTPURLResponse)?.statusCode {
                           print("Successfully downloaded. Status code: \(statusCode)")
                       }
-                      
-                      do {
-                          try FileManager.default.copyItem(at: tempLocalUrl, to: destinationFileUrl)
+                     
+                    do {
+                    
+                          try FileManager.default.copyItem(at: tempLocalUrl, to: destinationURL)
                       } catch (let writeError) {
-                          print("Error creating a file \(destinationFileUrl) : \(writeError)")
+                          print("Error creating a file \(destinationURL) : \(writeError)")
                       }
                       
                   } else {
                    print("Error took place while downloading a file. Error description: %@", error?.localizedDescription as Any);
                   }
               }
-              task.resume()
+            }
+          //Check if File exists. If it does, print and do not download
+              if FileExists == true {
+                print("This file was already downloaded.")
+                task.cancel()
+                }
+            
+        task.resume()
               
             }
     

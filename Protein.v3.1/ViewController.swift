@@ -13,7 +13,7 @@ import Foundation
 
 class ViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegate {
     
-    var proteinData: Protein!
+   // var proteinData: Protein!
     
     let configuration = ARWorldTrackingConfiguration()
     
