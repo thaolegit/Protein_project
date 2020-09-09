@@ -33,33 +33,7 @@ class GameViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegat
         
     }
     
-    
-    @IBAction func fCoilButton(_ sender: Any) {
-            //clearAll()
-            addProtein(name: "flexCoil")
-        }
-
-    @IBAction func rCoilButton(_ sender: Any) {
-            //clearAll()
-            addProtein(name: "rigCoil")
-        }
         
-    @IBAction func helixButton(_ sender: Any) {
-            //clearAll()
-            addProtein(name: "helix")
-        }
-        
-        
-    @IBAction func sheetButton(_ sender: Any) {
-            //clearAll()
-            addProtein(name: "sheet")
-        }
-        
- 
-        
-    @IBAction func clearButton(_ sender: UIButton) {
-            clearAll()
-        }
     
     var proteinArray = [String]()
     
@@ -92,6 +66,9 @@ class GameViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegat
         createProtein()
     }
     
+    @IBAction func clearButton(_ sender: UIButton) {
+            deleteAll()
+        }
     //----------------------FUNCITONS BELOW-----------------------
 
     
@@ -172,7 +149,7 @@ class GameViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegat
         func addProtein(name: String) {
           
             let proteinScene = SCNScene(named: "models.scnassets/" + name + ".scn")!
-            
+           //These models have only 1 rootnode as the model, add cameranode
             let cameraNode = SCNNode()
             cameraNode.camera = SCNCamera()
             cameraNode.position = SCNVector3(x: 0, y: 0, z: 0)
@@ -181,18 +158,17 @@ class GameViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegat
             
             let nodeName = proteinScene.rootNode.childNodes[0].name
             
-            let proteinNode = proteinScene.rootNode.childNode(withName: nodeName!, recursively: true)
+            guard let proteinNode = proteinScene.rootNode.childNode(withName: nodeName!, recursively: true) else {return}
 
             
-            proteinNode!.scale = SCNVector3(x: 0.008, y: 0.008, z: 0.008)
-            proteinNode!.position = SCNVector3(x: -0.005, y: 0, z: -0.005)
-            scene.rootNode.addChildNode(proteinNode!)
+            proteinNode.scale = SCNVector3(x: 0.008, y: 0.008, z: 0.008)
+            proteinNode.position = SCNVector3(x: -0.005, y: 0, z: -0.005)
+            scene.rootNode.addChildNode(proteinNode)
             
             let centerConstraint = SCNLookAtConstraint(target: proteinNode)
             cameraNode.constraints = [centerConstraint]
             
             thirdSceneView.scene = scene
-            
             
         }
 
@@ -201,19 +177,21 @@ class GameViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegat
         clearAll()
         let newProteinName = proteinArray.joined()
         print(newProteinName)
-        let newProtein = SCNScene(named: "Combinations.scnassets/" + newProteinName + ".scn")!
         
-        let cameraNode = SCNNode()
+        let newProtein = SCNScene(named: "Combinations.scnassets/" + newProteinName + ".scn")
+        if newProtein != nil {
+            
+            let cameraNode = SCNNode()
             cameraNode.camera = SCNCamera()
             cameraNode.position = SCNVector3(x: 0, y: 0, z: 0)
             scene.rootNode.addChildNode(cameraNode)
-                   
-                   
-        let nodeName = newProtein.rootNode.childNodes[0].name
-                   
-            guard let proteinNode = newProtein.rootNode.childNode(withName: nodeName!, recursively: true) else {
-                fatalError("Model is not found")
-        }
+                            
+                            
+            let nodeName = newProtein?.rootNode.childNodes[0].name
+                            
+            guard let proteinNode = newProtein?.rootNode.childNode(withName: nodeName!, recursively: true) else {
+                         fatalError("Model is not found")
+                 }
 
                    
         proteinNode.scale = SCNVector3(x: 0.008, y: 0.008, z: 0.008)
@@ -222,39 +200,17 @@ class GameViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegat
                    
             let centerConstraint = SCNLookAtConstraint(target: proteinNode)
             cameraNode.constraints = [centerConstraint]
+            
+            } else {
+            print("Model is not found")
+        }
                    
             thirdSceneView.scene = scene
     }
     
-    /*func createProtein(proteinName: String){
-   //Display the new structure from combinations folder
-        let newProtein = SCNScene(named:"Combinations.scnassets/" + proteinName + ".scn")!
-        
-        let name1 = "fCoil"
-        let name2 = "rCoil"
-        let name3 = "Helix"
-        let name4 = "Sheet"
-        
-        var proteinName = name1 + name2 + name3 + name4
-        if name1 == nil {
-            proteinName = name2 + name3 + name4
-        }
-        if name2 == nil {
-            proteinName = name1 + name3 + name4
-        }
-        if name3 == nil {
-            proteinName = name1 + name2 + name4
-        }
-        if name4 == nil{
-            proteinName = name1 + name2 + name3
-        }
-        
-        
-        
-        
-    }*/
+
     
-//6. Clear Button Functions: Clear All
+    //Function to clear screen
     func clearAll(){
             print("deleting " + String(scene.rootNode.childNodes.count))
             
@@ -265,6 +221,15 @@ class GameViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegat
             }
             
         }
+    //6. Clear Button Functions: Clear All on screen and in Array
+    func deleteAll(){
+        clearAll()
+        proteinArray.removeAll()
+    }
+    
+    //7. Function to display text
+    //When successfully create a new protein
+    //When unsuccessfully create a new protein
         
 //---------FUNCTIONS FOR INTERACTION AND DESIGN-------
 
