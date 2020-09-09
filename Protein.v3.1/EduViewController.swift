@@ -13,6 +13,7 @@ import Foundation
 import WebKit
 import CoreData
 import ReplayKit
+import AVFoundation
 
 class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegate, UITextViewDelegate, NSFetchedResultsControllerDelegate, RPPreviewViewControllerDelegate {
     
@@ -59,6 +60,8 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
     //Record Butotn to record 3D onscreen
     
     @IBAction func recordButton(_ sender: UIButton) {
+        //handleLongPress(gestureRecognizer: longPressGesture)
+        //startRecording()
         handleLongPress(gestureRecognizer: longPressGesture)
     }
    
@@ -148,10 +151,13 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
         
     //2. Record Button Function: Function to record the screen
  
-    let longPressGesture = UILongPressGestureRecognizer.init(target: self, action: #selector(handleLongPress))
+    //let longPressGesture = UILongPressGestureRecognizer.init(target: self, action: #selector(handleLongPress))
     
-    @objc func handleLongPress(gestureRecognizer: UILongPressGestureRecognizer) {
+   // @objc func handleLongPress(gestureRecognizer: UILongPressGestureRecognizer) {
 
+    let longPressGesture = UILongPressGestureRecognizer.init()
+    
+    func handleLongPress(gestureRecognizer: UILongPressGestureRecognizer) {
         if gestureRecognizer.state == UIGestureRecognizer.State.began {
                 debugPrint("long press started")
                 startRecording()

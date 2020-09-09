@@ -20,37 +20,79 @@ class GameViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegat
         let scene = SCNScene()
 
 //Button connections
+    
+     @IBAction func showButton(_ sender: UIButton) {
+             showOptions()
+         }
+    
+    @IBAction func recordButton(_ sender: UIButton) {
+    }
+    
+    @IBAction func cameraButton(_ sender: UIButton) {
+        takeScreenshot()
+        
+    }
+    
+    
     @IBAction func fCoilButton(_ sender: Any) {
-            clearAll()
+            //clearAll()
             addProtein(name: "flexCoil")
         }
 
     @IBAction func rCoilButton(_ sender: Any) {
-            clearAll()
+            //clearAll()
             addProtein(name: "rigCoil")
         }
         
     @IBAction func helixButton(_ sender: Any) {
-            clearAll()
+            //clearAll()
             addProtein(name: "helix")
         }
         
         
     @IBAction func sheetButton(_ sender: Any) {
-            clearAll()
-            addProtein(name: "flexCoil")
+            //clearAll()
+            addProtein(name: "sheet")
         }
         
-    
-    @IBAction func showButton(_ sender: UIButton) {
-            showOptions()
-        }
+ 
         
     @IBAction func clearButton(_ sender: UIButton) {
             clearAll()
         }
     
-//----------------------FUNCITONS BELOW-----------------------
+    var proteinArray = [String]()
+    
+    @IBAction func flexCoil(_ sender: UIButton) {
+       addProtein(name: "flexCoil")
+       proteinArray.append("fCoil")
+    }
+    
+    
+    @IBAction func rigCoil(_ sender: UIButton) {
+        addProtein(name: "rigCoil")
+        proteinArray.append("rCoil")
+    }
+    
+    
+    @IBAction func helix(_ sender: UIButton) {
+       addProtein(name: "helix")
+       proteinArray.append("Helix")
+        
+    }
+    
+    
+    @IBAction func sheet(_ sender: UIButton) {
+       addProtein(name: "sheet")
+       proteinArray.append("Sheet")
+    }
+    
+    
+    @IBAction func tryButton(_ sender: UIButton) {
+        createProtein()
+    }
+    
+    //----------------------FUNCITONS BELOW-----------------------
 
     
 //1. Menu Button Functions: Show options when Menu button is clicked
@@ -126,14 +168,10 @@ class GameViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegat
         UIImageWriteToSavedPhotosAlbum(capturedImage(), self, #selector(saveImage(_:error:context:)), nil)
     }
 
-// 4. Polypeptide Button Functions: To add protein onto the screens when pressed
+// 4. Polypeptide Button Functions: To add protein onto the screens when button is pressed
         func addProtein(name: String) {
-            thirdSceneView.delegate = self
-            thirdSceneView.showsStatistics = true
-            
+          
             let proteinScene = SCNScene(named: "models.scnassets/" + name + ".scn")!
-            
-            // proteinData.name = name
             
             let cameraNode = SCNNode()
             cameraNode.camera = SCNCamera()
@@ -146,7 +184,7 @@ class GameViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegat
             let proteinNode = proteinScene.rootNode.childNode(withName: nodeName!, recursively: true)
 
             
-            proteinNode!.scale = SCNVector3(x: 0.01, y: 0.01, z: 0.01)
+            proteinNode!.scale = SCNVector3(x: 0.008, y: 0.008, z: 0.008)
             proteinNode!.position = SCNVector3(x: -0.005, y: 0, z: -0.005)
             scene.rootNode.addChildNode(proteinNode!)
             
@@ -157,9 +195,64 @@ class GameViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegat
             
             
         }
-//5. Try Button Functions: Functions to create protein after being dragged
+
     
+    func createProtein(){
+        clearAll()
+        let newProteinName = proteinArray.joined()
+        print(newProteinName)
+        let newProtein = SCNScene(named: "Combinations.scnassets/" + newProteinName + ".scn")!
+        
+        let cameraNode = SCNNode()
+            cameraNode.camera = SCNCamera()
+            cameraNode.position = SCNVector3(x: 0, y: 0, z: 0)
+            scene.rootNode.addChildNode(cameraNode)
+                   
+                   
+        let nodeName = newProtein.rootNode.childNodes[0].name
+                   
+            guard let proteinNode = newProtein.rootNode.childNode(withName: nodeName!, recursively: true) else {
+                fatalError("Model is not found")
+        }
+
+                   
+        proteinNode.scale = SCNVector3(x: 0.008, y: 0.008, z: 0.008)
+        proteinNode.position = SCNVector3(x: -0.005, y: 0, z: -0.005)
+        scene.rootNode.addChildNode(proteinNode)
+                   
+            let centerConstraint = SCNLookAtConstraint(target: proteinNode)
+            cameraNode.constraints = [centerConstraint]
+                   
+            thirdSceneView.scene = scene
+    }
     
+    /*func createProtein(proteinName: String){
+   //Display the new structure from combinations folder
+        let newProtein = SCNScene(named:"Combinations.scnassets/" + proteinName + ".scn")!
+        
+        let name1 = "fCoil"
+        let name2 = "rCoil"
+        let name3 = "Helix"
+        let name4 = "Sheet"
+        
+        var proteinName = name1 + name2 + name3 + name4
+        if name1 == nil {
+            proteinName = name2 + name3 + name4
+        }
+        if name2 == nil {
+            proteinName = name1 + name3 + name4
+        }
+        if name3 == nil {
+            proteinName = name1 + name2 + name4
+        }
+        if name4 == nil{
+            proteinName = name1 + name2 + name3
+        }
+        
+        
+        
+        
+    }*/
     
 //6. Clear Button Functions: Clear All
     func clearAll(){
@@ -168,10 +261,7 @@ class GameViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegat
             for node in scene.rootNode.childNodes
             {
                 print(node.name as Any)
-                //if (node != nil)
-                //{
                 node.removeFromParentNode()
-                //}
             }
             
         }
@@ -198,7 +288,7 @@ class GameViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegat
             // Do any additional setup after loading the view.
             thirdSceneView.delegate = self
             thirdSceneView.showsStatistics = true
-            thirdSceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin, ARSCNDebugOptions.showFeaturePoints]
+            //thirdSceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin, ARSCNDebugOptions.showFeaturePoints]
             
             }
         

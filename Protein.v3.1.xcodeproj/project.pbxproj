@@ -19,6 +19,7 @@
 		9C5486C324E6CDBE002E8408 /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C5486C224E6CDBE002E8408 /* IntroViewController.swift */; };
 		9C5486C524E6CDCE002E8408 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C5486C424E6CDCE002E8408 /* GameViewController.swift */; };
 		9C5486E924E6DDEA002E8408 /* EduViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C5486E824E6DDEA002E8408 /* EduViewController.swift */; };
+		9C5825042508E147004A87CA /* Combinations.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C5825032508E147004A87CA /* Combinations.scnassets */; };
 		9CE4589E24F0315B00295A43 /* pppp.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CE4589D24F0315B00295A43 /* pppp.png */; };
 		9CE458A324F0333000295A43 /* pinpng.com-circle-shadow-png-5825447.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CE458A124F0333000295A43 /* pinpng.com-circle-shadow-png-5825447.png */; };
 		9CE458A424F0333000295A43 /* pinpng.com-tumblr-circle-png-952670.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CE458A224F0333000295A43 /* pinpng.com-tumblr-circle-png-952670.png */; };
@@ -43,6 +44,7 @@
 		9C5486C224E6CDBE002E8408 /* IntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
 		9C5486C424E6CDCE002E8408 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		9C5486E824E6DDEA002E8408 /* EduViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EduViewController.swift; sourceTree = "<group>"; };
+		9C5825032508E147004A87CA /* Combinations.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Combinations.scnassets; sourceTree = "<group>"; };
 		9CE4589D24F0315B00295A43 /* pppp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pppp.png; path = ../pppp.png; sourceTree = "<group>"; };
 		9CE458A124F0333000295A43 /* pinpng.com-circle-shadow-png-5825447.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pinpng.com-circle-shadow-png-5825447.png"; path = "../pinpng.com-circle-shadow-png-5825447.png"; sourceTree = "<group>"; };
 		9CE458A224F0333000295A43 /* pinpng.com-tumblr-circle-png-952670.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pinpng.com-tumblr-circle-png-952670.png"; path = "../pinpng.com-tumblr-circle-png-952670.png"; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 		9C26A90E24D8424E000E131B = {
 			isa = PBXGroup;
 			children = (
+				9C5825032508E147004A87CA /* Combinations.scnassets */,
 				9CF7BAA424FD80700031DC82 /* pdbFiles */,
 				9CE4589D24F0315B00295A43 /* pppp.png */,
 				9CE458A124F0333000295A43 /* pinpng.com-circle-shadow-png-5825447.png */,
@@ -165,6 +168,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9CE458A324F0333000295A43 /* pinpng.com-circle-shadow-png-5825447.png in Resources */,
+				9C5825042508E147004A87CA /* Combinations.scnassets in Resources */,
 				9C26A92724D84251000E131B /* LaunchScreen.storyboard in Resources */,
 				9CE4589E24F0315B00295A43 /* pppp.png in Resources */,
 				9CF7BAA124F59C640031DC82 /* Slide.xib in Resources */,
