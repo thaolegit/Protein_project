@@ -180,7 +180,7 @@ class GameViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegat
         
         let newProtein = SCNScene(named: "Combinations.scnassets/" + newProteinName + ".scn")
         if newProtein != nil {
-            
+            displayText1()
             let cameraNode = SCNNode()
             cameraNode.camera = SCNCamera()
             cameraNode.position = SCNVector3(x: 0, y: 0, z: 0)
@@ -203,6 +203,7 @@ class GameViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegat
             
             } else {
             print("Model is not found")
+            displayText2()
         }
                    
             thirdSceneView.scene = scene
@@ -228,6 +229,35 @@ class GameViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegat
     }
     
     //7. Function to display text
+    func displayText1(){
+        
+        let text = SCNText(string: "Congratulations!🤩\nYou have created a new protein!", extrusionDepth: 1)
+        let material = SCNMaterial()
+        material.diffuse.contents = UIColor.orange
+        text.materials = [material]
+        let node = SCNNode()
+        node.position = SCNVector3(x: -0.005, y: -0.002, z: -0.007)
+        node.scale = SCNVector3(0.0005, 0.0005, 0.0005)
+        node.geometry = text
+        node.name = "shape"
+        thirdSceneView.scene.rootNode.addChildNode(node)
+       
+    }
+    func displayText2(){
+          let text = SCNText(string: "Sorry!😢\nThis combination cannot be made.", extrusionDepth: 1)
+          let material = SCNMaterial()
+          material.diffuse.contents = UIColor.orange
+          text.materials = [material]
+          let node = SCNNode()
+          node.position = SCNVector3(x: -0.007,y: -0.005, z: -0.007)
+          node.scale = SCNVector3(0.0005, 0.0005, 0.0005)
+          node.geometry = text
+          node.name = "shape2"
+          thirdSceneView.scene.rootNode.addChildNode(node)
+      }
+    
+    
+    
     //When successfully create a new protein
     //When unsuccessfully create a new protein
         
