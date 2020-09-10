@@ -167,15 +167,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LjP-wM-xVq">
-                                <rect key="frame" x="0.0" y="0.0" width="389" height="522"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="537"/>
                                 <viewLayoutGuide key="contentLayoutGuide" id="sur-rX-nFW"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="hE2-kg-Ls7"/>
                             </scrollView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5wg-xj-RBg">
-                                <rect key="frame" x="100" y="575" width="163" height="30"/>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="Akp-k7-Str">
+                                <rect key="frame" x="0.0" y="562" width="375" height="37"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="pageIndicatorTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="currentPageIndicatorTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </pageControl>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5wg-xj-RBg">
+                                <rect key="frame" x="97" y="608" width="181" height="29"/>
                                 <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="KFB-5O-xZP"/>
+                                    <constraint firstAttribute="height" constant="29" id="yGS-hv-KX9"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <state key="normal" title="GET STARTED">
@@ -187,7 +193,10 @@
                                         <color key="value" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="17"/>
+                                        <real key="value" value="50"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="7"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -195,25 +204,19 @@
                                     <segue destination="6jn-NR-72z" kind="show" id="T1j-xB-A6P"/>
                                 </connections>
                             </button>
-                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="Akp-k7-Str">
-                                <rect key="frame" x="168" y="530" width="38" height="37"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="pageIndicatorTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="currentPageIndicatorTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </pageControl>
                         </subviews>
-                        <color key="backgroundColor" red="0.93147027490000001" green="0.69350069759999999" blue="0.83271723990000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.57181804889999999" green="0.75125893440000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="u4o-OT-mhu" firstAttribute="bottom" secondItem="5wg-xj-RBg" secondAttribute="bottom" constant="42" id="3Ut-AY-PeN"/>
-                            <constraint firstItem="Akp-k7-Str" firstAttribute="leading" secondItem="u4o-OT-mhu" secondAttribute="leading" constant="168" id="7cP-Zr-Hfo"/>
-                            <constraint firstItem="LjP-wM-xVq" firstAttribute="top" secondItem="Vt5-ml-fHy" secondAttribute="topMargin" id="97G-og-Nhg"/>
-                            <constraint firstItem="Akp-k7-Str" firstAttribute="centerX" secondItem="5wg-xj-RBg" secondAttribute="centerX" constant="5.5" id="IEO-O2-Rhz"/>
-                            <constraint firstItem="u4o-OT-mhu" firstAttribute="trailing" secondItem="5wg-xj-RBg" secondAttribute="trailing" constant="112" id="Ldw-fS-34x"/>
-                            <constraint firstItem="Akp-k7-Str" firstAttribute="top" secondItem="LjP-wM-xVq" secondAttribute="bottom" constant="8" id="gMk-sR-3II"/>
-                            <constraint firstItem="5wg-xj-RBg" firstAttribute="leading" secondItem="u4o-OT-mhu" secondAttribute="leading" constant="100" id="kCt-um-gFT"/>
-                            <constraint firstItem="5wg-xj-RBg" firstAttribute="top" secondItem="Akp-k7-Str" secondAttribute="bottom" constant="8" id="nfl-2P-sYR"/>
-                            <constraint firstItem="LjP-wM-xVq" firstAttribute="centerX" secondItem="Vt5-ml-fHy" secondAttribute="centerX" constant="10" id="wG0-t9-QDR"/>
-                            <constraint firstItem="LjP-wM-xVq" firstAttribute="leading" secondItem="u4o-OT-mhu" secondAttribute="leading" id="xFo-MD-24U"/>
+                            <constraint firstItem="u4o-OT-mhu" firstAttribute="bottom" secondItem="5wg-xj-RBg" secondAttribute="bottom" constant="10" id="3v3-Ph-nnG"/>
+                            <constraint firstItem="Akp-k7-Str" firstAttribute="top" secondItem="LjP-wM-xVq" secondAttribute="bottom" constant="25" id="8lT-H3-d6Z"/>
+                            <constraint firstItem="5wg-xj-RBg" firstAttribute="leading" secondItem="u4o-OT-mhu" secondAttribute="leading" constant="97" id="9q7-LE-iF6"/>
+                            <constraint firstItem="LjP-wM-xVq" firstAttribute="trailing" secondItem="Akp-k7-Str" secondAttribute="trailing" id="JsD-NU-sDb"/>
+                            <constraint firstItem="LjP-wM-xVq" firstAttribute="top" secondItem="u4o-OT-mhu" secondAttribute="top" id="KCR-VW-t8F"/>
+                            <constraint firstItem="Akp-k7-Str" firstAttribute="centerX" secondItem="5wg-xj-RBg" secondAttribute="centerX" id="TBu-Bu-tFy"/>
+                            <constraint firstItem="LjP-wM-xVq" firstAttribute="leading" secondItem="Akp-k7-Str" secondAttribute="leading" id="eit-0h-36c"/>
+                            <constraint firstItem="5wg-xj-RBg" firstAttribute="top" secondItem="Akp-k7-Str" secondAttribute="bottom" constant="9" id="gJ4-m6-KGG"/>
+                            <constraint firstItem="LjP-wM-xVq" firstAttribute="centerX" secondItem="Vt5-ml-fHy" secondAttribute="centerX" id="pYY-Na-IB2"/>
+                            <constraint firstItem="LjP-wM-xVq" firstAttribute="leading" secondItem="u4o-OT-mhu" secondAttribute="leading" id="uMR-Rk-w7e"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="u4o-OT-mhu"/>
                     </view>
@@ -565,7 +568,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="1Hv-vb-k21"/>
+        <segue reference="T1j-xB-A6P"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="FlexCoilButton" width="101" height="60.5"/>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -13,45 +13,45 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pppp" translatesAutoresizingMaskIntoConstraints="NO" id="kZN-R5-f1b">
-                    <rect key="frame" x="10" y="165" width="394" height="265"/>
-                </imageView>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="SFV-0t-gR4">
-                    <rect key="frame" x="20" y="565" width="358" height="184"/>
-                    <color key="backgroundColor" red="0.93147027490000001" green="0.69350069759999999" blue="0.83271723990000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SFV-0t-gR4">
+                    <rect key="frame" x="28" y="602" width="358" height="182"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="184" id="Lj5-UD-6a5"/>
+                        <constraint firstAttribute="height" constant="182" id="qoL-V1-UVk"/>
                     </constraints>
                     <string key="text" base64-UTF8="YES">
 Cgo
 </string>
-                    <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RbR-Hf-H9Z">
-                    <rect key="frame" x="54" y="498" width="291" height="37"/>
-                    <color key="backgroundColor" red="0.91736280918121338" green="0.54624956846237183" blue="0.77962654829025269" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RbR-Hf-H9Z">
+                    <rect key="frame" x="28" y="540" width="358" height="54"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="37" id="CFk-ha-Nar"/>
+                        <constraint firstAttribute="height" constant="54" id="Qt6-BF-5Qn"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <imageView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kZN-R5-f1b">
+                    <rect key="frame" x="0.0" y="81" width="414" height="451"/>
+                </imageView>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="SFV-0t-gR4" secondAttribute="bottom" constant="113" id="1ym-Sx-9AJ"/>
-                <constraint firstItem="kZN-R5-f1b" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="121" id="Cc3-UW-GZ5"/>
-                <constraint firstItem="RbR-Hf-H9Z" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="54" id="CdK-oY-fBb"/>
-                <constraint firstItem="kZN-R5-f1b" firstAttribute="centerX" secondItem="RbR-Hf-H9Z" secondAttribute="centerX" constant="7.5" id="ErG-it-4RC"/>
-                <constraint firstItem="SFV-0t-gR4" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leadingMargin" id="OMK-1S-syB"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="SFV-0t-gR4" secondAttribute="trailing" constant="36" id="VAt-Uv-HbV"/>
-                <constraint firstItem="kZN-R5-f1b" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="10" id="Vq1-r3-qwx"/>
-                <constraint firstItem="SFV-0t-gR4" firstAttribute="top" secondItem="RbR-Hf-H9Z" secondAttribute="bottom" constant="30" id="fIF-N2-QMD"/>
-                <constraint firstItem="kZN-R5-f1b" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="qeR-Nt-gsa"/>
-                <constraint firstItem="RbR-Hf-H9Z" firstAttribute="top" secondItem="kZN-R5-f1b" secondAttribute="bottom" constant="68" id="rSD-h5-scI"/>
+                <constraint firstItem="RbR-Hf-H9Z" firstAttribute="leading" secondItem="SFV-0t-gR4" secondAttribute="leading" id="4eY-VE-dj6"/>
+                <constraint firstItem="kZN-R5-f1b" firstAttribute="centerX" secondItem="RbR-Hf-H9Z" secondAttribute="centerX" id="CXo-Kd-QTh"/>
+                <constraint firstItem="kZN-R5-f1b" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="37" id="LJw-s9-CAA"/>
+                <constraint firstItem="RbR-Hf-H9Z" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="28" id="gG8-Ok-ImW"/>
+                <constraint firstItem="RbR-Hf-H9Z" firstAttribute="top" secondItem="kZN-R5-f1b" secondAttribute="bottom" constant="8" id="iBD-Nj-E8Y"/>
+                <constraint firstItem="SFV-0t-gR4" firstAttribute="top" secondItem="RbR-Hf-H9Z" secondAttribute="bottom" constant="8" id="kYZ-2d-Fgc"/>
+                <constraint firstItem="RbR-Hf-H9Z" firstAttribute="trailing" secondItem="SFV-0t-gR4" secondAttribute="trailing" id="nOO-eB-Ng9"/>
+                <constraint firstItem="kZN-R5-f1b" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="pqx-rB-kal"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="SFV-0t-gR4" secondAttribute="bottom" constant="78" id="sEy-QT-TR1"/>
+                <constraint firstItem="kZN-R5-f1b" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="zep-dD-Cb5"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
@@ -62,7 +62,4 @@ Cgo
             <point key="canvasLocation" x="140.57971014492756" y="95.758928571428569"/>
         </view>
     </objects>
-    <resources>
-        <image name="pppp" width="571.5" height="473"/>
-    </resources>
 </document>

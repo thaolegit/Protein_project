@@ -42,18 +42,18 @@ class IntroViewController: UIViewController {
 
             let slide1:Slide = Bundle.main.loadNibNamed("Slide", owner: self, options: nil)?.first as! Slide
             slide1.imageView.image = UIImage(named: "pppp")
-            slide1.labelTitle.text = "Protein"
-            slide1.labelDesc.text = " Did you know? \n- Protein made up 17% of our bodies.\n- High protein diet can keep you full longer, increase your brain's concentration and aid fat loss.\n- The lifespan of protein is only 2 days or less. \n\nThis app is designed to help you learn more about protein and have some fun!"
+            slide1.labelTitle.text = "About Protein"
+            slide1.labelDesc.text = "  Did you know? \n- Protein made up 17% of our bodies.\n- High protein diet can keep you full longer, increase your brain's concentration and aid fat loss.\n- The lifespan of protein is only 2 days or less. \n\nThis app is designed to help you learn more about protein and have some fun!"
             
             let slide2:Slide = Bundle.main.loadNibNamed("Slide", owner: self, options: nil)?.first as! Slide
             slide2.imageView.image = UIImage(named: "pppp")
             slide2.labelTitle.text = "Education"
-            slide2.labelDesc.text = "Input the protein name and get the visualization"
+            slide2.labelDesc.text = "You can look and interact with any protein structure in 3D simply by inputing the name of the protein. \nOur app will get your protein's data directly from RCSB Protein Data Bank."
             
             let slide3:Slide = Bundle.main.loadNibNamed("Slide", owner: self, options: nil)?.first as! Slide
             slide3.imageView.image = UIImage(named: "pppp")
             slide3.labelTitle.text = "Mini-game"
-            slide3.labelDesc.text = "Design a protein on your own by adding the coils"
+            slide3.labelDesc.text = "You can try and create some protein on your own simply by combining some polypeptides in the order that you think might work!"
             
           
             
@@ -62,12 +62,12 @@ class IntroViewController: UIViewController {
         
         
         func setupSlideScrollView(slides : [Slide]) {
-            scrollView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
-            scrollView.contentSize = CGSize(width: view.frame.width * CGFloat(slides.count), height: view.frame.height)
+            scrollView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height*0.75)
+            scrollView.contentSize = CGSize(width: view.frame.width * CGFloat(slides.count), height: view.frame.height*0.75)
             scrollView.isPagingEnabled = true
             
             for i in 0 ..< slides.count {
-                slides[i].frame = CGRect(x: view.frame.width * CGFloat(i), y: 0, width: view.frame.width, height: view.frame.height)
+                slides[i].frame = CGRect(x: view.frame.width * CGFloat(i), y: 0, width: view.frame.width, height: view.frame.height*0.75)
                 scrollView.addSubview(slides[i])
             }
         }
@@ -82,7 +82,7 @@ class IntroViewController: UIViewController {
             let pageIndex = round(scrollView.contentOffset.x/view.frame.width)
             pageControl.currentPage = Int(pageIndex)
             
-            let maximumHorizontalOffset: CGFloat = scrollView.contentSize.width - scrollView.frame.width
+            /*let maximumHorizontalOffset: CGFloat = scrollView.contentSize.width - scrollView.frame.width
             let currentHorizontalOffset: CGFloat = scrollView.contentOffset.x
             
             // vertical
@@ -91,7 +91,7 @@ class IntroViewController: UIViewController {
             
             let percentageHorizontalOffset: CGFloat = currentHorizontalOffset / maximumHorizontalOffset
             let percentageVerticalOffset: CGFloat = currentVerticalOffset / maximumVerticalOffset
-            
+            */
             
             /*
              * below code changes the background color of view on paging the scrollview
@@ -102,7 +102,7 @@ class IntroViewController: UIViewController {
             /*
              * below code scales the imageview on paging the scrollview
              */
-            let percentOffset: CGPoint = CGPoint(x: percentageHorizontalOffset, y: percentageVerticalOffset)
+            /*let percentOffset: CGPoint = CGPoint(x: percentageHorizontalOffset, y: percentageVerticalOffset)
             
             if(percentOffset.x > 0 && percentOffset.x <= 0.25) {
                 
@@ -113,7 +113,7 @@ class IntroViewController: UIViewController {
                 slides[1].imageView.transform = CGAffineTransform(scaleX: (0.50-percentOffset.x)/0.25, y: (0.50-percentOffset.x)/0.25)
                 slides[2].imageView.transform = CGAffineTransform(scaleX: percentOffset.x/0.50, y: percentOffset.x/0.50)
                 
-            } 
+            } */
         }
         
         
@@ -157,4 +157,5 @@ class IntroViewController: UIViewController {
             return UIColor(red: red, green: green, blue: blue, alpha: alpha)
         }
     }
+
 
