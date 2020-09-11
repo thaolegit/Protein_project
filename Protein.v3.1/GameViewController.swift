@@ -10,8 +10,10 @@ import UIKit
 import SceneKit
 import ARKit
 import Foundation
-
-class GameViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegate {
+import ReplayKit
+import AVFoundation
+                                                                                                                                 
+class GameViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegate, RPPreviewViewControllerDelegate {
     
   
  //Outlets connections
@@ -123,8 +125,48 @@ class GameViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegat
     
     
 //2. Record Button Function: Function to record the screen
-    // 2.1. Record Screen Function
-    // 2.2. Save video Function
+
+   //let longPressGesture = UILongPressGestureRecognizer.init(target: self, action: #selector(handleLongPress))
+   
+  // @objc func handleLongPress(gestureRecognizer: UILongPressGestureRecognizer) {
+
+   let longPressGesture = UILongPressGestureRecognizer.init()
+   
+   func handleLongPress(gestureRecognizer: UILongPressGestureRecognizer) {
+       if gestureRecognizer.state == UIGestureRecognizer.State.began {
+               debugPrint("long press started")
+               startRecording()
+           }
+       else if gestureRecognizer.state == UIGestureRecognizer.State.ended {
+               debugPrint("longpress ended")
+               stopRecording()
+           }
+   }
+       // 2.1. Record Screen Function
+   let recorder = RPScreenRecorder.shared()
+   func startRecording(){
+       recorder.startRecording{(error) in
+           if let error = error {
+               print(error)
+           }
+       }
+   }
+       // 2.2. Stop recording Function
+   func stopRecording(){
+       recorder.stopRecording {(previewVC, error) in
+           if let previewVC = previewVC {
+           previewVC.previewControllerDelegate = self
+           self.present(previewVC, animated: true, completion: nil)
+       }
+       if let error = error {
+           print(error)
+       }
+       }
+   }
+func previewControllerDidFinish(_ previewController: RPPreviewViewController) {
+      dismiss(animated: true, completion: nil)
+  }
+  
     
 
 //3. Camera Button Function: take a photo of the screen
@@ -163,6 +205,13 @@ class GameViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegat
             
             proteinNode.scale = SCNVector3(x: 0.008, y: 0.008, z: 0.008)
             proteinNode.position = SCNVector3(x: -0.005, y: 0, z: -0.005)
+            
+            let randomx = Float.random(in: (-Float.pi)...(Float.pi))
+            let randomy = Float.random(in: (-Float.pi)...(Float.pi))
+            let randomz = Float.random(in: (-Float.pi)...(Float.pi))
+
+            
+            proteinNode.eulerAngles = SCNVector3(x: randomx, y:randomy, z:randomz)
             scene.rootNode.addChildNode(proteinNode)
             
             let centerConstraint = SCNLookAtConstraint(target: proteinNode)
