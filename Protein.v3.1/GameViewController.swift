@@ -20,6 +20,8 @@ class GameViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegat
     @IBOutlet weak var thirdSceneView: ARSCNView!
         let configuration = ARWorldTrackingConfiguration()
         let scene = SCNScene()
+    var newAngleZ : Float = 0.0
+    var currentAngleZ : Float = 0.0
 
 //Button connections
     
@@ -27,8 +29,8 @@ class GameViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegat
              showOptions()
          }
     
-    @IBAction func recordButton(_ sender: UIButton) {
-    }
+    @IBOutlet weak var recordButton: UIButton!
+    
     
     @IBAction func cameraButton(_ sender: UIButton) {
         takeScreenshot()
@@ -71,6 +73,64 @@ class GameViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegat
     @IBAction func clearButton(_ sender: UIButton) {
             deleteAll()
         }
+    
+    //Gestures Recognizer
+    // Pinch Gestures
+    @IBAction func pinchGesture(_ sender: UIPinchGestureRecognizer) {
+        if sender.state == .changed{
+                let areaPinched = sender.view as? SCNView
+                    let location = sender.location(in: areaPinched)
+                    let hitTestResults = thirdSceneView.hitTest(location, options: nil)
+                    
+                    if let hitTest = hitTestResults.first {
+                        let plane = hitTest.node
+                        
+                        let scaleX = Float(sender.scale) * plane.scale.x
+                        let scaleY = Float(sender.scale) * plane.scale.y
+                        let scaleZ = Float(sender.scale) * plane.scale.z
+                        
+                        plane.scale = SCNVector3(scaleX, scaleY, scaleZ)
+                        
+                        sender.scale = 1
+                    }
+                }
+            }
+    // Rotation Gesture
+    @IBAction func rotationGesture(_ sender: UIRotationGestureRecognizer) {
+        if sender.state == .changed {
+                 let areaTouched = sender.view as? SCNView
+                 let location = sender.location(in: areaTouched)
+
+                 let hitTestResults = thirdSceneView.hitTest(location, options: nil)
+                 
+                 if let hitTest = hitTestResults.first {
+                     let plane = hitTest.node
+                     newAngleZ = Float(-sender.rotation)
+                     newAngleZ += currentAngleZ
+                     plane.eulerAngles.z = newAngleZ
+                 }
+             } else if sender.state == .ended {
+                     currentAngleZ = newAngleZ
+             }
+    }
+    
+    //Pan Gesture
+    @IBAction func panGesture(_ sender: UIPanGestureRecognizer) {
+        let areaPanned = sender.view as? SCNView
+        let location = sender.location(in: areaPanned)
+        let hitTestResults = areaPanned?.hitTest(location, options: nil)
+        print("\(String(describing: areaPanned))")
+       if let hitTest = hitTestResults?.first {
+           if let plane = hitTest.node.parent {
+               if sender.state == .changed {
+                   let translate = sender.translation(in: areaPanned)
+                   plane.localTranslate(by: SCNVector3(translate.x/10000,-translate.y/10000,0.0))
+                }
+           }
+       }
+    }
+    
+    
     //----------------------FUNCITONS BELOW-----------------------
 
     
@@ -127,21 +187,15 @@ class GameViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegat
     
 //2. Record Button Function: Function to record the screen
 
-   //let longPressGesture = UILongPressGestureRecognizer.init(target: self, action: #selector(handleLongPress))
+   @objc func handleTapGesture(){
+       stopRecording()
+       print("Tap")
+       
+   }
    
-  // @objc func handleLongPress(gestureRecognizer: UILongPressGestureRecognizer) {
-
-   let longPressGesture = UILongPressGestureRecognizer.init()
-   
-   func handleLongPress(gestureRecognizer: UILongPressGestureRecognizer) {
-       if gestureRecognizer.state == UIGestureRecognizer.State.began {
-               debugPrint("long press started")
-               startRecording()
-           }
-       else if gestureRecognizer.state == UIGestureRecognizer.State.ended {
-               debugPrint("longpress ended")
-               stopRecording()
-           }
+    @objc func handleLongPress() {
+       startRecording()
+       print("Long pressed")
    }
        // 2.1. Record Screen Function
    let recorder = RPScreenRecorder.shared()
@@ -336,8 +390,13 @@ func previewControllerDidFinish(_ previewController: RPPreviewViewController) {
             thirdSceneView.delegate = self
             thirdSceneView.showsStatistics = true
             //thirdSceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin, ARSCNDebugOptions.showFeaturePoints]
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture))
+            let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
+            recordButton.addGestureRecognizer(tapGesture)
+            recordButton.addGestureRecognizer(longPressGesture)
             
             }
+
         
         override func viewWillAppear(_ animated: Bool) {
             

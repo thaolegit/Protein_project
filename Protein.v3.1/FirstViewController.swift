@@ -18,10 +18,7 @@ class FirstViewController: UIViewController, ARSCNViewDelegate, UITextViewDelega
     
     @IBAction func IntroButton(_ sender: UIButton) {
     }
-    
-    @IBAction func test(_ sender: UIButton) {
-          download()
-    }
+
     
     @IBAction func EduButton(_ sender: UIButton) {
       

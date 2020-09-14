@@ -37,6 +37,8 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
     let configuration = ARWorldTrackingConfiguration()
     
     let scene = SCNScene()
+    var newAngleZ : Float = 0.0
+    var currentAngleZ : Float = 0.0
 
 //----------------------OUTLET CONNECTIONS-------------------------
     //AR Scene
@@ -59,12 +61,8 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
     
     //Record Butotn to record 3D onscreen
     
-    @IBAction func recordButton(_ sender: UIButton) {
-        //handleLongPress(gestureRecognizer: longPressGesture)
-        //startRecording()
-        handleLongPress(gestureRecognizer: longPressGesture)
-    }
    
+    @IBOutlet weak var recordButton: UIButton!
     
     //Camera Button to capture the screen and save to Photo Library
     @IBAction func cameraButton(_ sender: UIButton) {
@@ -79,6 +77,66 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
     //Exit Button
     @IBAction func exitButton(_ sender: UIButton) {
     }
+ //Gestures
+    
+   //Pinch
+    @IBAction func pinchGesture(_ sender:
+    UIPinchGestureRecognizer) {
+    if sender.state == .changed{
+            let areaPinched = sender.view as? SCNView
+                let location = sender.location(in: areaPinched)
+                let hitTestResults = secondSceneView.hitTest(location, options: nil)
+                
+                if let hitTest = hitTestResults.first {
+                    let plane = hitTest.node
+                    
+                    let scaleX = Float(sender.scale) * plane.scale.x
+                    let scaleY = Float(sender.scale) * plane.scale.y
+                    let scaleZ = Float(sender.scale) * plane.scale.z
+                    
+                    plane.scale = SCNVector3(scaleX, scaleY, scaleZ)
+                    
+                    sender.scale = 1
+                }
+            }
+        }
+    
+    // Rotate
+    @IBAction func rotationGesture(_ sender: UIRotationGestureRecognizer) {
+    if sender.state == .changed {
+                    let areaTouched = sender.view as? SCNView
+                    let location = sender.location(in: areaTouched)
+
+                    let hitTestResults = secondSceneView.hitTest(location, options: nil)
+                    
+                    if let hitTest = hitTestResults.first {
+                        let plane = hitTest.node
+                        newAngleZ = Float(-sender.rotation)
+                        newAngleZ += currentAngleZ
+                        plane.eulerAngles.z = newAngleZ
+                    }
+                } else if sender.state == .ended {
+                        currentAngleZ = newAngleZ
+                }
+        }
+    
+    //Pan
+    @IBAction func panGesture(_ sender: UIPanGestureRecognizer) {
+    let areaPanned = sender.view as? SCNView
+       let location = sender.location(in: areaPanned)
+       let hitTestResults = areaPanned?.hitTest(location, options: nil)
+      print(location)
+      if let hitTest = hitTestResults?.first {
+          if let plane = hitTest.node.parent {
+              if sender.state == .changed {
+                  let translate = sender.translation(in: areaPanned)
+                  plane.localTranslate(by: SCNVector3(translate.x/10000,-translate.y/10000,0.0))
+               }
+          }
+      }
+    }
+    
+    
     
 //------------FUNCTIONS THAT MAKE ACTIONS BELOW------------------------
     
@@ -153,23 +211,16 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
         
         
     //2. Record Button Function: Function to record the screen
+    @objc func handleTapGesture(){
+     stopRecording()
+     print("Tap")
+     
+ }
  
-    //let longPressGesture = UILongPressGestureRecognizer.init(target: self, action: #selector(handleLongPress))
-    
-   // @objc func handleLongPress(gestureRecognizer: UILongPressGestureRecognizer) {
-
-    let longPressGesture = UILongPressGestureRecognizer.init()
-    
-    func handleLongPress(gestureRecognizer: UILongPressGestureRecognizer) {
-        if gestureRecognizer.state == UIGestureRecognizer.State.began {
-                debugPrint("long press started")
-                startRecording()
-            }
-        else if gestureRecognizer.state == UIGestureRecognizer.State.ended {
-                debugPrint("longpress ended")
-                stopRecording()
-            }
-    }
+  @objc func handleLongPress() {
+     startRecording()
+     print("Long pressed")
+ }
         // 2.1. Record Screen Function
     let recorder = RPScreenRecorder.shared()
     func startRecording(){
@@ -587,6 +638,11 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
         secondSceneView.delegate = self
         secondSceneView.showsStatistics = true
         secondSceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin, ARSCNDebugOptions.showFeaturePoints]
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture))
+            let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
+            recordButton.addGestureRecognizer(tapGesture)
+            recordButton.addGestureRecognizer(longPressGesture)
             /*
         //make the frc and fetch
                frc = NSFetchedResultsController(fetchRequest: makeRequest(), managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)

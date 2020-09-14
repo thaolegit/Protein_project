@@ -15,29 +15,40 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NeN-4H-818">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NeN-4H-818">
                                 <rect key="frame" x="-5" y="0.0" width="414" height="265"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="SiL-ac-T36">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="SiL-ac-T36">
                                 <rect key="frame" x="0.0" y="187" width="414" height="295"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.84446042779999997" green="0.57813215259999995" blue="0.66662985090000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Launch Screen.png" translatesAutoresizingMaskIntoConstraints="NO" id="bqv-am-XqM">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Launch Screen.png" translatesAutoresizingMaskIntoConstraints="NO" id="bqv-am-XqM">
                                 <rect key="frame" x="-5" y="202" width="419" height="265"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.84446042779999997" green="0.57813215259999995" blue="0.66662985090000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" red="0.84446042779999997" green="0.57813215259999995" blue="0.66662985090000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.40842303629999999" green="0.36813214420000001" blue="0.4713074565" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="NeN-4H-818" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="-25" id="1gD-85-RN1"/>
+                            <constraint firstItem="bqv-am-XqM" firstAttribute="centerY" secondItem="SiL-ac-T36" secondAttribute="centerY" id="CLz-Nh-yu3"/>
+                            <constraint firstItem="SiL-ac-T36" firstAttribute="trailing" secondItem="bqv-am-XqM" secondAttribute="trailing" id="Ekv-hC-1sV"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="SiL-ac-T36" secondAttribute="bottom" constant="380" id="HnS-Qy-sQt"/>
+                            <constraint firstItem="SiL-ac-T36" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="XEX-HK-VM6"/>
+                            <constraint firstItem="NeN-4H-818" firstAttribute="leading" secondItem="bqv-am-XqM" secondAttribute="leading" id="cuu-xO-M4g"/>
+                            <constraint firstItem="bqv-am-XqM" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="158" id="eBq-0g-xBg"/>
+                            <constraint firstItem="SiL-ac-T36" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="gCr-tW-4qN"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="NeN-4H-818" secondAttribute="trailing" constant="5" id="iLE-KQ-g5g"/>
+                            <constraint firstItem="NeN-4H-818" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="topMargin" constant="-44" id="kFz-L0-O8e"/>
+                            <constraint firstItem="SiL-ac-T36" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="143" id="lHI-Bl-Y0Z"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="NeN-4H-818" secondAttribute="bottom" constant="597" id="mYj-iJ-dJJ"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>

@@ -17,6 +17,12 @@
                         <subviews>
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Je4-cU-xTC">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Bnl-oo-ASA" appends="YES" id="YL7-UC-QLM"/>
+                                    <outletCollection property="gestureRecognizers" destination="bij-wS-urk" appends="YES" id="7zm-Mx-j41"/>
+                                    <outletCollection property="gestureRecognizers" destination="SnX-Bs-KMf" appends="YES" id="uOT-HZ-7kp"/>
+                                </connections>
                             </arscnView>
                             <button opaque="NO" clipsSubviews="YES" alpha="0.55000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Alt-AY-Nl3">
                                 <rect key="frame" x="216" y="105" width="68" height="41"/>
@@ -66,9 +72,6 @@
                                 <state key="normal" backgroundImage="largecircle.fill.circle" catalog="system">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
-                                <connections>
-                                    <action selector="recordButton:" destination="BCM-N0-cEq" eventType="touchUpInside" id="yNh-JW-yfJ"/>
-                                </connections>
                             </button>
                             <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dAP-ae-UKl">
                                 <rect key="frame" x="40" y="39.5" width="38" height="36"/>
@@ -149,12 +152,28 @@
                     </view>
                     <navigationItem key="navigationItem" id="fWg-0L-jqU"/>
                     <connections>
+                        <outlet property="recordButton" destination="Ybx-cB-hSr" id="R7f-Fm-Kma"/>
                         <outlet property="secondSceneView" destination="Je4-cU-xTC" id="Dr0-9n-jco"/>
                         <outlet property="textField" destination="FJw-Wq-dk2" id="ZaU-eL-jYw"/>
                         <outlet property="textView" destination="gNt-MH-ni0" id="y0G-xk-Pqt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w8Y-T1-ivv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <pinchGestureRecognizer id="Bnl-oo-ASA">
+                    <connections>
+                        <action selector="pinchGesture:" destination="BCM-N0-cEq" id="Kov-cv-igG"/>
+                    </connections>
+                </pinchGestureRecognizer>
+                <rotationGestureRecognizer id="bij-wS-urk">
+                    <connections>
+                        <action selector="rotationGesture:" destination="BCM-N0-cEq" id="W5z-1S-Bum"/>
+                    </connections>
+                </rotationGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="SnX-Bs-KMf">
+                    <connections>
+                        <action selector="panGesture:" destination="BCM-N0-cEq" id="QaZ-5w-Ekr"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="437.60000000000002" y="-92.203898050974516"/>
         </scene>
@@ -241,11 +260,11 @@
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PEk-qa-Zg6">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                             </arscnView>
-                            <button opaque="NO" clipsSubviews="YES" alpha="0.59999999999999998" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hJ3-XL-8UI">
-                                <rect key="frame" x="81" y="149" width="212" height="79"/>
+                            <button opaque="NO" clipsSubviews="YES" alpha="0.59999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hJ3-XL-8UI">
+                                <rect key="frame" x="81" y="149" width="213" height="79"/>
                                 <color key="backgroundColor" red="0.40059250590000001" green="0.36031949520000001" blue="0.46348041299999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="79" id="8og-aE-77X"/>
+                                    <constraint firstAttribute="height" constant="79" id="T72-mC-XaE"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="27"/>
                                 <state key="normal" title="Introduction">
@@ -268,9 +287,17 @@
                                     <segue destination="l9q-dm-iMt" kind="show" id="3Uc-IH-8kb"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" clipsSubviews="YES" alpha="0.59999999999999998" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HiR-9S-E9w">
-                                <rect key="frame" x="81" y="284" width="212" height="79"/>
+                            <button opaque="NO" clipsSubviews="YES" alpha="0.59999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HiR-9S-E9w">
+                                <rect key="frame" x="81" y="284" width="213" height="79"/>
                                 <color key="backgroundColor" red="0.40059250590000001" green="0.36031949520000001" blue="0.46348041299999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="79" id="CJq-2p-Byh"/>
+                                    <constraint firstAttribute="width" secondItem="HiR-9S-E9w" secondAttribute="height" multiplier="213:79" id="DRO-dA-Co4"/>
+                                    <constraint firstAttribute="width" secondItem="HiR-9S-E9w" secondAttribute="height" multiplier="213:79" id="J7T-cI-ue7"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="212" id="Kqm-0s-Fr1"/>
+                                    <constraint firstAttribute="width" secondItem="HiR-9S-E9w" secondAttribute="height" multiplier="213:79" id="SnC-FT-gVF"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="79" id="U8d-Ht-AjA"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="27"/>
                                 <state key="normal" title="Education">
                                     <color key="titleColor" red="0.91383510830000003" green="0.67626744510000003" blue="0.75599360469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -291,9 +318,12 @@
                                     <segue destination="BCM-N0-cEq" kind="show" id="Tkm-bh-Oyu"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" clipsSubviews="YES" alpha="0.59999999999999998" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2ct-P2-YlG">
-                                <rect key="frame" x="81" y="421" width="212" height="79"/>
+                            <button opaque="NO" clipsSubviews="YES" alpha="0.59999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2ct-P2-YlG">
+                                <rect key="frame" x="81" y="421" width="213" height="79"/>
                                 <color key="backgroundColor" red="0.40059250590000001" green="0.36031949520000001" blue="0.46348041299999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="79" id="8UN-by-pfY"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="27"/>
                                 <state key="normal" title="Mini-game">
                                     <color key="titleColor" red="0.91383510830000003" green="0.67626744510000003" blue="0.75599360469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -311,21 +341,25 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="PEk-qa-Zg6" firstAttribute="centerX" secondItem="HiR-9S-E9w" secondAttribute="centerX" id="587-bF-ruj"/>
-                            <constraint firstItem="PEk-qa-Zg6" firstAttribute="centerY" secondItem="HiR-9S-E9w" secondAttribute="centerY" id="8rc-p5-h7e"/>
-                            <constraint firstItem="hJ3-XL-8UI" firstAttribute="top" secondItem="OQn-D9-6kD" secondAttribute="top" constant="149" id="BDd-JX-YVE"/>
-                            <constraint firstItem="hJ3-XL-8UI" firstAttribute="leading" secondItem="OQn-D9-6kD" secondAttribute="leading" constant="81" id="RH5-GZ-MUP"/>
-                            <constraint firstItem="PEk-qa-Zg6" firstAttribute="centerX" secondItem="Zv4-ri-bOq" secondAttribute="centerX" id="Tbf-j1-QBp"/>
-                            <constraint firstItem="HiR-9S-E9w" firstAttribute="top" secondItem="hJ3-XL-8UI" secondAttribute="bottom" constant="56" id="Tmu-Mv-ttg"/>
-                            <constraint firstItem="PEk-qa-Zg6" firstAttribute="leading" secondItem="OQn-D9-6kD" secondAttribute="leading" id="U2I-OU-x0j"/>
-                            <constraint firstItem="hJ3-XL-8UI" firstAttribute="trailing" secondItem="HiR-9S-E9w" secondAttribute="trailing" id="WIj-ko-mXK"/>
-                            <constraint firstItem="2ct-P2-YlG" firstAttribute="top" secondItem="HiR-9S-E9w" secondAttribute="bottom" constant="58" id="YPA-VT-f6f"/>
-                            <constraint firstItem="PEk-qa-Zg6" firstAttribute="bottom" secondItem="OQn-D9-6kD" secondAttribute="bottom" id="gr5-fr-LzO"/>
-                            <constraint firstItem="hJ3-XL-8UI" firstAttribute="leading" secondItem="HiR-9S-E9w" secondAttribute="leading" id="mUE-08-lLK"/>
-                            <constraint firstItem="PEk-qa-Zg6" firstAttribute="top" secondItem="OQn-D9-6kD" secondAttribute="top" id="nVf-ss-Ulg"/>
-                            <constraint firstItem="HiR-9S-E9w" firstAttribute="trailing" secondItem="2ct-P2-YlG" secondAttribute="trailing" id="tcn-xg-C57"/>
-                            <constraint firstItem="OQn-D9-6kD" firstAttribute="bottom" secondItem="2ct-P2-YlG" secondAttribute="bottom" constant="147" id="v7s-33-B4h"/>
-                            <constraint firstItem="HiR-9S-E9w" firstAttribute="leading" secondItem="2ct-P2-YlG" secondAttribute="leading" id="xj8-TF-Bep"/>
+                            <constraint firstItem="PEk-qa-Zg6" firstAttribute="leading" secondItem="OQn-D9-6kD" secondAttribute="leading" id="18e-JJ-XFd"/>
+                            <constraint firstItem="PEk-qa-Zg6" firstAttribute="top" secondItem="OQn-D9-6kD" secondAttribute="top" id="44e-RH-6Xb"/>
+                            <constraint firstItem="HiR-9S-E9w" firstAttribute="leading" secondItem="OQn-D9-6kD" secondAttribute="leading" constant="81" id="4Cv-z7-5ak"/>
+                            <constraint firstItem="hJ3-XL-8UI" firstAttribute="trailing" secondItem="HiR-9S-E9w" secondAttribute="trailing" id="59y-7j-7pq"/>
+                            <constraint firstItem="HiR-9S-E9w" firstAttribute="top" secondItem="hJ3-XL-8UI" secondAttribute="bottom" constant="56" id="7TO-61-Vw4"/>
+                            <constraint firstItem="PEk-qa-Zg6" firstAttribute="bottom" secondItem="OQn-D9-6kD" secondAttribute="bottom" id="8Rc-El-WWD"/>
+                            <constraint firstItem="OQn-D9-6kD" firstAttribute="trailing" secondItem="HiR-9S-E9w" secondAttribute="trailing" constant="81" id="JF5-ms-bdj"/>
+                            <constraint firstItem="HiR-9S-E9w" firstAttribute="leading" secondItem="OQn-D9-6kD" secondAttribute="leading" constant="81" id="KlS-dk-pi2"/>
+                            <constraint firstItem="2ct-P2-YlG" firstAttribute="top" secondItem="HiR-9S-E9w" secondAttribute="bottom" constant="58" id="LHb-Uf-RMw"/>
+                            <constraint firstItem="HiR-9S-E9w" firstAttribute="top" secondItem="hJ3-XL-8UI" secondAttribute="bottom" constant="56" id="MNy-d7-2zi"/>
+                            <constraint firstItem="hJ3-XL-8UI" firstAttribute="trailing" secondItem="2ct-P2-YlG" secondAttribute="trailing" id="fji-5A-dyp"/>
+                            <constraint firstItem="HiR-9S-E9w" firstAttribute="leading" secondItem="OQn-D9-6kD" secondAttribute="leading" constant="81" id="hRm-KX-BSs"/>
+                            <constraint firstItem="hJ3-XL-8UI" firstAttribute="leading" secondItem="2ct-P2-YlG" secondAttribute="leading" id="hiO-Dl-CrV"/>
+                            <constraint firstItem="OQn-D9-6kD" firstAttribute="trailing" secondItem="HiR-9S-E9w" secondAttribute="trailing" constant="81" id="jRh-05-ddb"/>
+                            <constraint firstItem="hJ3-XL-8UI" firstAttribute="leading" secondItem="HiR-9S-E9w" secondAttribute="leading" id="lDN-cc-6WZ"/>
+                            <constraint firstItem="HiR-9S-E9w" firstAttribute="top" secondItem="hJ3-XL-8UI" secondAttribute="bottom" constant="56" id="laG-2f-3Fm"/>
+                            <constraint firstItem="PEk-qa-Zg6" firstAttribute="centerX" secondItem="Zv4-ri-bOq" secondAttribute="centerX" id="ttb-sT-zWs"/>
+                            <constraint firstItem="OQn-D9-6kD" firstAttribute="trailing" secondItem="HiR-9S-E9w" secondAttribute="trailing" constant="81" id="y3g-ev-Ooi"/>
+                            <constraint firstItem="hJ3-XL-8UI" firstAttribute="top" secondItem="OQn-D9-6kD" secondAttribute="top" constant="149" id="yMY-Xx-ou7"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="OQn-D9-6kD"/>
                     </view>
@@ -348,6 +382,11 @@
                         <subviews>
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cJ7-60-DX1">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Hj5-IO-wC6" appends="YES" id="d4G-RK-M8g"/>
+                                    <outletCollection property="gestureRecognizers" destination="6JL-zh-eMh" appends="YES" id="kaw-AU-CwV"/>
+                                </connections>
                             </arscnView>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="helix" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1AN-bl-7pD">
                                 <rect key="frame" x="185" y="513" width="72" height="21"/>
@@ -442,9 +481,6 @@
                                 <state key="normal" backgroundImage="largecircle.fill.circle" catalog="system">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
-                                <connections>
-                                    <action selector="recordButton:" destination="swg-VC-r6m" eventType="touchUpInside" id="705-Xp-dar"/>
-                                </connections>
                             </button>
                             <button opaque="NO" clipsSubviews="YES" alpha="0.59999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YBL-i0-PCj">
                                 <rect key="frame" x="185" y="553" width="94" height="41"/>
@@ -518,6 +554,7 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="nKH-dW-zKG" firstAttribute="trailing" secondItem="YBL-i0-PCj" secondAttribute="trailing" constant="96" id="2EH-V3-AmK"/>
                             <constraint firstItem="gBQ-zJ-6a1" firstAttribute="bottom" secondItem="wEA-5F-QEx" secondAttribute="bottom" id="5eD-rQ-AOP"/>
@@ -568,19 +605,38 @@
                             <constraint firstItem="htE-Jr-zkD" firstAttribute="leading" secondItem="nKH-dW-zKG" secondAttribute="leading" constant="83" id="ydu-ge-reh"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="nKH-dW-zKG"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="oTM-E7-zUY" appends="YES" id="fyi-pw-qJ4"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="dT3-gW-0FA"/>
                     <connections>
+                        <outlet property="recordButton" destination="Abp-tO-Ugd" id="TGa-5w-d1y"/>
                         <outlet property="thirdSceneView" destination="cJ7-60-DX1" id="wgB-WI-rx9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Loh-CF-g1o" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <pinchGestureRecognizer id="Hj5-IO-wC6">
+                    <connections>
+                        <action selector="pinchGesture:" destination="swg-VC-r6m" id="wXS-Da-0zm"/>
+                    </connections>
+                </pinchGestureRecognizer>
+                <rotationGestureRecognizer id="oTM-E7-zUY">
+                    <connections>
+                        <action selector="rotationGesture:" destination="swg-VC-r6m" id="Opp-Ee-aff"/>
+                    </connections>
+                </rotationGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="6JL-zh-eMh">
+                    <connections>
+                        <action selector="panGesture:" destination="swg-VC-r6m" id="9Ot-xc-woh"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="437.60000000000002" y="668.81559220389806"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="T1j-xB-A6P"/>
+        <segue reference="1Hv-vb-k21"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="FlexCoilButton" width="101" height="60.5"/>
