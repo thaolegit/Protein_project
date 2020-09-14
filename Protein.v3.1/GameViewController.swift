@@ -22,6 +22,7 @@ class GameViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegat
         let scene = SCNScene()
     var newAngleZ : Float = 0.0
     var currentAngleZ : Float = 0.0
+    let showLight = SCNNode()
 
 //Button connections
     
@@ -42,6 +43,7 @@ class GameViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegat
     var proteinArray = [String]()
     
     @IBAction func flexCoil(_ sender: UIButton) {
+        
        addProtein(name: "flexCoil")
        proteinArray.append("fCoil")
     }
@@ -132,7 +134,12 @@ class GameViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegat
     
     
     //----------------------FUNCITONS BELOW-----------------------
-
+    func lightOn() {
+        showLight.light = SCNLight()
+        showLight.light?.type = .spot
+        showLight.light?.color = UIColor(white: 0.6, alpha: 1.0)
+        showLight.position = SCNVector3(0,0,0)
+        }
     
 //1. Menu Button Functions: Show options when Menu button is clicked
     func showOptions(){
@@ -244,6 +251,7 @@ func previewControllerDidFinish(_ previewController: RPPreviewViewController) {
 
 // 4. Polypeptide Button Functions: To add protein onto the screens when button is pressed
         func addProtein(name: String) {
+           lightOn()
           
             let proteinScene = SCNScene(named: "models.scnassets/" + name + ".scn")!
            //These models have only 1 rootnode as the model, add cameranode
@@ -279,6 +287,7 @@ func previewControllerDidFinish(_ previewController: RPPreviewViewController) {
     
     func createProtein(){
         clearAll()
+        lightOn()
         let newProteinName = proteinArray.joined()
         print(newProteinName)
         
