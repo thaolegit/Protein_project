@@ -117,31 +117,34 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
     
         // 1.2. Function to pop-up Help screen
                 //Make helpView a global variable for usage later.
-                let helpView : UIView = UIView(frame:CGRect(x:0, y: 0, width: 400, height: 300))
-                func helpScreen (){
-                    let helpText = UITextView(frame:CGRect(x:20, y: 20, width: 350, height: 230))
-                    helpText.text = "If you already know a protein's name and want to see it on AR Display, type the name into input box.\n\nIf you don't have any specific name in mind, check out PDB 101 by clicking the other tab inside Menu. \n\n     Have fun!"
-        
-                    helpView.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1.0)
-                    helpView.alpha=0.8
-                    helpText.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1.0)
-                    helpText.alpha=0.8
-                    helpText.textAlignment = .left
-                    //helpText.font = UIFont(name: "Apple SD Gothic Neo Medium", size: 25)
-                    helpText.font = .boldSystemFont(ofSize: 20)
-                    helpText.textColor = UIColor.black
-                    
-                    self.view.addSubview(helpView)
-                    helpView.center = self.view.center
-                    helpView.addSubview(helpText)
-                    
-                    helpText.layer.cornerRadius = 5
-                    
+                let helpView = UIView(frame:CGRect(x:0, y: 0, width: 400, height: 250))
+                            func helpScreen (){
+                                let helpText = UITextView(frame:CGRect(x:20, y: 20, width: 350, height: 230))
+                               helpText.text = "1. Tap on fCoil, rCoil, Helix, Sheet to look at each individual polypeptide. \n\n2. Tap on TRY to create a new Protein!\n\n3. Tap on Clear to try again."
+                     
+                        
+                               helpView.backgroundColor = UIColor(red: 0.4, green: 0.36, blue: 0.46, alpha: 1)
+                               helpView.alpha = 0.8
+                               helpText.backgroundColor = UIColor(red: 0.4, green: 0.36, blue: 0.46, alpha: 1)
+                               helpText.alpha = 1
+                               helpText.textAlignment = .left
+                               
+                               helpText.font = .boldSystemFont(ofSize: 20)
+                               helpText.textColor = UIColor(red: 0.95, green: 0.65, blue: 0.75, alpha: 0.8)
+                                                  
+                               self.view.addSubview(helpView)
+                               helpView.center = self.view.center
+                               helpView.addSubview(helpText)
+                            
+                               helpView.layer.cornerRadius = 10
+                               //helpText.layer.cornerRadius = 5
+                    }
+                   
                     //helpText.centerXAnchor.constraint(equalTo: helpView.centerXAnchor).isActive = true
                     //helpText.centerYAnchor.constraint(equalTo: helpView.centerYAnchor).isActive = true
                 
                     
-         }
+         
             // 1.3. Functions to open pDB 101
                 func pdb101(){
                     guard let url = URL(string: "http://pdb101.rcsb.org/") else { return }

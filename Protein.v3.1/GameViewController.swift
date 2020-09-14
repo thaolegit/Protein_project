@@ -102,19 +102,20 @@ class GameViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegat
          UIApplication.shared.open(url)
      }
         // 1.2. Function to pop-up Help screen
-            let helpView = UIView(frame:CGRect(x:0, y: 0, width: 400, height: 300))
+            let helpView = UIView(frame:CGRect(x:0, y: 0, width: 400, height: 250))
              func helpScreen (){
                  let helpText = UITextView(frame:CGRect(x:20, y: 20, width: 350, height: 230))
-                helpText.text = "Click on fCoil, rCoil, Helix, Sheet to look at each individual polypeptide. \nHold and drag the polypeptide on top of each other to create a new Protein. Tap on TRY to create the new Protein! "
+                helpText.text = "1. Tap on fCoil, rCoil, Helix, Sheet to look at each individual polypeptide. \n\n2. Tap on TRY to create a new Protein!\n\n3. Tap on Clear to try again."
       
          
-                helpView.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1.0)
-                helpView.alpha=0.8
-                helpText.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1.0)
-                helpText.alpha=0.8
+                helpView.backgroundColor = UIColor(red: 0.4, green: 0.36, blue: 0.46, alpha: 1)
+                helpView.alpha = 0.8
+                helpText.backgroundColor = UIColor(red: 0.4, green: 0.36, blue: 0.46, alpha: 1)
+                helpText.alpha = 1
                 helpText.textAlignment = .left
+                
                 helpText.font = .boldSystemFont(ofSize: 20)
-                helpText.textColor = UIColor.black
+                helpText.textColor = UIColor(red: 0.95, green: 0.65, blue: 0.75, alpha: 0.8)
                                    
                 self.view.addSubview(helpView)
                 helpView.center = self.view.center
@@ -204,7 +205,7 @@ func previewControllerDidFinish(_ previewController: RPPreviewViewController) {
 
             
             proteinNode.scale = SCNVector3(x: 0.008, y: 0.008, z: 0.008)
-            proteinNode.position = SCNVector3(x: -0.005, y: 0, z: -0.005)
+            proteinNode.position = SCNVector3(x: -0.005, y: 0, z: -0.010)
             
             let randomx = Float.random(in: (-Float.pi)...(Float.pi))
             let randomy = Float.random(in: (-Float.pi)...(Float.pi))
@@ -278,27 +279,30 @@ func previewControllerDidFinish(_ previewController: RPPreviewViewController) {
     }
     
     //7. Function to display text
+    //When successfully create a new protein
     func displayText1(){
-        
-        let text = SCNText(string: "Congratulations!🤩\nYou have created a new protein!", extrusionDepth: 1)
+        let newElements = proteinArray.joined(separator: "-")
+        let text = SCNText(string: "Congratulations!\nYou have created \na new protein made of \(newElements)", extrusionDepth: 2)
         let material = SCNMaterial()
-        material.diffuse.contents = UIColor.orange
+        material.diffuse.contents = UIColor.systemTeal
         text.materials = [material]
         let node = SCNNode()
-        node.position = SCNVector3(x: -0.005, y: -0.002, z: -0.007)
+        node.position = SCNVector3(x: -0.005, y: -0.005, z: -0.01)
         node.scale = SCNVector3(0.0005, 0.0005, 0.0005)
         node.geometry = text
         node.name = "shape"
         thirdSceneView.scene.rootNode.addChildNode(node)
        
     }
+     //When unsuccessfully create a new protein
     func displayText2(){
-          let text = SCNText(string: "Sorry!😢\nThis combination cannot be made.", extrusionDepth: 1)
+          let newElements = proteinArray.joined(separator: "-")
+          let text = SCNText(string: "Sorry!\nThe combination of \(newElements) cannot be made.", extrusionDepth: 2)
           let material = SCNMaterial()
-          material.diffuse.contents = UIColor.orange
+          material.diffuse.contents = UIColor.black
           text.materials = [material]
           let node = SCNNode()
-          node.position = SCNVector3(x: -0.007,y: -0.005, z: -0.007)
+          node.position = SCNVector3(x: -0.007,y: -0.005, z: -0.01)
           node.scale = SCNVector3(0.0005, 0.0005, 0.0005)
           node.geometry = text
           node.name = "shape2"
@@ -307,8 +311,7 @@ func previewControllerDidFinish(_ previewController: RPPreviewViewController) {
     
     
     
-    //When successfully create a new protein
-    //When unsuccessfully create a new protein
+       
         
 //---------FUNCTIONS FOR INTERACTION AND DESIGN-------
 

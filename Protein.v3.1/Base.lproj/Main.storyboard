@@ -18,15 +18,15 @@
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Je4-cU-xTC">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                             </arscnView>
-                            <button opaque="NO" clipsSubviews="YES" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Alt-AY-Nl3">
+                            <button opaque="NO" clipsSubviews="YES" alpha="0.55000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Alt-AY-Nl3">
                                 <rect key="frame" x="216" y="105" width="68" height="41"/>
-                                <color key="backgroundColor" red="0.57181804889999999" green="0.75125893440000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.38950407510000001" green="0.35168433189999998" blue="0.44821965689999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="68" id="L33-19-DAK"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                 <state key="normal" title="Get">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="titleColor" red="0.84446042779999997" green="0.57813215259999995" blue="0.66662985090000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="titleShadowColor" red="0.57181804889999999" green="0.75125893440000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -37,7 +37,7 @@
                                         <real key="value" value="46"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" red="0.57181804889999999" green="0.75125893440000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" red="0.392762363" green="0.35250791910000001" blue="0.45565378670000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -47,7 +47,7 @@
                             <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dw3-DL-q15">
                                 <rect key="frame" x="180" y="39" width="43" height="37"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="tintColor" red="0.38950407510000001" green="0.35168433189999998" blue="0.44821965689999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" backgroundImage="camera.circle" catalog="system">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -77,7 +77,7 @@
                                     <constraint firstAttribute="width" constant="38" id="3LA-Dk-yBU"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="27"/>
-                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="tintColor" red="0.38950407510000001" green="0.35168433189999998" blue="0.44821965689999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" backgroundImage="equal.circle.fill" catalog="system">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -91,7 +91,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="41" id="oYN-Jl-ven"/>
                                 </constraints>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" red="0.86697131400000005" green="0.59449297189999994" blue="0.68620347979999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" backgroundImage="xmark.circle.fill" catalog="system">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -174,23 +174,23 @@
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="Akp-k7-Str">
                                 <rect key="frame" x="0.0" y="552" width="375" height="37"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="pageIndicatorTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="pageIndicatorTintColor" red="0.95324486490000004" green="0.65549772979999998" blue="0.7534563541" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="currentPageIndicatorTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </pageControl>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5wg-xj-RBg">
                                 <rect key="frame" x="97" y="598" width="181" height="39"/>
-                                <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.95324486490000004" green="0.65549772979999998" blue="0.7534563541" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="39" id="LhE-e1-mdh"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
                                 <state key="normal" title="GET STARTED">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="titleColor" red="0.42808610200000002" green="0.38735401629999999" blue="0.48721867800000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="titleShadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" red="0.95324486490000004" green="0.65549772979999998" blue="0.7534563541" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="50"/>
@@ -205,7 +205,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.57181804889999999" green="0.75125893440000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.41242393849999998" green="0.37172102930000001" blue="0.47156125310000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="LjP-wM-xVq" firstAttribute="leading" secondItem="Akp-k7-Str" secondAttribute="leading" id="3dy-mV-a6s"/>
                             <constraint firstItem="u4o-OT-mhu" firstAttribute="bottom" secondItem="5wg-xj-RBg" secondAttribute="bottom" constant="10" id="5d9-eQ-GOZ"/>
@@ -241,15 +241,15 @@
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PEk-qa-Zg6">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                             </arscnView>
-                            <button opaque="NO" clipsSubviews="YES" alpha="0.5" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hJ3-XL-8UI">
+                            <button opaque="NO" clipsSubviews="YES" alpha="0.59999999999999998" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hJ3-XL-8UI">
                                 <rect key="frame" x="81" y="149" width="212" height="79"/>
-                                <color key="backgroundColor" red="0.91999179124832153" green="0.58321154117584229" blue="0.61300492286682129" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.40059250590000001" green="0.36031949520000001" blue="0.46348041299999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="79" id="y5t-fK-fTF"/>
+                                    <constraint firstAttribute="height" constant="79" id="8og-aE-77X"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="27"/>
                                 <state key="normal" title="Introduction">
-                                    <color key="titleColor" systemColor="tertiarySystemBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="titleColor" red="0.91383510830000003" green="0.67626744510000003" blue="0.75599360469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="titleShadowColor" red="1" green="0.59281551779999997" blue="0.677579924" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -268,15 +268,12 @@
                                     <segue destination="l9q-dm-iMt" kind="show" id="3Uc-IH-8kb"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" clipsSubviews="YES" alpha="0.5" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HiR-9S-E9w">
-                                <rect key="frame" x="81" y="272" width="212" height="79"/>
-                                <color key="backgroundColor" red="0.91167920827865601" green="0.43328005075454712" blue="0.51815837621688843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="79" id="fAk-8N-AuC"/>
-                                </constraints>
+                            <button opaque="NO" clipsSubviews="YES" alpha="0.59999999999999998" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HiR-9S-E9w">
+                                <rect key="frame" x="81" y="284" width="212" height="79"/>
+                                <color key="backgroundColor" red="0.40059250590000001" green="0.36031949520000001" blue="0.46348041299999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="27"/>
                                 <state key="normal" title="Education">
-                                    <color key="titleColor" systemColor="tertiarySystemBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="titleColor" red="0.91383510830000003" green="0.67626744510000003" blue="0.75599360469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
@@ -294,12 +291,12 @@
                                     <segue destination="BCM-N0-cEq" kind="show" id="Tkm-bh-Oyu"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" clipsSubviews="YES" alpha="0.5" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2ct-P2-YlG">
-                                <rect key="frame" x="81" y="400" width="212" height="79"/>
-                                <color key="backgroundColor" red="0.92787492275238037" green="0.23893296718597412" blue="0.41270512342453003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <button opaque="NO" clipsSubviews="YES" alpha="0.59999999999999998" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2ct-P2-YlG">
+                                <rect key="frame" x="81" y="421" width="212" height="79"/>
+                                <color key="backgroundColor" red="0.40059250590000001" green="0.36031949520000001" blue="0.46348041299999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="27"/>
-                                <state key="normal" title="Mini game">
-                                    <color key="titleColor" systemColor="tertiarySystemBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Mini-game">
+                                    <color key="titleColor" red="0.91383510830000003" green="0.67626744510000003" blue="0.75599360469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
@@ -314,20 +311,21 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="OQn-D9-6kD" firstAttribute="bottom" secondItem="2ct-P2-YlG" secondAttribute="bottom" constant="168" id="42z-PJ-L7h"/>
-                            <constraint firstItem="hJ3-XL-8UI" firstAttribute="trailing" secondItem="HiR-9S-E9w" secondAttribute="trailing" id="DzD-kD-rL8"/>
-                            <constraint firstItem="PEk-qa-Zg6" firstAttribute="bottom" secondItem="OQn-D9-6kD" secondAttribute="bottom" id="Eg6-YT-GmX"/>
-                            <constraint firstItem="2ct-P2-YlG" firstAttribute="top" secondItem="HiR-9S-E9w" secondAttribute="bottom" constant="49" id="GXj-RN-ZHd"/>
-                            <constraint firstItem="HiR-9S-E9w" firstAttribute="leading" secondItem="2ct-P2-YlG" secondAttribute="leading" id="JtH-d8-DpH"/>
-                            <constraint firstItem="HiR-9S-E9w" firstAttribute="trailing" secondItem="2ct-P2-YlG" secondAttribute="trailing" id="QnP-vs-hJL"/>
-                            <constraint firstItem="HiR-9S-E9w" firstAttribute="top" secondItem="hJ3-XL-8UI" secondAttribute="bottom" constant="44" id="S9o-qD-6Ks"/>
-                            <constraint firstItem="PEk-qa-Zg6" firstAttribute="leading" secondItem="OQn-D9-6kD" secondAttribute="leading" id="YpJ-1T-L2p"/>
-                            <constraint firstItem="hJ3-XL-8UI" firstAttribute="centerX" secondItem="Zv4-ri-bOq" secondAttribute="centerX" id="Ze6-I6-vVe"/>
-                            <constraint firstItem="hJ3-XL-8UI" firstAttribute="leading" secondItem="OQn-D9-6kD" secondAttribute="leading" constant="81" id="ZlU-gZ-tJf"/>
-                            <constraint firstItem="hJ3-XL-8UI" firstAttribute="leading" secondItem="HiR-9S-E9w" secondAttribute="leading" id="hGf-gu-cTP"/>
-                            <constraint firstItem="PEk-qa-Zg6" firstAttribute="top" secondItem="OQn-D9-6kD" secondAttribute="top" id="ks4-Dz-KRh"/>
-                            <constraint firstItem="PEk-qa-Zg6" firstAttribute="centerX" secondItem="HiR-9S-E9w" secondAttribute="centerX" id="uPC-tK-Oib"/>
-                            <constraint firstItem="hJ3-XL-8UI" firstAttribute="top" secondItem="OQn-D9-6kD" secondAttribute="top" constant="149" id="zFx-pr-Mw0"/>
+                            <constraint firstItem="PEk-qa-Zg6" firstAttribute="centerX" secondItem="HiR-9S-E9w" secondAttribute="centerX" id="587-bF-ruj"/>
+                            <constraint firstItem="PEk-qa-Zg6" firstAttribute="centerY" secondItem="HiR-9S-E9w" secondAttribute="centerY" id="8rc-p5-h7e"/>
+                            <constraint firstItem="hJ3-XL-8UI" firstAttribute="top" secondItem="OQn-D9-6kD" secondAttribute="top" constant="149" id="BDd-JX-YVE"/>
+                            <constraint firstItem="hJ3-XL-8UI" firstAttribute="leading" secondItem="OQn-D9-6kD" secondAttribute="leading" constant="81" id="RH5-GZ-MUP"/>
+                            <constraint firstItem="PEk-qa-Zg6" firstAttribute="centerX" secondItem="Zv4-ri-bOq" secondAttribute="centerX" id="Tbf-j1-QBp"/>
+                            <constraint firstItem="HiR-9S-E9w" firstAttribute="top" secondItem="hJ3-XL-8UI" secondAttribute="bottom" constant="56" id="Tmu-Mv-ttg"/>
+                            <constraint firstItem="PEk-qa-Zg6" firstAttribute="leading" secondItem="OQn-D9-6kD" secondAttribute="leading" id="U2I-OU-x0j"/>
+                            <constraint firstItem="hJ3-XL-8UI" firstAttribute="trailing" secondItem="HiR-9S-E9w" secondAttribute="trailing" id="WIj-ko-mXK"/>
+                            <constraint firstItem="2ct-P2-YlG" firstAttribute="top" secondItem="HiR-9S-E9w" secondAttribute="bottom" constant="58" id="YPA-VT-f6f"/>
+                            <constraint firstItem="PEk-qa-Zg6" firstAttribute="bottom" secondItem="OQn-D9-6kD" secondAttribute="bottom" id="gr5-fr-LzO"/>
+                            <constraint firstItem="hJ3-XL-8UI" firstAttribute="leading" secondItem="HiR-9S-E9w" secondAttribute="leading" id="mUE-08-lLK"/>
+                            <constraint firstItem="PEk-qa-Zg6" firstAttribute="top" secondItem="OQn-D9-6kD" secondAttribute="top" id="nVf-ss-Ulg"/>
+                            <constraint firstItem="HiR-9S-E9w" firstAttribute="trailing" secondItem="2ct-P2-YlG" secondAttribute="trailing" id="tcn-xg-C57"/>
+                            <constraint firstItem="OQn-D9-6kD" firstAttribute="bottom" secondItem="2ct-P2-YlG" secondAttribute="bottom" constant="147" id="v7s-33-B4h"/>
+                            <constraint firstItem="HiR-9S-E9w" firstAttribute="leading" secondItem="2ct-P2-YlG" secondAttribute="leading" id="xj8-TF-Bep"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="OQn-D9-6kD"/>
                     </view>
@@ -400,9 +398,10 @@
                                     <constraint firstAttribute="width" constant="38" id="m2v-l5-og0"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="27"/>
-                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="tintColor" red="0.38950407510000001" green="0.35168433189999998" blue="0.44821965689999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" backgroundImage="equal.circle.fill" catalog="system">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="titleShadowColor" red="0.40125149490000001" green="0.36340793970000002" blue="0.45996195080000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="showButton:" destination="swg-VC-r6m" eventType="touchUpInside" id="P1c-fd-Ie2"/>
@@ -414,7 +413,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="41" id="Gdd-3G-CpB"/>
                                 </constraints>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" red="0.83705240489999999" green="0.57397615909999999" blue="0.66253513100000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" backgroundImage="xmark.circle.fill" catalog="system">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -425,7 +424,7 @@
                             <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WGk-eJ-Cpr">
                                 <rect key="frame" x="179" y="46.5" width="43" height="37"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="tintColor" red="0.38950407510000001" green="0.35168433189999998" blue="0.44821965689999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" backgroundImage="camera.circle" catalog="system">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -447,20 +446,20 @@
                                     <action selector="recordButton:" destination="swg-VC-r6m" eventType="touchUpInside" id="705-Xp-dar"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" clipsSubviews="YES" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YBL-i0-PCj">
+                            <button opaque="NO" clipsSubviews="YES" alpha="0.59999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YBL-i0-PCj">
                                 <rect key="frame" x="185" y="553" width="94" height="41"/>
-                                <color key="backgroundColor" red="0.1135449186" green="0.29158133269999997" blue="0.28224721549999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <color key="backgroundColor" red="0.39667740460000001" green="0.35641348360000003" blue="0.45956701039999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Clear">
-                                    <color key="titleColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" red="0.83705240489999999" green="0.57397615909999999" blue="0.66253513100000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                         <real key="value" value="4"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" red="0.098808459939999996" green="0.23037073020000001" blue="0.22425401210000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" red="0.40067833660000002" green="0.35999906059999998" blue="0.45981919770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="44"/>
@@ -470,13 +469,13 @@
                                     <action selector="clearButton:" destination="swg-VC-r6m" eventType="touchUpInside" id="xNW-zH-oX9"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" clipsSubviews="YES" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="htE-Jr-zkD">
+                            <button opaque="NO" clipsSubviews="YES" alpha="0.59999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="htE-Jr-zkD">
                                 <rect key="frame" x="83" y="553" width="94" height="41"/>
-                                <color key="backgroundColor" red="0.1169672236" green="0.29929080609999997" blue="0.2899784446" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <color key="backgroundColor" red="0.39667740460000001" green="0.35641348360000003" blue="0.45956701039999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Try">
-                                    <color key="titleColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" red="0.83705240489999999" green="0.57397615909999999" blue="0.66253513100000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
@@ -486,7 +485,7 @@
                                         <real key="value" value="44"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" red="0.098808459939999996" green="0.23037073020000001" blue="0.22425401210000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" red="0.38501891490000001" green="0.34437382220000001" blue="0.44416469339999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
