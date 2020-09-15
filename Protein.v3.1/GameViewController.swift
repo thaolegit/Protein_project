@@ -33,11 +33,20 @@ class GameViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegat
     @IBOutlet weak var recordButton: UIButton!
     
     
-    @IBAction func cameraButton(_ sender: UIButton) {
-        takeScreenshot()
-        
-    }
-    
+    @IBAction func cameraButton(_ sender: AnyObject) {
+        if let cameraButton : UIButton = sender as? UIButton {
+                cameraButton.isSelected = !cameraButton.isSelected
+                if (cameraButton.isSelected){
+                    cameraButton.tintColor = UIColor(red: 0.95, green: 0.65, blue: 0.75, alpha: 1)
+                    takeScreenshot()
+                    cameraButton.tintColor = UIColor(red: 0.4, green: 0.36, blue: 0.46, alpha: 1)
+                        
+                    } else {
+                    cameraButton.tintColor = UIColor(red: 0.4, green: 0.36, blue: 0.46, alpha: 1)
+            }
+            }
+        }
+       
         
     
     var proteinArray = [String]()

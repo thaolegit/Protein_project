@@ -28,7 +28,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Launch Screen.png" translatesAutoresizingMaskIntoConstraints="NO" id="bqv-am-XqM">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="bqv-am-XqM">
                                 <rect key="frame" x="-5" y="202" width="419" height="265"/>
                                 <color key="backgroundColor" red="0.84446042779999997" green="0.57813215259999995" blue="0.66662985090000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" red="0.84446042779999997" green="0.57813215259999995" blue="0.66662985090000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -58,6 +58,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Launch Screen.png" width="417" height="357"/>
+        <image name="Image" width="417" height="357"/>
     </resources>
 </document>

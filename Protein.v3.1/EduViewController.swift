@@ -20,7 +20,7 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
  // ------------------VARIABLES DECLARTION-----------------------
      let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
       
-     /* var proteinManagedObject : Protein! = nil
+     var proteinManagedObject : Protein! = nil
       
       var entity: NSEntityDescription!=nil
       
@@ -32,7 +32,7 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
           request.sortDescriptors = [sorter]
           
           return request
-      }*/
+      }
     
     let configuration = ARWorldTrackingConfiguration()
     
@@ -65,8 +65,18 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
     @IBOutlet weak var recordButton: UIButton!
     
     //Camera Button to capture the screen and save to Photo Library
-    @IBAction func cameraButton(_ sender: UIButton) {
-        takeScreenshot()
+    @IBAction func cameraButton(_ sender: AnyObject) {
+           if let cameraButton : UIButton = sender as? UIButton {
+                     cameraButton.isSelected = !cameraButton.isSelected
+                     if (cameraButton.isSelected){
+                         cameraButton.tintColor = UIColor(red: 0.95, green: 0.65, blue: 0.75, alpha: 1)
+                         takeScreenshot()
+                         cameraButton.tintColor = UIColor(red: 0.4, green: 0.36, blue: 0.46, alpha: 1)
+                             
+                         } else {
+                         cameraButton.tintColor = UIColor(red: 0.4, green: 0.36, blue: 0.46, alpha: 1)
+                 }
+                 }
     }
      
     //Get Button to get the pDB files and display
@@ -125,7 +135,6 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
     let areaPanned = sender.view as? SCNView
        let location = sender.location(in: areaPanned)
        let hitTestResults = areaPanned?.hitTest(location, options: nil)
-      print(location)
       if let hitTest = hitTestResults?.first {
           if let plane = hitTest.node.parent {
               if sender.state == .changed {
@@ -211,16 +220,17 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
         
         
     //2. Record Button Function: Function to record the screen
+        // objective-C function to handle the Gesture Recognizer
+        //Tap Gesture
     @objc func handleTapGesture(){
      stopRecording()
      print("Tap")
-     
- }
- 
-  @objc func handleLongPress() {
+     }
+        //Long press gesture
+    @objc func handleLongPress() {
      startRecording()
      print("Long pressed")
- }
+    }
         // 2.1. Record Screen Function
     let recorder = RPScreenRecorder.shared()
     func startRecording(){
@@ -242,7 +252,7 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
         }
         }
     }
- func previewControllerDidFinish(_ previewController: RPPreviewViewController) {
+    func previewControllerDidFinish(_ previewController: RPPreviewViewController) {
        dismiss(animated: true, completion: nil)
    }
    
@@ -268,29 +278,28 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
     
 //4. Get Button Functions: Download PDB files from the PDB Bank and Display them
     //4.1. Download Functions: To download and save PDB files to Documents Directory after user input text
-    func download(){
-                let proteinName = textField.text
+    
+func download(){
+              let parameter = textField.text
               // Create destination URL
               let documentsUrl:URL =  (FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first as URL?)!
-                 //let destinationFileUrl = documentsUrl.appendingPathComponent("downloadedFile.pdb")
                  print("docDire" + String(describing: documentsUrl))
                  let dataPath = documentsUrl.appendingPathComponent("pDBFiles")
-            let destinationURL = dataPath.appendingPathComponent("/" + proteinName! + ".pdb")
+                 let destinationURL = dataPath.appendingPathComponent("/" + parameter! + ".pdb")
                  let FileExists = FileManager().fileExists(atPath: destinationURL.path)
                  
+                
+        
                  //Create URL to the source file you want to download
                    let domain = "https://files.rcsb.org/download/"
-                   //let parameter = "\(textField.text ?? "1111")"
                    let fileExt = ".pdb"
-                   let fileURL:NSURL = NSURL(string: "\(domain)" + proteinName! + "\(fileExt)")!
-                  //let fileURL:NSURL = NSURL(string: "\(domain)\(parameter)\(fileExt)")!
-                 //let fileURL = URL(string: "https://files.rcsb.org/download/6MK1.pdb")
+                   let fileURL:NSURL = NSURL(string: "\(domain)" + parameter! + "\(fileExt)")!
+        
+    
                  
                  let sessionConfig = URLSessionConfiguration.default
                  let session = URLSession(configuration: sessionConfig)
-              
-                    let request = URLRequest(url:fileURL as URL)
-                 
+                 let request = URLRequest(url:fileURL as URL)
                  let task = session.downloadTask(with: request) { (tempLocalUrl, response, error) in
                     DispatchQueue.main.async {
                     
@@ -298,11 +307,27 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
                          // Success
                          if let statusCode = (response as? HTTPURLResponse)?.statusCode {
                              print("Successfully downloaded. Status code: \(statusCode)")
+                            //make a new proteinManagedObject
+                            self.proteinManagedObject = Protein(context: self.context)
+                                 
+                                 //give the attributes from the downloaded file
+                            self.proteinManagedObject.name = self.textField.text
+                            self.proteinManagedObject.location = String(describing: destinationURL)
+                                 do{
+                                    try self.context.save()
+                                    print(self.proteinManagedObject.name!)
+                                    print(self.proteinManagedObject.location!)
+                                    self.textView.text = self.proteinManagedObject.name
+                                    
+                                 } catch {
+                                     print("Cannot create a new object")
+                                 }
+                            
                          }
                         
                        do {
                        
-                             try FileManager.default.copyItem(at: tempLocalUrl, to: destinationURL)
+                        try FileManager.default.copyItem(at: tempLocalUrl, to: destinationURL)
                          } catch (let writeError) {
                              print("Error creating a file \(destinationURL) : \(writeError)")
                          }
@@ -321,6 +346,9 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
            task.resume()
                  
                }
+    
+        //Save to Core Data
+
        //4.2. Function to Display pDB file as 3D Models in AR
        //4.3. Function to link downloaded file information to CoreData
        //4.4. Function to fetch some data from the sites (text data)
@@ -624,6 +652,10 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
     sceneView.scene.rootNode.addChildNode(textNode)
     }*/
     
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+
+        textView.text = proteinManagedObject.name
+       }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -643,7 +675,7 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
             let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
             recordButton.addGestureRecognizer(tapGesture)
             recordButton.addGestureRecognizer(longPressGesture)
-            /*
+            
         //make the frc and fetch
                frc = NSFetchedResultsController(fetchRequest: makeRequest(), managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
                frc.delegate = self
@@ -653,16 +685,10 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
                } catch {
                    print("frc cannot fetch")
                }
-        // populate the fileds if update
+        /*// populate the fileds if update
             if proteinManagedObject != nil{
                 textField.text = proteinManagedObject.name
-                /*String(describing: destinationURL.path) = proteinManagedObject.location
-                imageTextField.text = proteinManagedObject.image
-                //urlTextField.text = personManagedObject.url
-                
-                if personManagedObject.image != nil {
-                    getImage(imageName: personManagedObject.image!)*/
-                }*/
+                             }*/
               
 
 
