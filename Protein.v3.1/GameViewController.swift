@@ -203,16 +203,18 @@ class GameViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegat
     
 //2. Record Button Function: Function to record the screen
 
-   @objc func handleTapGesture(){
-       stopRecording()
-       print("Tap")
-       
+  @objc func handleTapGesture(){
+    stopRecording()
+    recordButton.tintColor = UIColor(red: 0.4, green: 0.36, blue: 0.46, alpha: 1)
+    print("Tap")
+    }
+       //Long press gesture
+   @objc func handleLongPress() {
+    startRecording()
+    recordButton.tintColor = UIColor.red
+    print("Long pressed")
    }
-   
-    @objc func handleLongPress() {
-       startRecording()
-       print("Long pressed")
-   }
+    
        // 2.1. Record Screen Function
    let recorder = RPScreenRecorder.shared()
    func startRecording(){
@@ -356,7 +358,7 @@ func previewControllerDidFinish(_ previewController: RPPreviewViewController) {
         let newElements = proteinArray.joined(separator: "-")
         let text = SCNText(string: "Congratulations!\nYou have created \na new protein made of \(newElements)", extrusionDepth: 2)
         let material = SCNMaterial()
-        material.diffuse.contents = UIColor.systemTeal
+        material.diffuse.contents = UIColor(red: 0.95, green: 0.65, blue: 0.75, alpha: 0.8)
         text.materials = [material]
         let node = SCNNode()
         node.position = SCNVector3(x: -0.005, y: -0.005, z: -0.01)

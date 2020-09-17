@@ -67,7 +67,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="43" id="RvX-tu-H6z"/>
                                 </constraints>
-                                <color key="tintColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.40059250590000001" green="0.36031949520000001" blue="0.46348041299999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" backgroundImage="largecircle.fill.circle" catalog="system">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -475,7 +475,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="43" id="c1N-sY-zdL"/>
                                 </constraints>
-                                <color key="tintColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.40059250590000001" green="0.36031949520000001" blue="0.46348041299999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" backgroundImage="largecircle.fill.circle" catalog="system">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>

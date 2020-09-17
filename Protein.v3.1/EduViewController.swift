@@ -224,11 +224,13 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
         //Tap Gesture
     @objc func handleTapGesture(){
      stopRecording()
+     recordButton.tintColor = UIColor(red: 0.4, green: 0.36, blue: 0.46, alpha: 1)
      print("Tap")
      }
         //Long press gesture
     @objc func handleLongPress() {
      startRecording()
+     recordButton.tintColor = UIColor.red
      print("Long pressed")
     }
         // 2.1. Record Screen Function
