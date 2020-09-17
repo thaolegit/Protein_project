@@ -280,27 +280,25 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
 //4. Get Button Functions: Download PDB files from the PDB Bank and Display them
     //4.1. Download Functions: To download and save PDB files to Documents Directory after user input text
     
-func download(){
+/*func download(){
               let parameter = textField.text
               // Create destination URL
               let documentsUrl:URL =  (FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first as URL?)!
                  print("docDire" + String(describing: documentsUrl))
                  let dataPath = documentsUrl.appendingPathComponent("pDBFiles")
                  let destinationURL = dataPath.appendingPathComponent("/" + parameter! + ".pdb")
-                 let FileExists = FileManager().fileExists(atPath: destinationURL.path)
+                 //let FileExists = FileManager().fileExists(atPath: destinationURL.path)
                  
-                
-        
-                 //Create URL to the source file you want to download
+                 //Create URL to the source file to download
                    let domain = "https://files.rcsb.org/download/"
                    let fileExt = ".pdb"
-                   let fileURL:NSURL = NSURL(string: "\(domain)" + parameter! + "\(fileExt)")!
-        
+                   let fileURL:URL = URL(string: "\(domain)" + parameter! + "\(fileExt)")!
+                print(fileURL)
     
                  
                  let sessionConfig = URLSessionConfiguration.default
                  let session = URLSession(configuration: sessionConfig)
-                 let request = URLRequest(url:fileURL as URL)
+                 let request = URLRequest(url: fileURL)
                  let task = session.downloadTask(with: request) { (tempLocalUrl, response, error) in
                     DispatchQueue.main.async {
                     
@@ -309,7 +307,7 @@ func download(){
                          if let statusCode = (response as? HTTPURLResponse)?.statusCode {
                              print("Successfully downloaded. Status code: \(statusCode)")
                             //make a new proteinManagedObject
-                            self.proteinManagedObject = Protein(context: self.context)
+                            /*self.proteinManagedObject = Protein(context: self.context)
                                  
                                  //give the attributes from the downloaded file
                             self.proteinManagedObject.name = self.textField.text
@@ -322,7 +320,7 @@ func download(){
                                     
                                  } catch {
                                      print("Cannot create a new object")
-                                 }
+                                 }*/
                             
                          }
                         
@@ -338,15 +336,70 @@ func download(){
                      }
                  }
                }
-             //Check if File exists. If it does, print and do not download
+             /*//Check if File exists. If it does, print and do not download
                  if FileExists == true {
                    print("This file was already downloaded.")
                    task.cancel()
-                   }
+                   }*/
                
            task.resume()
                  
-               }
+               }*/
+    var task: URLSessionTask!
+    
+    func download() {
+        //Create URL to the source file to download
+        let parameter = textField.text
+        let domain = "https://files.rcsb.org/download/"
+        let fileExt = ".pdb"
+        let fileURL = URL(string: "\(domain)" + parameter! + "\(fileExt)")!
+        print(fileURL)
+
+        //Use URLSession and downloadTask
+        let sessionConfig = URLSessionConfiguration.default
+        let session = URLSession(configuration: sessionConfig)
+        let request = URLRequest(url: fileURL)
+        
+        let task = session.downloadTask(with: request) { temporaryURL, response, error in
+                //Get the httpresonse code to make sure file exists
+                if let statusCode = (response as? HTTPURLResponse)?.statusCode{
+                    print("Successfully downloaded. Status code:\(statusCode)")
+                }else {
+                    return
+                }
+                
+                guard let temporaryURL = temporaryURL, error == nil else {
+                    print(error ?? "Unknown error")
+                    return
+                }
+                
+                do {
+                    //download file and save as pre-defined format
+                    print(temporaryURL)
+                    let documentsUrl =  try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+                    print("docDire" + String(describing: documentsUrl))
+                    let destinationURL = documentsUrl.appendingPathComponent( parameter! + ".pdb")
+                    print(destinationURL)
+                    //manage the downloaded files
+                    let manager = FileManager.default
+                    try? manager.removeItem(at: destinationURL)// remove the old one, if there is any
+                    try manager.moveItem(at: temporaryURL, to: destinationURL)// move the new one to destinationURL
+                    //Create a new ProteinManagedObject from the downloaded file:
+                    self.proteinManagedObject = Protein(context: self.context)
+                    self.proteinManagedObject.name = parameter
+                    self.proteinManagedObject.location = String(describing: destinationURL)
+                        do {
+                            try self.context.save()
+                        } catch {
+                            print("Cannot create a new object")
+                        }
+                } catch let moveError {
+                    print("\(moveError)")
+                }
+            
+        }
+        task.resume()
+    }
     
         //Save to Core Data
 
@@ -599,10 +652,10 @@ func download(){
 
  
     
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+   /* func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
 
         textView.text = proteinManagedObject.name
-       }
+       }*/
     
     override func viewDidLoad() {
         super.viewDidLoad()
