@@ -60,7 +60,6 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
     }
     
     //Record Butotn to record 3D onscreen
-    
    
     @IBOutlet weak var recordButton: UIButton!
     
@@ -69,9 +68,9 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
            if let cameraButton : UIButton = sender as? UIButton {
                      cameraButton.isSelected = !cameraButton.isSelected
                      if (cameraButton.isSelected){
-                         cameraButton.tintColor = UIColor(red: 0.95, green: 0.65, blue: 0.75, alpha: 1)
-                         takeScreenshot()
-                         cameraButton.tintColor = UIColor(red: 0.4, green: 0.36, blue: 0.46, alpha: 1)
+                         cameraButton.tintColor = UIColor(red: 0.95, green: 0.65, blue: 0.75, alpha: 1)//change to pink colour
+                         takeScreenshot()//action
+                         cameraButton.tintColor = UIColor(red: 0.4, green: 0.36, blue: 0.46, alpha: 1)//change back to original colour
                              
                          } else {
                          cameraButton.tintColor = UIColor(red: 0.4, green: 0.36, blue: 0.46, alpha: 1)
@@ -87,9 +86,10 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
     //Exit Button
     @IBAction func exitButton(_ sender: UIButton) {
     }
- //Gestures
     
-   //Pinch
+ //----------------------FUNCTIONS TO ENABLE INTERACTIONS---------------
+ //Gestures Recognizer
+   //Pinch Gesture
     @IBAction func pinchGesture(_ sender:
     UIPinchGestureRecognizer) {
     if sender.state == .changed{
@@ -111,7 +111,7 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
             }
         }
     
-    // Rotate
+    // Rotation Gesture
     @IBAction func rotationGesture(_ sender: UIRotationGestureRecognizer) {
     if sender.state == .changed {
                     let areaTouched = sender.view as? SCNView
@@ -130,7 +130,7 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
                 }
         }
     
-    //Pan
+    //Pan Gesture
     @IBAction func panGesture(_ sender: UIPanGestureRecognizer) {
     let areaPanned = sender.view as? SCNView
        let location = sender.location(in: areaPanned)
@@ -147,7 +147,7 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
     
     
     
-//------------FUNCTIONS THAT MAKE ACTIONS BELOW------------------------
+//------------FUNCTIONS THAT MAKE ACTIONS---------------------------
     
     //1. Menu Button Functions: Show options when Menu button is clicked
         func showOptions(){
@@ -175,7 +175,7 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
            
          // Create functions inside of Menu Button
       
-            // 1.1. Function to open link to RCSB
+        // 1.1. Function to open link to RCSB
                 func openLink(){
                     guard let url = URL(string: "https://www.rcsb.org/") else { return }
              UIApplication.shared.open(url)
@@ -206,11 +206,8 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
                                helpView.layer.cornerRadius = 10
                                //helpText.layer.cornerRadius = 5
                     }
-                   
-                    //helpText.centerXAnchor.constraint(equalTo: helpView.centerXAnchor).isActive = true
-                    //helpText.centerYAnchor.constraint(equalTo: helpView.centerYAnchor).isActive = true
-                
-                    
+               
+        
          
             // 1.3. Functions to open pDB 101
                 func pdb101(){
@@ -242,7 +239,7 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
             }
         }
     }
-        // 2.2. Stop recording Function
+        // 2.2. Stop recording Function and show the preview screen
     func stopRecording(){
         recorder.stopRecording {(previewVC, error) in
             if let previewVC = previewVC {
@@ -254,6 +251,7 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
         }
         }
     }
+    // 2.3. Dismiss the preview screen
     func previewControllerDidFinish(_ previewController: RPPreviewViewController) {
        dismiss(animated: true, completion: nil)
    }
@@ -269,7 +267,8 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
             }
 
             print("Image was saved in the photo gallery")
-            //UIApplication.shared.open(URL(string:"photos-redirect://")!): open Camera Library every time after photo is taken
+            //Enable this to open camera every time photo is taken
+            //UIApplication.shared.open(URL(string:"photos-redirect://")!)
         }
         // 3.2. Functions to take screen shot
         func takeScreenshot(){
@@ -357,25 +356,21 @@ func download(){
        
     
 //---------FUNCTIONS FOR INTERACTION AND DESIGN-------
- //1. Dismiss after entering protein's name
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-          textField.resignFirstResponder()
-          return true;
-      }
+ //1. Dismiss keyboard after entering protein's name
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 //2. Dismiss Help Screen by touching other part of the screen
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch: UITouch? = (touches.first!)
         if touch?.view != helpView{
             self.helpView.isHidden = true
             }
+     
         }
 
-    
-//3. Make Camera Button change after clicked
-    
-//4. Lighting and Shading functions
-    
-//5. Functions to interact with Protein Models on screen
+
     
     
     
@@ -434,42 +429,6 @@ func download(){
  
   
     
-    /*
-    func download(){
-        // Create destination URL
-        let documentsUrl:URL =  (FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first as URL?)!
-           let destinationFileUrl = documentsUrl.appendingPathComponent("downloadedFile.pdb")
-           
-           //Create URL to the source file you want to download
-           let fileURL = URL(string: "https://files.rcsb.org/download/6MK1.pdb")
-           
-           let sessionConfig = URLSessionConfiguration.default
-           let session = URLSession(configuration: sessionConfig)
-        
-           let request = URLRequest(url:fileURL!)
-           
-           let task = session.downloadTask(with: request) { (tempLocalUrl, response, error) in
-               if let tempLocalUrl = tempLocalUrl, error == nil {
-                   // Success
-                   if let statusCode = (response as? HTTPURLResponse)?.statusCode {
-                       print("Successfully downloaded. Status code: \(statusCode)")
-                   }
-                   
-                   do {
-                       try FileManager.default.copyItem(at: tempLocalUrl, to: destinationFileUrl)
-                   } catch (let writeError) {
-                       print("Error creating a file \(destinationFileUrl) : \(writeError)")
-                   }
-                   
-               } else {
-                print("Error took place while downloading a file. Error description: %@", error?.localizedDescription as Any);
-               }
-           }
-           task.resume()
-           
-         }
-
-    */
     
     
     func post() {
@@ -638,21 +597,7 @@ func download(){
     
 
 
-    
-   /* //DISPLAYING TEXT ON SCREEN
-    func showText() {
-    let text = SCNText(string: "Hello", extrusionDepth: 1)
-    let material = SCNMaterial()
-    material.diffuse.contents = UIColor.systemPink
-    text.materials = [material]
-        
-    let textNode = SCNNode()
-    textNode.position = SCNVector3(0,0,0)
-    textNode.scale = SCNVector3 (0.01, 0.01, 0.01)
-    textNode.geometry = text
-
-    sceneView.scene.rootNode.addChildNode(textNode)
-    }*/
+ 
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
 
@@ -701,10 +646,10 @@ func download(){
         
         super.viewWillAppear(animated)
         
-        
-        
         let configuration = ARWorldTrackingConfiguration()
         secondSceneView.session.run(configuration)
+        textField.delegate = self
+        textField.returnKeyType = .done
     }
     
     override func viewWillDisappear(_ animated: Bool) {
