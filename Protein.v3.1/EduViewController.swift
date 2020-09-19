@@ -15,10 +15,11 @@ import CoreData
 import ReplayKit
 import AVFoundation
 
-class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegate, UITextViewDelegate, NSFetchedResultsControllerDelegate, RPPreviewViewControllerDelegate {
+class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegate, UITextViewDelegate, NSFetchedResultsControllerDelegate, RPPreviewViewControllerDelegate{
     
  // ------------------VARIABLES DECLARTION-----------------------
-     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
       
      var proteinManagedObject : Protein! = nil
       
@@ -33,6 +34,16 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
           
           return request
       }
+    
+    
+    /*func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        proteinManagedObject.name = context.name
+        }*/
+    
+    
+    
+
+    
     
     let configuration = ARWorldTrackingConfiguration()
     
@@ -81,10 +92,21 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
     //Get Button to get the pDB files and display
      @IBAction func getButton(_ sender: UIButton) {
         download()
+        //displayProtein(name: textField.text!)
+        //displayText(name: textField.text!)
+        
+        if let pdbFileURL = Bundle.main.url(forResource: textField.text, withExtension: ".dae", subdirectory: "Sample.scnassets") {
+            print(pdbFileURL)
+        }
      }
     
     //Exit Button
     @IBAction func exitButton(_ sender: UIButton) {
+    }
+    
+    
+    @IBAction func clearButton(_ sender: UIButton) {
+        secondSceneView.scene = scene
     }
     
  //----------------------FUNCTIONS TO ENABLE INTERACTIONS---------------
@@ -148,6 +170,34 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
     
     
 //------------FUNCTIONS THAT MAKE ACTIONS---------------------------
+    
+    func displayProtein(name: String) {
+        let proteinScene = SCNScene(named: "Sample.scnassets/" + name + ".dae")!
+        secondSceneView.scene = proteinScene
+    }
+
+    //idea of the function that should be able to display the protein if there is a converter
+    func displayProteinreal(name: String) {
+        let proteinScene = SCNScene(named: proteinManagedObject.location! + "/" + name + ".dae")!
+        secondSceneView.scene = proteinScene
+    }
+    
+    func displayText(name: String){
+        let text = SCNText(string: name + ".pdb is downloaded", extrusionDepth: 2)
+        let material = SCNMaterial()
+        material.diffuse.contents = UIColor(red: 0.4, green: 0.36, blue: 0.46, alpha: 1)
+        text.materials = [material]
+        let node = SCNNode()
+        node.position = SCNVector3(x: -0.005, y: -0.005, z: -0.01)
+        node.scale = SCNVector3(0.0003, 0.0003, 0.0003)
+        node.geometry = text
+        node.name = "shape"
+        secondSceneView.scene.rootNode.addChildNode(node)
+       
+    }
+    
+    
+    
     
     //1. Menu Button Functions: Show options when Menu button is clicked
         func showOptions(){
@@ -375,23 +425,21 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
                 
                 do {
                     //download file and save as pre-defined format
-                    print(temporaryURL)
                     let documentsUrl =  try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-                    print("docDire" + String(describing: documentsUrl))
                     let destinationURL = documentsUrl.appendingPathComponent( parameter! + ".pdb")
                     print(destinationURL)
                     //manage the downloaded files
                     let manager = FileManager.default
                     try? manager.removeItem(at: destinationURL)// remove the old one, if there is any
                     try manager.moveItem(at: temporaryURL, to: destinationURL)// move the new one to destinationURL
-                    //Create a new ProteinManagedObject from the downloaded file:
-                    self.proteinManagedObject = Protein(context: self.context)
-                    self.proteinManagedObject.name = parameter
-                    self.proteinManagedObject.location = String(describing: destinationURL)
-                        do {
-                            try self.context.save()
-                        } catch {
-                            print("Cannot create a new object")
+                        self.proteinManagedObject = Protein(context: self.context)
+                        self.proteinManagedObject.name = parameter
+                        self.proteinManagedObject.location = String(describing: destinationURL)
+                            do {
+                                try self.context.save()
+                                print("Data saved to CoreData")
+                            } catch {
+                                print("Cannot create a new object")
                         }
                 } catch let moveError {
                     print("\(moveError)")
@@ -400,6 +448,34 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
         }
         task.resume()
     }
+    
+    
+    
+    
+   /* func copyFiles(pathFromDocument : String, pathDestBundle: String) {
+        if let pdbFileURL = Bundle.main.url(forResource: textField.text, withExtension: ".dae", subdirectory: "Sample.scnassets") {
+            print(pdbFileURL)
+        }
+        
+        
+        
+       
+        let pathFromDocument = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+        let pathDestBundle = Bundle.main.url(forResource: textField.text, withExtension: ".dae", subdirectory: "Sample.scnassets")
+        let fileManagerIs = FileManager.default
+        do {
+            let filelist = try fileManagerIs.contentsOfDirectory(atPath: pathFromDocument)
+            try? fileManagerIs.copyItem(atPath: pathFromDocument, toPath: pathDestBundle)
+
+            for filename in filelist {
+                try? fileManagerIs.copyItem(atPath: "\(pathFromDocument)/\(filename)", toPath: "\(pathDestBundle)/\(filename)")
+            }
+        } catch {
+            print("\nError\n")
+        }
+    }*/
+    
+    
     
         //Save to Core Data
 
@@ -420,8 +496,7 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
         if touch?.view != helpView{
             self.helpView.isHidden = true
             }
-     
-        }
+    }
 
 
     
@@ -450,40 +525,7 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
     
     
   // TRY AND FETCH SOMETHING FROM THE WEB
-    //textView for inputting data
 
-
-    
-   
-
-    /* //Get button
-    @IBAction func getButton(_ sender: UIButton) {
-        get(dataString: "userId")
-    }*/
-    
-    /*struct ResponseModel: Codable{
-    var userId: Int
-    var id: Int?
-    var title: String
-    var completed: Bool
-}*/
-    
-    
-
-    
-    //Create POST function for both posting and getting the information from the web
-    /*func evaluateJavaScript(_ javaScriptString: String,
-    completionHandler: ((Any?, Error?) -> Void)? = nil)
-    {*/
-      
-        
-
-    
- 
-  
-    
-    
-    
     func post() {
         
        textField.isUserInteractionEnabled = true
@@ -493,7 +535,7 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
        /* let tap = UITapGestureRecognizer(target:self.view, action: #selector(UIView.endEditing(_:)))
         secondSceneView.addGestureRecognizer(tap)*/
         
-        let url = URL(string: "https://www.rcsb.org/")// files.rcsb.org/download/6MK1.pdb
+        let url = URL(string: "https://www.rcsb.org/")
         
         guard let requestURL = url else { fatalError() }
 
@@ -590,12 +632,7 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
         print(myURLString)
        // print(url!)
         guard let requestUrl = myURLString else { fatalError() }
-        
-        /* webView.evaluateJavaScript("document.getElementById(\"contentStructureWeight\").innerHtml;") {(response, Error) in
-            if (response != nil) {
-                self.textView.text = response as? String
-            }
-        }*/
+    
         // Create URL Request
         var request = URLRequest(url: requestUrl)
         // Specify HTTP Method to use
@@ -648,22 +685,17 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
     
    
     
-
-
  
-    
-   /* func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
 
-        textView.text = proteinManagedObject.name
-       }*/
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
         
-        textView.delegate = self
-        self.textView.reloadInputViews()
+        //textView.delegate = self
+        //self.textView.reloadInputViews()
         
         textField.delegate = self
 
@@ -689,11 +721,10 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
             if proteinManagedObject != nil{
                 textField.text = proteinManagedObject.name
                              }*/
-              
-
-
-        
+            
         }
+    
+
     
     override func viewWillAppear(_ animated: Bool) {
         

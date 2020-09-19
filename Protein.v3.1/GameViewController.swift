@@ -52,27 +52,26 @@ class GameViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegat
     var proteinArray = [String]()
     
     @IBAction func flexCoil(_ sender: UIButton) {
-        
-       addProtein(name: "flexCoil")
+       addProtein(name: "fCoil")
        proteinArray.append("fCoil")
     }
     
     
     @IBAction func rigCoil(_ sender: UIButton) {
-        addProtein(name: "rigCoil")
+        addProtein(name: "rCoil")
         proteinArray.append("rCoil")
     }
     
     
     @IBAction func helix(_ sender: UIButton) {
-       addProtein(name: "helix")
+       addProtein(name: "Helix")
        proteinArray.append("Helix")
         
     }
     
     
     @IBAction func sheet(_ sender: UIButton) {
-       addProtein(name: "sheet")
+       addProtein(name: "Sheet")
        proteinArray.append("Sheet")
     }
     
@@ -156,16 +155,11 @@ class GameViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegat
                 (ACTION) in
                 self.openLink()
             }
-            
             let helpScreenAction = UIAlertAction(title: "Help", style: .default) {
                 (ACTION) in
                 self.helpScreen()
-                
             }
-            
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-            
-            
             AlertService.showAlert(style: .actionSheet, title: nil, message: nil, actions: [openLinkAction, helpScreenAction,cancelAction], completion: nil)
             
         }
@@ -202,7 +196,7 @@ class GameViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegat
     
     
 //2. Record Button Function: Function to record the screen
-
+    //Tap Gesture
   @objc func handleTapGesture(){
     stopRecording()
     recordButton.tintColor = UIColor(red: 0.4, green: 0.36, blue: 0.46, alpha: 1)
@@ -214,7 +208,6 @@ class GameViewController: UIViewController, ARSCNViewDelegate, UITextViewDelegat
     recordButton.tintColor = UIColor.red
     print("Long pressed")
    }
-    
        // 2.1. Record Screen Function
    let recorder = RPScreenRecorder.shared()
    func startRecording(){
@@ -263,20 +256,17 @@ func previewControllerDidFinish(_ previewController: RPPreviewViewController) {
 // 4. Polypeptide Button Functions: To add protein onto the screens when button is pressed
         func addProtein(name: String) {
            lightOn()
-          
-            let proteinScene = SCNScene(named: "models.scnassets/" + name + ".scn")!
+            let proteinScene = SCNScene(named: "Combinations.scnassets/" + name + ".scn")!
            //These models have only 1 rootnode as the model, add cameranode
             let cameraNode = SCNNode()
             cameraNode.camera = SCNCamera()
             cameraNode.position = SCNVector3(x: 0, y: 0, z: 0)
             scene.rootNode.addChildNode(cameraNode)
             
-            
             let nodeName = proteinScene.rootNode.childNodes[0].name
             
             guard let proteinNode = proteinScene.rootNode.childNode(withName: nodeName!, recursively: true) else {return}
 
-            
             proteinNode.scale = SCNVector3(x: 0.008, y: 0.008, z: 0.008)
             proteinNode.position = SCNVector3(x: -0.005, y: 0, z: -0.010)
             
@@ -292,7 +282,6 @@ func previewControllerDidFinish(_ previewController: RPPreviewViewController) {
             cameraNode.constraints = [centerConstraint]
             
             thirdSceneView.scene = scene
-            
         }
 
     
@@ -358,7 +347,7 @@ func previewControllerDidFinish(_ previewController: RPPreviewViewController) {
         let newElements = proteinArray.joined(separator: "-")
         let text = SCNText(string: "Congratulations!\nYou have created \na new protein made of \(newElements)", extrusionDepth: 2)
         let material = SCNMaterial()
-        material.diffuse.contents = UIColor(red: 0.95, green: 0.65, blue: 0.75, alpha: 0.8)
+        material.diffuse.contents = UIColor(red: 0.4, green: 0.36, blue: 0.46, alpha: 1)
         text.materials = [material]
         let node = SCNNode()
         node.position = SCNVector3(x: -0.005, y: -0.005, z: -0.01)

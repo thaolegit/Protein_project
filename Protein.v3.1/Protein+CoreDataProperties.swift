@@ -17,7 +17,6 @@ extension Protein {
         return NSFetchRequest<Protein>(entityName: "Protein")
     }
 
-    @NSManaged public var image: String?
     @NSManaged public var location: String?
     @NSManaged public var name: String?
 
