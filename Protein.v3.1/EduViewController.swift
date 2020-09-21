@@ -21,9 +21,9 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
       
-     var proteinManagedObject : Protein! = nil
+    var proteinManagedObject : Protein! = nil
       
-      var entity: NSEntityDescription!=nil
+    var entity: NSEntityDescription!=nil
       
       var frc : NSFetchedResultsController<NSFetchRequestResult>! = nil
       
@@ -93,11 +93,12 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
      @IBAction func getButton(_ sender: UIButton) {
         download()
         //displayProtein(name: textField.text!)
-        //displayText(name: textField.text!)
+        //print(proteinManagedObject.name!)
+        //displayText(name: self.proteinManagedObject.name)
         
-        if let pdbFileURL = Bundle.main.url(forResource: textField.text, withExtension: ".dae", subdirectory: "Sample.scnassets") {
+        /*if let pdbFileURL = Bundle.main.url(forResource: textField.text, withExtension: ".dae", subdirectory: "Sample.scnassets") {
             print(pdbFileURL)
-        }
+        }*/
      }
     
     //Exit Button
@@ -177,8 +178,8 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
     }
 
     //idea of the function that should be able to display the protein if there is a converter
-    func displayProteinreal(name: String) {
-        let proteinScene = SCNScene(named: proteinManagedObject.location! + "/" + name + ".dae")!
+   func displayProteinreal(name: String) {
+    let proteinScene = SCNScene(named: proteinManagedObject.location! + "/" + name + ".dae")!
         secondSceneView.scene = proteinScene
     }
     
@@ -409,6 +410,9 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
         let sessionConfig = URLSessionConfiguration.default
         let session = URLSession(configuration: sessionConfig)
         let request = URLRequest(url: fileURL)
+    
+        
+        //proteinManagedObject = frc.object(at: IndexPath(row: 0, section: 0)) as? Protein
         
         let task = session.downloadTask(with: request) { temporaryURL, response, error in
                 //Get the httpresonse code to make sure file exists
@@ -427,28 +431,51 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
                     //download file and save as pre-defined format
                     let documentsUrl =  try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
                     let destinationURL = documentsUrl.appendingPathComponent( parameter! + ".pdb")
-                    print(destinationURL)
+                    //let destinationURL = documentsUrl.appendingPathComponent(parameter!).appendingPathExtension("pdb")
+                    
+
+                    /*
+                    //Enable (1) and (2) to move downloaded file to the main app
+                    //(1) Create the path to the main app's Bundle
+                    let newFolderURL = Bundle.main.bundleURL
+                    let newFileURL = newFolderURL.appendingPathComponent("/Sample.scnassets" + parameter! + ".pdb")
+                    */
+                
                     //manage the downloaded files
                     let manager = FileManager.default
                     try? manager.removeItem(at: destinationURL)// remove the old one, if there is any
                     try manager.moveItem(at: temporaryURL, to: destinationURL)// move the new one to destinationURL
-                        self.proteinManagedObject = Protein(context: self.context)
-                        self.proteinManagedObject.name = parameter
-                        self.proteinManagedObject.location = String(describing: destinationURL)
-                            do {
-                                try self.context.save()
-                                print("Data saved to CoreData")
-                            } catch {
-                                print("Cannot create a new object")
-                        }
-                } catch let moveError {
+                
+                    
+                    /*//(2) Move to app bundle
+                     try manager.moveItem(at: temporaryURL, to: newFileURL)// move the new one to destinationURL*/
+                    
+                    //Save Files information to Core Data
+                    self.saveContext(name:parameter!, location: String(describing: documentsUrl))
+                
+                }
+                catch let moveError {
                     print("\(moveError)")
                 }
-            
+                
+                
         }
         task.resume()
+        
     }
     
+    func saveContext(name: String, location: String) {
+        //proteinManagedObject = frc.object(at: IndexPath(row: 0, section: 0)) as? Protein
+        proteinManagedObject = Protein(context: context)
+        proteinManagedObject.name = name
+        proteinManagedObject.location = location
+        do {
+            try context.save()
+            print("Data saved to CoreData")
+        } catch {
+            print("Cannot create a new object")
+        }
+    }
     
     
     

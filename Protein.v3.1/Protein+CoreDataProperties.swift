@@ -2,7 +2,7 @@
 //  Protein+CoreDataProperties.swift
 //  Protein.v3.1
 //
-//  Created by Thao P Le on 15/09/2020.
+//  Created by Thao P Le on 21/09/2020.
 //  Copyright © 2020 Thao P Le. All rights reserved.
 //
 //
@@ -19,5 +19,9 @@ extension Protein {
 
     @NSManaged public var location: String?
     @NSManaged public var name: String?
+
+}
+
+extension Protein : Identifiable {
 
 }

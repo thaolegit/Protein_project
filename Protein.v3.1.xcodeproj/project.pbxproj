@@ -20,8 +20,9 @@
 		9C5486E924E6DDEA002E8408 /* EduViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C5486E824E6DDEA002E8408 /* EduViewController.swift */; };
 		9C5825042508E147004A87CA /* Combinations.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C5825032508E147004A87CA /* Combinations.scnassets */; };
 		9C6E435125161F61004A907C /* Sample.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C6E435025161F61004A907C /* Sample.scnassets */; };
-		9CAAB3A42510FDA400949F7A /* Protein+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CAAB3A22510FDA400949F7A /* Protein+CoreDataClass.swift */; };
-		9CAAB3A52510FDA400949F7A /* Protein+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CAAB3A32510FDA400949F7A /* Protein+CoreDataProperties.swift */; };
+		9C6E43592518D784004A907C /* ProteinClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6E43582518D784004A907C /* ProteinClass.swift */; };
+		9C6E43662518EBD1004A907C /* Protein+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6E43652518EBD1004A907C /* Protein+CoreDataClass.swift */; };
+		9C6E436A2518EDB1004A907C /* Protein+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6E43692518EDB1004A907C /* Protein+CoreDataProperties.swift */; };
 		9CE4589E24F0315B00295A43 /* pppp.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CE4589D24F0315B00295A43 /* pppp.png */; };
 		9CF7BA9F24F59C3B0031DC82 /* Slide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF7BA9E24F59C3B0031DC82 /* Slide.swift */; };
 		9CF7BAA124F59C640031DC82 /* Slide.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9CF7BAA024F59C640031DC82 /* Slide.xib */; };
@@ -45,8 +46,9 @@
 		9C5486E824E6DDEA002E8408 /* EduViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EduViewController.swift; sourceTree = "<group>"; };
 		9C5825032508E147004A87CA /* Combinations.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Combinations.scnassets; sourceTree = "<group>"; };
 		9C6E435025161F61004A907C /* Sample.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Sample.scnassets; sourceTree = "<group>"; };
-		9CAAB3A22510FDA400949F7A /* Protein+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Protein+CoreDataClass.swift"; sourceTree = "<group>"; };
-		9CAAB3A32510FDA400949F7A /* Protein+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Protein+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		9C6E43582518D784004A907C /* ProteinClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProteinClass.swift; sourceTree = "<group>"; };
+		9C6E43652518EBD1004A907C /* Protein+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Protein+CoreDataClass.swift"; sourceTree = "<group>"; };
+		9C6E43692518EDB1004A907C /* Protein+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Protein+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		9CE4589D24F0315B00295A43 /* pppp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pppp.png; path = ../pppp.png; sourceTree = "<group>"; };
 		9CF7BA9E24F59C3B0031DC82 /* Slide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slide.swift; sourceTree = "<group>"; };
 		9CF7BAA024F59C640031DC82 /* Slide.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Slide.xib; sourceTree = "<group>"; };
@@ -88,8 +90,8 @@
 		9C26A91924D8424E000E131B /* Protein.v3.1 */ = {
 			isa = PBXGroup;
 			children = (
-				9CAAB3A22510FDA400949F7A /* Protein+CoreDataClass.swift */,
-				9CAAB3A32510FDA400949F7A /* Protein+CoreDataProperties.swift */,
+				9C6E43692518EDB1004A907C /* Protein+CoreDataProperties.swift */,
+				9C6E43652518EBD1004A907C /* Protein+CoreDataClass.swift */,
 				9C26A91A24D8424E000E131B /* AppDelegate.swift */,
 				9CF7BA9E24F59C3B0031DC82 /* Slide.swift */,
 				9C26A93224D842EC000E131B /* AlertService.swift */,
@@ -105,6 +107,7 @@
 				9C26A92824D84251000E131B /* Info.plist */,
 				9CF7BAA024F59C640031DC82 /* Slide.xib */,
 				9CF7BAA624FE79590031DC82 /* Database.xcdatamodeld */,
+				9C6E43582518D784004A907C /* ProteinClass.swift */,
 			);
 			path = Protein.v3.1;
 			sourceTree = "<group>";
@@ -188,14 +191,15 @@
 				9C26A91F24D8424E000E131B /* ViewController.swift in Sources */,
 				9C26A91B24D8424E000E131B /* AppDelegate.swift in Sources */,
 				9C5486E924E6DDEA002E8408 /* EduViewController.swift in Sources */,
-				9CAAB3A42510FDA400949F7A /* Protein+CoreDataClass.swift in Sources */,
+				9C6E43592518D784004A907C /* ProteinClass.swift in Sources */,
 				9C5486C524E6CDCE002E8408 /* GameViewController.swift in Sources */,
 				9C26A93324D842EC000E131B /* AlertService.swift in Sources */,
 				9CF7BA9F24F59C3B0031DC82 /* Slide.swift in Sources */,
+				9C6E436A2518EDB1004A907C /* Protein+CoreDataProperties.swift in Sources */,
+				9C6E43662518EBD1004A907C /* Protein+CoreDataClass.swift in Sources */,
 				9C26A91D24D8424E000E131B /* SceneDelegate.swift in Sources */,
 				9C5486C124E6BC54002E8408 /* FirstViewController.swift in Sources */,
 				9CF7BAA824FE79590031DC82 /* Database.xcdatamodeld in Sources */,
-				9CAAB3A52510FDA400949F7A /* Protein+CoreDataProperties.swift in Sources */,
 				9C5486C324E6CDBE002E8408 /* IntroViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
