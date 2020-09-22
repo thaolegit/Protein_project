@@ -267,7 +267,7 @@ func previewControllerDidFinish(_ previewController: RPPreviewViewController) {
             
             guard let proteinNode = proteinScene.rootNode.childNode(withName: nodeName!, recursively: true) else {return}
 
-            proteinNode.scale = SCNVector3(x: 0.008, y: 0.008, z: 0.008)
+            proteinNode.scale = SCNVector3(x: 0.005, y: 0.005, z: 0.005)
             proteinNode.position = SCNVector3(x: -0.005, y: 0, z: -0.010)
             
             let randomx = Float.random(in: (-Float.pi)...(Float.pi))
@@ -307,7 +307,7 @@ func previewControllerDidFinish(_ previewController: RPPreviewViewController) {
                  }
 
                    
-        proteinNode.scale = SCNVector3(x: 0.008, y: 0.008, z: 0.008)
+        proteinNode.scale = SCNVector3(x: 0.005, y: 0.005, z: 0.005)
         proteinNode.position = SCNVector3(x: -0.005, y: 0, z: -0.005)
         scene.rootNode.addChildNode(proteinNode)
                    

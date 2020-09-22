@@ -91,8 +91,9 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
      
     //Get Button to get the pDB files and display
      @IBAction func getButton(_ sender: UIButton) {
-        download()
-        //displayProtein(name: textField.text!)
+    //download()
+       //getText()
+        displayProtein(name: textField.text!)
         //print(proteinManagedObject.name!)
         //displayText(name: self.proteinManagedObject.name)
         
@@ -108,6 +109,14 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
     
     @IBAction func clearButton(_ sender: UIButton) {
         secondSceneView.scene = scene
+        print("deleting " + String(scene.rootNode.childNodes.count))
+        
+        for node in scene.rootNode.childNodes
+        {
+            print(node.name as Any)
+            node.removeFromParentNode()
+        }
+        
     }
     
  //----------------------FUNCTIONS TO ENABLE INTERACTIONS---------------
@@ -173,8 +182,31 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
 //------------FUNCTIONS THAT MAKE ACTIONS---------------------------
     
     func displayProtein(name: String) {
-        let proteinScene = SCNScene(named: "Sample.scnassets/" + name + ".dae")!
-        secondSceneView.scene = proteinScene
+        let proteinScene = SCNScene(named: "Sample.scnassets/" + name + ".dae")
+        if proteinScene == nil {
+            print("Model does not exist")
+            displayText(name: name)
+        } else {
+            
+            let cameraNode = SCNNode()
+            cameraNode.camera = SCNCamera()
+            cameraNode.position = SCNVector3(x: 0, y: 0, z: 0)
+            scene.rootNode.addChildNode(cameraNode)
+            
+            let node = proteinScene!.rootNode
+            node.scale = SCNVector3(x: 0.0008, y: 0.0008, z: 0.0008)
+            
+            
+            let node1 = proteinScene?.rootNode.childNode(withName: "node_1", recursively: true)!
+            node1!.scale = SCNVector3(x: 0.0008, y: 0.0008, z: 0.0008)
+        
+            let centerConstraint = SCNLookAtConstraint(target: node)
+            cameraNode.constraints = [centerConstraint]
+            secondSceneView.scene = proteinScene!
+            
+        }
+             
+       
     }
 
     //idea of the function that should be able to display the protein if there is a converter
@@ -184,13 +216,13 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
     }
     
     func displayText(name: String){
-        let text = SCNText(string: name + ".pdb is downloaded", extrusionDepth: 2)
+        let text = SCNText(string: name + " does not exist...Try another!", extrusionDepth: 2)
         let material = SCNMaterial()
         material.diffuse.contents = UIColor(red: 0.4, green: 0.36, blue: 0.46, alpha: 1)
         text.materials = [material]
         let node = SCNNode()
         node.position = SCNVector3(x: -0.005, y: -0.005, z: -0.01)
-        node.scale = SCNVector3(0.0003, 0.0003, 0.0003)
+        node.scale = SCNVector3(0.0005, 0.0005, 0.0005)
         node.geometry = text
         node.name = "shape"
         secondSceneView.scene.rootNode.addChildNode(node)
@@ -238,7 +270,7 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
                 let helpView = UIView(frame:CGRect(x:0, y: 0, width: 400, height: 250))
                             func helpScreen (){
                                 let helpText = UITextView(frame:CGRect(x:20, y: 20, width: 350, height: 230))
-                               helpText.text = "1. Tap on fCoil, rCoil, Helix, Sheet to look at each individual polypeptide. \n\n2. Tap on TRY to create a new Protein!\n\n3. Tap on Clear to try again."
+                               helpText.text = "1. Type in the box the name of Protein that you want. \n\n2. Tap on GET to get the structure of it. \n\n3. Play with it!"
                      
                         
                                helpView.backgroundColor = UIColor(red: 0.4, green: 0.36, blue: 0.46, alpha: 1)
@@ -331,71 +363,7 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
 //4. Get Button Functions: Download PDB files from the PDB Bank and Display them
     //4.1. Download Functions: To download and save PDB files to Documents Directory after user input text
     
-/*func download(){
-              let parameter = textField.text
-              // Create destination URL
-              let documentsUrl:URL =  (FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first as URL?)!
-                 print("docDire" + String(describing: documentsUrl))
-                 let dataPath = documentsUrl.appendingPathComponent("pDBFiles")
-                 let destinationURL = dataPath.appendingPathComponent("/" + parameter! + ".pdb")
-                 //let FileExists = FileManager().fileExists(atPath: destinationURL.path)
-                 
-                 //Create URL to the source file to download
-                   let domain = "https://files.rcsb.org/download/"
-                   let fileExt = ".pdb"
-                   let fileURL:URL = URL(string: "\(domain)" + parameter! + "\(fileExt)")!
-                print(fileURL)
-    
-                 
-                 let sessionConfig = URLSessionConfiguration.default
-                 let session = URLSession(configuration: sessionConfig)
-                 let request = URLRequest(url: fileURL)
-                 let task = session.downloadTask(with: request) { (tempLocalUrl, response, error) in
-                    DispatchQueue.main.async {
-                    
-                     if let tempLocalUrl = tempLocalUrl, error == nil {
-                         // Success
-                         if let statusCode = (response as? HTTPURLResponse)?.statusCode {
-                             print("Successfully downloaded. Status code: \(statusCode)")
-                            //make a new proteinManagedObject
-                            /*self.proteinManagedObject = Protein(context: self.context)
-                                 
-                                 //give the attributes from the downloaded file
-                            self.proteinManagedObject.name = self.textField.text
-                            self.proteinManagedObject.location = String(describing: destinationURL)
-                                 do{
-                                    try self.context.save()
-                                    print(self.proteinManagedObject.name!)
-                                    print(self.proteinManagedObject.location!)
-                                    self.textView.text = self.proteinManagedObject.name
-                                    
-                                 } catch {
-                                     print("Cannot create a new object")
-                                 }*/
-                            
-                         }
-                        
-                       do {
-                       
-                        try FileManager.default.copyItem(at: tempLocalUrl, to: destinationURL)
-                         } catch (let writeError) {
-                             print("Error creating a file \(destinationURL) : \(writeError)")
-                         }
-                         
-                     } else {
-                      print("Error took place while downloading a file. Error description: %@", error?.localizedDescription as Any);
-                     }
-                 }
-               }
-             /*//Check if File exists. If it does, print and do not download
-                 if FileExists == true {
-                   print("This file was already downloaded.")
-                   task.cancel()
-                   }*/
-               
-           task.resume()
-                 
-               }*/
+
     var task: URLSessionTask!
     
     func download() {
@@ -430,7 +398,7 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
                 do {
                     //download file and save as pre-defined format
                     let documentsUrl =  try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-                    let destinationURL = documentsUrl.appendingPathComponent( parameter! + ".pdb")
+                    let destinationURL = documentsUrl.appendingPathComponent(parameter! + ".pdb")
                     //let destinationURL = documentsUrl.appendingPathComponent(parameter!).appendingPathExtension("pdb")
                     
 
@@ -445,6 +413,7 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
                     let manager = FileManager.default
                     try? manager.removeItem(at: destinationURL)// remove the old one, if there is any
                     try manager.moveItem(at: temporaryURL, to: destinationURL)// move the new one to destinationURL
+                    print(destinationURL)
                 
                     
                     /*//(2) Move to app bundle
@@ -477,6 +446,34 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
         }
     }
     
+   /* func getText(){
+        if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first{
+            let archiveURL = dir.appendingPathComponent("Text").appendingPathExtension("txt")
+            print(archiveURL)
+        
+        do{
+                title = try! String(contentsOfFile: String(describing: archiveURL), encoding: .utf8)
+                print("Response data string")
+            if let range = title!.range(of: "TITLE ") {
+                     
+                _ = title![range]
+                     
+                     // get more data
+                let endIndex = title!.index(range.lowerBound, offsetBy: 10)
+                let mySubstring = title![range.lowerBound..<endIndex]
+                    
+                   
+                     print(String(mySubstring))
+                     //self.textView.text = "Molecular weight:" + String(mySubstring)
+                 }
+                 else {
+                   print("String not present")
+                }
+    
+        }
+        
+    }
+    }*/
     
     
    /* func copyFiles(pathFromDocument : String, pathDestBundle: String) {
@@ -632,83 +629,7 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
        }
        }
     
-   
-    /*struct Website {
-
-        var url: URL
-        var img: URL
-        var title: String
-
-        init(url: URL, img: URL, text: String) {
-            self.url = url
-            self.img = img
-            self.title = text
-        }
-    }*/
-    
-        
-    
-    
-   /* func get() {
-
-        
-        // Create URL
-        let domain = "https://www.rcsb.org/structure/"
-        let parameter = "\(textField.text ?? "1111")"
-        let myURLString:NSURL = NSURL(string: "\(domain)\(parameter)")!
-        print(myURLString)
-       // print(url!)
-        guard let requestUrl = myURLString else { fatalError() }
-    
-        // Create URL Request
-        var request = URLRequest(url: requestUrl)
-        // Specify HTTP Method to use
-        request.httpMethod = "GET"
-        // Send HTTP Request
-        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-           DispatchQueue.main.async {
-
-            // Check if Error took place
-            if let error = error {
-                print("Error took place \(error)")
-                return
-            }
-            
-            // Read HTTP Response Status code
-            if let response = response as? HTTPURLResponse {
-                print("Response HTTP Status code: \(response.statusCode)")
-            
-            }
-            
-            // Convert HTTP Response Data to a simple String
-            if let data = data, let dataString = String(data: data, encoding: .utf8) {
-                
-                if let range = dataString.range(of: "Structure weight:") {
-                    
-                    _ = dataString[range]
-                   
-                    let endIndex = dataString.index(range.upperBound, offsetBy: 10)
-                    
-                    let mySubString = dataString[range.upperBound..<endIndex]
-                 
-                    //let substring = dataString[..<range.lowerBound] // or str[str.startIndex..<range.lowerBound]
-                  print(String(mySubString))
-                    self.textView.text = "Weight:" + String(mySubString)// Prints ab
-                }
-                else {
-                  print("String not present")
-                }
- 
-               /* print("Response data string:\n \(dataString)")
-                self.textView.text = dataString*/
-            }
-            
-        }
-        }
-        task.resume()
-        
-        
-    }*/
+  
     
    
     
@@ -728,7 +649,7 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
 
         secondSceneView.delegate = self
         secondSceneView.showsStatistics = true
-        secondSceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin, ARSCNDebugOptions.showFeaturePoints]
+        //secondSceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin, ARSCNDebugOptions.showFeaturePoints]
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture))
             let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
