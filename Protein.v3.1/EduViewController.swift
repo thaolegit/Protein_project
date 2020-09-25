@@ -91,15 +91,10 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
      
     //Get Button to get the pDB files and display
      @IBAction func getButton(_ sender: UIButton) {
-    //download()
-       //getText()
-        displayProtein(name: textField.text!)
-        //print(proteinManagedObject.name!)
-        //displayText(name: self.proteinManagedObject.name)
-        
-        /*if let pdbFileURL = Bundle.main.url(forResource: textField.text, withExtension: ".dae", subdirectory: "Sample.scnassets") {
-            print(pdbFileURL)
-        }*/
+    //download(fileURL: fileURL, parameter: parameter)
+    getDownloadURL()
+    displayProteinfake(name: textField.text!)
+     
      }
     
     //Exit Button
@@ -180,9 +175,9 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
     
     
 //------------FUNCTIONS THAT MAKE ACTIONS---------------------------
-    
-    func displayProtein(name: String) {
-        let proteinScene = SCNScene(named: "Sample.scnassets/" + name + ".dae")
+   
+    func displayProteinfake(name: String) {
+        let proteinScene = SCNScene(named: "Sample.scnassets/"  + name + ".dae")
         if proteinScene == nil {
             print("Model does not exist")
             displayText(name: name)
@@ -203,18 +198,34 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
             let centerConstraint = SCNLookAtConstraint(target: node)
             cameraNode.constraints = [centerConstraint]
             secondSceneView.scene = proteinScene!
-            
         }
-             
-       
     }
 
     //idea of the function that should be able to display the protein if there is a converter
-   func displayProteinreal(name: String) {
-    let proteinScene = SCNScene(named: proteinManagedObject.location! + "/" + name + ".dae")!
-        secondSceneView.scene = proteinScene
+    func displayProtein(name: String) {
+        let proteinScene = SCNScene(named: proteinManagedObject.location! + "/"  + name + ".dae")
+        if proteinScene == nil {
+            print("Model does not exist")
+            displayText(name: name)
+        } else {
+            
+            let cameraNode = SCNNode()
+            cameraNode.camera = SCNCamera()
+            cameraNode.position = SCNVector3(x: 0, y: 0, z: 0)
+            scene.rootNode.addChildNode(cameraNode)
+            
+            let node = proteinScene!.rootNode
+            node.scale = SCNVector3(x: 0.0008, y: 0.0008, z: 0.0008)
+            
+            
+            let node1 = proteinScene?.rootNode.childNode(withName: "node_1", recursively: true)!
+            node1!.scale = SCNVector3(x: 0.0008, y: 0.0008, z: 0.0008)
+        
+            let centerConstraint = SCNLookAtConstraint(target: node)
+            cameraNode.constraints = [centerConstraint]
+            secondSceneView.scene = proteinScene!
+        }
     }
-    
     func displayText(name: String){
         let text = SCNText(string: name + " does not exist...Try another!", extrusionDepth: 2)
         let material = SCNMaterial()
@@ -366,22 +377,22 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
 
     var task: URLSessionTask!
     
-    func download() {
+    func getDownloadURL() {
         //Create URL to the source file to download
         let parameter = textField.text
         let domain = "https://files.rcsb.org/download/"
         let fileExt = ".pdb"
         let fileURL = URL(string: "\(domain)" + parameter! + "\(fileExt)")!
         print(fileURL)
-
+        download(fileURL: fileURL, parameter: parameter!)
+    }
+        
+    func download(fileURL:URL, parameter: String){
         //Use URLSession and downloadTask
         let sessionConfig = URLSessionConfiguration.default
         let session = URLSession(configuration: sessionConfig)
         let request = URLRequest(url: fileURL)
     
-        
-        //proteinManagedObject = frc.object(at: IndexPath(row: 0, section: 0)) as? Protein
-        
         let task = session.downloadTask(with: request) { temporaryURL, response, error in
                 //Get the httpresonse code to make sure file exists
                 if let statusCode = (response as? HTTPURLResponse)?.statusCode{
@@ -398,7 +409,7 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
                 do {
                     //download file and save as pre-defined format
                     let documentsUrl =  try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-                    let destinationURL = documentsUrl.appendingPathComponent(parameter! + ".pdb")
+                    let destinationURL = documentsUrl.appendingPathComponent(parameter + ".pdb")
                     //let destinationURL = documentsUrl.appendingPathComponent(parameter!).appendingPathExtension("pdb")
                     
 
@@ -420,7 +431,7 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
                      try manager.moveItem(at: temporaryURL, to: newFileURL)// move the new one to destinationURL*/
                     
                     //Save Files information to Core Data
-                    self.saveContext(name:parameter!, location: String(describing: documentsUrl))
+                    self.saveContext(name:parameter, location: String(describing: documentsUrl))
                 
                 }
                 catch let moveError {
@@ -480,10 +491,6 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
         if let pdbFileURL = Bundle.main.url(forResource: textField.text, withExtension: ".dae", subdirectory: "Sample.scnassets") {
             print(pdbFileURL)
         }
-        
-        
-        
-       
         let pathFromDocument = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
         let pathDestBundle = Bundle.main.url(forResource: textField.text, withExtension: ".dae", subdirectory: "Sample.scnassets")
         let fileManagerIs = FileManager.default
@@ -501,11 +508,7 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
     
     
     
-        //Save to Core Data
-
-       //4.2. Function to Display pDB file as 3D Models in AR
-       //4.3. Function to link downloaded file information to CoreData
-       //4.4. Function to fetch some data from the sites (text data)
+    
        
     
 //---------FUNCTIONS FOR INTERACTION AND DESIGN-------
@@ -536,29 +539,13 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-  // TRY AND FETCH SOMETHING FROM THE WEB
+
+  // TRY AND FETCH SOMETHING FROM THE WEB WITH POST REQUEST
 
     func post() {
         
        textField.isUserInteractionEnabled = true
-        //textField.isEditable = true
-        //textInputView.endEditing(true)
-        
-       /* let tap = UITapGestureRecognizer(target:self.view, action: #selector(UIView.endEditing(_:)))
-        secondSceneView.addGestureRecognizer(tap)*/
-        
+
         let url = URL(string: "https://www.rcsb.org/")
         
         guard let requestURL = url else { fatalError() }
@@ -607,35 +594,8 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
         
     }
     
-    func getTry(){
-           
-           let domain = "https://www.rcsb.org/structure/"
-           let parameter = "\(textField.text ?? "1111")"
-           let myURLString:NSURL = NSURL(string: "\(domain)\(parameter)")!
-           print(myURLString)
-          // let userType =
-           //let myURLString = (userType)"
-           guard let myURL:NSURL = NSURL(string: "\(myURLString)") else {
-               print ("Error: \(myURLString) doesn't seem to be valid")
-               return
-           }
-       
-       
-       do{
-           let myHTMLString = try String(contentsOf: myURL as URL,  encoding: .ascii)
-           print("HTML : \(myHTMLString)")
-       } catch let error {
-           print("Error: \(error)")
-       }
-       }
-    
-  
-    
+
    
-    
- 
-
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -692,40 +652,3 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
     
 }
 
-/*extension UIButton {
-    open override func draw(_ rect: CGRect) {
-        //provide custom style
-        self.layer.cornerRadius = 20
-        //self.layer.masksToBounds = true
-        
-    
-        
-    }
-}
-*/
-
-
-/*//WEB FETCHING EXTENSION
-extension Dictionary {
-    func percentEncoded() -> Data? {
-        return map { key, value in
-            let escapedKey = "\(key)".addingPercentEncoding(withAllowedCharacters: .urlQueryValueAllowed) ?? ""
-            let escapedValue = "\(value)".addingPercentEncoding(withAllowedCharacters: .urlQueryValueAllowed) ?? ""
-            return escapedKey + "=" + escapedValue
-        }
-        .joined(separator: "&")
-        .data(using: .utf8)
-    }
-}
-
-extension CharacterSet {
-    static let urlQueryValueAllowed: CharacterSet = {
-        let generalDelimitersToEncode = ":#[]@" // does not include "?" or "/" due to RFC 3986 - Section 3.4
-        let subDelimitersToEncode = "!$&'()*+,;="
-
-        var allowed = CharacterSet.urlQueryAllowed
-        allowed.remove(charactersIn: "\(generalDelimitersToEncode)\(subDelimitersToEncode)")
-        return allowed
-    }()
-}
-*/

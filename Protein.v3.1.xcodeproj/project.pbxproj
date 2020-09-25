@@ -13,7 +13,6 @@
 		9C26A92224D8424E000E131B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C26A92024D8424E000E131B /* Main.storyboard */; };
 		9C26A92424D84251000E131B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C26A92324D84251000E131B /* Assets.xcassets */; };
 		9C26A92724D84251000E131B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C26A92524D84251000E131B /* LaunchScreen.storyboard */; };
-		9C26A93324D842EC000E131B /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C26A93224D842EC000E131B /* AlertService.swift */; };
 		9C5486C124E6BC54002E8408 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C5486C024E6BC54002E8408 /* FirstViewController.swift */; };
 		9C5486C324E6CDBE002E8408 /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C5486C224E6CDBE002E8408 /* IntroViewController.swift */; };
 		9C5486C524E6CDCE002E8408 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C5486C424E6CDCE002E8408 /* GameViewController.swift */; };
@@ -23,12 +22,23 @@
 		9C6E43592518D784004A907C /* ProteinClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6E43582518D784004A907C /* ProteinClass.swift */; };
 		9C6E43662518EBD1004A907C /* Protein+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6E43652518EBD1004A907C /* Protein+CoreDataClass.swift */; };
 		9C6E436A2518EDB1004A907C /* Protein+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6E43692518EDB1004A907C /* Protein+CoreDataProperties.swift */; };
-		9CE4589E24F0315B00295A43 /* pppp.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CE4589D24F0315B00295A43 /* pppp.png */; };
 		9CF7BA9F24F59C3B0031DC82 /* Slide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF7BA9E24F59C3B0031DC82 /* Slide.swift */; };
 		9CF7BAA124F59C640031DC82 /* Slide.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9CF7BAA024F59C640031DC82 /* Slide.xib */; };
 		9CF7BAA524FD80730031DC82 /* pdbFiles in Resources */ = {isa = PBXBuildFile; fileRef = 9CF7BAA424FD80700031DC82 /* pdbFiles */; };
 		9CF7BAA824FE79590031DC82 /* Database.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9CF7BAA624FE79590031DC82 /* Database.xcdatamodeld */; };
+		9CF86DFD251B8B8900723254 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF86DFC251B8B8900723254 /* AlertService.swift */; };
+		9CF86E89251D19F300723254 /* Protein_v3_1Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF86E88251D19F300723254 /* Protein_v3_1Tests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9CF86E8B251D19F300723254 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9C26A90F24D8424E000E131B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9C26A91624D8424E000E131B;
+			remoteInfo = Protein.v3.1;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		9C26A91724D8424E000E131B /* Protein.v3.1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Protein.v3.1.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -39,7 +49,6 @@
 		9C26A92324D84251000E131B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9C26A92624D84251000E131B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9C26A92824D84251000E131B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9C26A93224D842EC000E131B /* AlertService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlertService.swift; path = ../../Protein.v3/Protein.v3/AlertService.swift; sourceTree = "<group>"; };
 		9C5486C024E6BC54002E8408 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		9C5486C224E6CDBE002E8408 /* IntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
 		9C5486C424E6CDCE002E8408 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -49,15 +58,25 @@
 		9C6E43582518D784004A907C /* ProteinClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProteinClass.swift; sourceTree = "<group>"; };
 		9C6E43652518EBD1004A907C /* Protein+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Protein+CoreDataClass.swift"; sourceTree = "<group>"; };
 		9C6E43692518EDB1004A907C /* Protein+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Protein+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		9CE4589D24F0315B00295A43 /* pppp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pppp.png; path = ../pppp.png; sourceTree = "<group>"; };
 		9CF7BA9E24F59C3B0031DC82 /* Slide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slide.swift; sourceTree = "<group>"; };
 		9CF7BAA024F59C640031DC82 /* Slide.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Slide.xib; sourceTree = "<group>"; };
 		9CF7BAA424FD80700031DC82 /* pdbFiles */ = {isa = PBXFileReference; lastKnownFileType = folder; path = pdbFiles; sourceTree = "<group>"; };
 		9CF7BAA724FE79590031DC82 /* Database.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Database.xcdatamodel; sourceTree = "<group>"; };
+		9CF86DFC251B8B8900723254 /* AlertService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
+		9CF86E86251D19F300723254 /* Protein.v3.1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Protein.v3.1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9CF86E88251D19F300723254 /* Protein_v3_1Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protein_v3_1Tests.swift; sourceTree = "<group>"; };
+		9CF86E8A251D19F300723254 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		9C26A91424D8424E000E131B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9CF86E83251D19F300723254 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -73,8 +92,8 @@
 				9C5825032508E147004A87CA /* Combinations.scnassets */,
 				9C6E435025161F61004A907C /* Sample.scnassets */,
 				9CF7BAA424FD80700031DC82 /* pdbFiles */,
-				9CE4589D24F0315B00295A43 /* pppp.png */,
 				9C26A91924D8424E000E131B /* Protein.v3.1 */,
+				9CF86E87251D19F300723254 /* Protein.v3.1Tests */,
 				9C26A91824D8424E000E131B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -83,6 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				9C26A91724D8424E000E131B /* Protein.v3.1.app */,
+				9CF86E86251D19F300723254 /* Protein.v3.1Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -94,7 +114,7 @@
 				9C6E43652518EBD1004A907C /* Protein+CoreDataClass.swift */,
 				9C26A91A24D8424E000E131B /* AppDelegate.swift */,
 				9CF7BA9E24F59C3B0031DC82 /* Slide.swift */,
-				9C26A93224D842EC000E131B /* AlertService.swift */,
+				9CF86DFC251B8B8900723254 /* AlertService.swift */,
 				9C26A91C24D8424E000E131B /* SceneDelegate.swift */,
 				9C26A91E24D8424E000E131B /* ViewController.swift */,
 				9C26A92024D8424E000E131B /* Main.storyboard */,
@@ -110,6 +130,15 @@
 				9C6E43582518D784004A907C /* ProteinClass.swift */,
 			);
 			path = Protein.v3.1;
+			sourceTree = "<group>";
+		};
+		9CF86E87251D19F300723254 /* Protein.v3.1Tests */ = {
+			isa = PBXGroup;
+			children = (
+				9CF86E88251D19F300723254 /* Protein_v3_1Tests.swift */,
+				9CF86E8A251D19F300723254 /* Info.plist */,
+			);
+			path = Protein.v3.1Tests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -132,18 +161,40 @@
 			productReference = 9C26A91724D8424E000E131B /* Protein.v3.1.app */;
 			productType = "com.apple.product-type.application";
 		};
+		9CF86E85251D19F300723254 /* Protein.v3.1Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9CF86E8D251D19F300723254 /* Build configuration list for PBXNativeTarget "Protein.v3.1Tests" */;
+			buildPhases = (
+				9CF86E82251D19F300723254 /* Sources */,
+				9CF86E83251D19F300723254 /* Frameworks */,
+				9CF86E84251D19F300723254 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9CF86E8C251D19F300723254 /* PBXTargetDependency */,
+			);
+			name = Protein.v3.1Tests;
+			productName = Protein.v3.1Tests;
+			productReference = 9CF86E86251D19F300723254 /* Protein.v3.1Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		9C26A90F24D8424E000E131B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1150;
+				LastSwiftUpdateCheck = 1200;
 				LastUpgradeCheck = 1150;
 				ORGANIZATIONNAME = "Thao P Le";
 				TargetAttributes = {
 					9C26A91624D8424E000E131B = {
 						CreatedOnToolsVersion = 11.5;
+					};
+					9CF86E85251D19F300723254 = {
+						CreatedOnToolsVersion = 12.0;
+						TestTargetID = 9C26A91624D8424E000E131B;
 					};
 				};
 			};
@@ -161,6 +212,7 @@
 			projectRoot = "";
 			targets = (
 				9C26A91624D8424E000E131B /* Protein.v3.1 */,
+				9CF86E85251D19F300723254 /* Protein.v3.1Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -172,12 +224,18 @@
 			files = (
 				9C5825042508E147004A87CA /* Combinations.scnassets in Resources */,
 				9C26A92724D84251000E131B /* LaunchScreen.storyboard in Resources */,
-				9CE4589E24F0315B00295A43 /* pppp.png in Resources */,
 				9CF7BAA124F59C640031DC82 /* Slide.xib in Resources */,
 				9CF7BAA524FD80730031DC82 /* pdbFiles in Resources */,
 				9C26A92424D84251000E131B /* Assets.xcassets in Resources */,
 				9C26A92224D8424E000E131B /* Main.storyboard in Resources */,
 				9C6E435125161F61004A907C /* Sample.scnassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9CF86E84251D19F300723254 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -190,10 +248,10 @@
 			files = (
 				9C26A91F24D8424E000E131B /* ViewController.swift in Sources */,
 				9C26A91B24D8424E000E131B /* AppDelegate.swift in Sources */,
+				9CF86DFD251B8B8900723254 /* AlertService.swift in Sources */,
 				9C5486E924E6DDEA002E8408 /* EduViewController.swift in Sources */,
 				9C6E43592518D784004A907C /* ProteinClass.swift in Sources */,
 				9C5486C524E6CDCE002E8408 /* GameViewController.swift in Sources */,
-				9C26A93324D842EC000E131B /* AlertService.swift in Sources */,
 				9CF7BA9F24F59C3B0031DC82 /* Slide.swift in Sources */,
 				9C6E436A2518EDB1004A907C /* Protein+CoreDataProperties.swift in Sources */,
 				9C6E43662518EBD1004A907C /* Protein+CoreDataClass.swift in Sources */,
@@ -204,7 +262,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9CF86E82251D19F300723254 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9CF86E89251D19F300723254 /* Protein_v3_1Tests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9CF86E8C251D19F300723254 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9C26A91624D8424E000E131B /* Protein.v3.1 */;
+			targetProxy = 9CF86E8B251D19F300723254 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		9C26A92024D8424E000E131B /* Main.storyboard */ = {
@@ -376,6 +450,50 @@
 			};
 			name = Release;
 		};
+		9CF86E8E251D19F300723254 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3U5J5L4HYD;
+				INFOPLIST_FILE = Protein.v3.1Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "UCC.Protein-v3-1Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Protein.v3.1.app/Protein.v3.1";
+			};
+			name = Debug;
+		};
+		9CF86E8F251D19F300723254 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3U5J5L4HYD;
+				INFOPLIST_FILE = Protein.v3.1Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "UCC.Protein-v3-1Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Protein.v3.1.app/Protein.v3.1";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -393,6 +511,15 @@
 			buildConfigurations = (
 				9C26A92C24D84251000E131B /* Debug */,
 				9C26A92D24D84251000E131B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9CF86E8D251D19F300723254 /* Build configuration list for PBXNativeTarget "Protein.v3.1Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9CF86E8E251D19F300723254 /* Debug */,
+				9CF86E8F251D19F300723254 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
