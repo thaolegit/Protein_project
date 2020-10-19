@@ -392,7 +392,6 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
         let sessionConfig = URLSessionConfiguration.default
         let session = URLSession(configuration: sessionConfig)
         let request = URLRequest(url: fileURL)
-    
         let task = session.downloadTask(with: request) { temporaryURL, response, error in
                 //Get the httpresonse code to make sure file exists
                 if let statusCode = (response as? HTTPURLResponse)?.statusCode{
@@ -400,36 +399,30 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
                 }else {
                     return
                 }
-                
                 guard let temporaryURL = temporaryURL, error == nil else {
                     print(error ?? "Unknown error")
                     return
                 }
-                
-                do {
+                    do {
                     //download file and save as pre-defined format
                     let documentsUrl =  try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
                     let destinationURL = documentsUrl.appendingPathComponent(parameter + ".pdb")
-                    //let destinationURL = documentsUrl.appendingPathComponent(parameter!).appendingPathExtension("pdb")
                     
-
-                    /*
-                    //Enable (1) and (2) to move downloaded file to the main app
-                    //(1) Create the path to the main app's Bundle
-                    let newFolderURL = Bundle.main.bundleURL
-                    let newFileURL = newFolderURL.appendingPathComponent("/Sample.scnassets" + parameter! + ".pdb")
-                    */
-                
+                        /*
+                        //Enable (1) and (2) to move downloaded file to the main app
+                        //(1) Create the path to the main app's Bundle
+                        let newFolderURL = Bundle.main.bundleURL
+                        let newFileURL = newFolderURL.appendingPathComponent("/Sample.scnassets" + parameter! + ".pdb")
+                        */
+                        
                     //manage the downloaded files
                     let manager = FileManager.default
                     try? manager.removeItem(at: destinationURL)// remove the old one, if there is any
                     try manager.moveItem(at: temporaryURL, to: destinationURL)// move the new one to destinationURL
                     print(destinationURL)
+                        /*//(2) Move to app bundle
+                         try manager.moveItem(at: temporaryURL, to: newFileURL)// move the new one to destinationURL*/
                 
-                    
-                    /*//(2) Move to app bundle
-                     try manager.moveItem(at: temporaryURL, to: newFileURL)// move the new one to destinationURL*/
-                    
                     //Save Files information to Core Data
                     self.saveContext(name:parameter, location: String(describing: documentsUrl))
                 
@@ -437,11 +430,8 @@ class EduViewController: UIViewController, ARSCNViewDelegate, UITextFieldDelegat
                 catch let moveError {
                     print("\(moveError)")
                 }
-                
-                
         }
         task.resume()
-        
     }
     
     func saveContext(name: String, location: String) {

@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		9C26A91B24D8424E000E131B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C26A91A24D8424E000E131B /* AppDelegate.swift */; };
 		9C26A91D24D8424E000E131B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C26A91C24D8424E000E131B /* SceneDelegate.swift */; };
-		9C26A91F24D8424E000E131B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C26A91E24D8424E000E131B /* ViewController.swift */; };
 		9C26A92224D8424E000E131B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C26A92024D8424E000E131B /* Main.storyboard */; };
 		9C26A92424D84251000E131B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C26A92324D84251000E131B /* Assets.xcassets */; };
 		9C26A92724D84251000E131B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C26A92524D84251000E131B /* LaunchScreen.storyboard */; };
@@ -24,7 +23,6 @@
 		9C6E436A2518EDB1004A907C /* Protein+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6E43692518EDB1004A907C /* Protein+CoreDataProperties.swift */; };
 		9CF7BA9F24F59C3B0031DC82 /* Slide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF7BA9E24F59C3B0031DC82 /* Slide.swift */; };
 		9CF7BAA124F59C640031DC82 /* Slide.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9CF7BAA024F59C640031DC82 /* Slide.xib */; };
-		9CF7BAA524FD80730031DC82 /* pdbFiles in Resources */ = {isa = PBXBuildFile; fileRef = 9CF7BAA424FD80700031DC82 /* pdbFiles */; };
 		9CF7BAA824FE79590031DC82 /* Database.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9CF7BAA624FE79590031DC82 /* Database.xcdatamodeld */; };
 		9CF86DFD251B8B8900723254 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF86DFC251B8B8900723254 /* AlertService.swift */; };
 		9CF86E89251D19F300723254 /* Protein_v3_1Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF86E88251D19F300723254 /* Protein_v3_1Tests.swift */; };
@@ -44,7 +42,6 @@
 		9C26A91724D8424E000E131B /* Protein.v3.1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Protein.v3.1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C26A91A24D8424E000E131B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9C26A91C24D8424E000E131B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		9C26A91E24D8424E000E131B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		9C26A92124D8424E000E131B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9C26A92324D84251000E131B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9C26A92624D84251000E131B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -60,7 +57,6 @@
 		9C6E43692518EDB1004A907C /* Protein+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Protein+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		9CF7BA9E24F59C3B0031DC82 /* Slide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slide.swift; sourceTree = "<group>"; };
 		9CF7BAA024F59C640031DC82 /* Slide.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Slide.xib; sourceTree = "<group>"; };
-		9CF7BAA424FD80700031DC82 /* pdbFiles */ = {isa = PBXFileReference; lastKnownFileType = folder; path = pdbFiles; sourceTree = "<group>"; };
 		9CF7BAA724FE79590031DC82 /* Database.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Database.xcdatamodel; sourceTree = "<group>"; };
 		9CF86DFC251B8B8900723254 /* AlertService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
 		9CF86E86251D19F300723254 /* Protein.v3.1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Protein.v3.1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -91,7 +87,6 @@
 			children = (
 				9C5825032508E147004A87CA /* Combinations.scnassets */,
 				9C6E435025161F61004A907C /* Sample.scnassets */,
-				9CF7BAA424FD80700031DC82 /* pdbFiles */,
 				9C26A91924D8424E000E131B /* Protein.v3.1 */,
 				9CF86E87251D19F300723254 /* Protein.v3.1Tests */,
 				9C26A91824D8424E000E131B /* Products */,
@@ -116,7 +111,6 @@
 				9CF7BA9E24F59C3B0031DC82 /* Slide.swift */,
 				9CF86DFC251B8B8900723254 /* AlertService.swift */,
 				9C26A91C24D8424E000E131B /* SceneDelegate.swift */,
-				9C26A91E24D8424E000E131B /* ViewController.swift */,
 				9C26A92024D8424E000E131B /* Main.storyboard */,
 				9C5486C224E6CDBE002E8408 /* IntroViewController.swift */,
 				9C5486E824E6DDEA002E8408 /* EduViewController.swift */,
@@ -225,7 +219,6 @@
 				9C5825042508E147004A87CA /* Combinations.scnassets in Resources */,
 				9C26A92724D84251000E131B /* LaunchScreen.storyboard in Resources */,
 				9CF7BAA124F59C640031DC82 /* Slide.xib in Resources */,
-				9CF7BAA524FD80730031DC82 /* pdbFiles in Resources */,
 				9C26A92424D84251000E131B /* Assets.xcassets in Resources */,
 				9C26A92224D8424E000E131B /* Main.storyboard in Resources */,
 				9C6E435125161F61004A907C /* Sample.scnassets in Resources */,
@@ -246,7 +239,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9C26A91F24D8424E000E131B /* ViewController.swift in Sources */,
 				9C26A91B24D8424E000E131B /* AppDelegate.swift in Sources */,
 				9CF86DFD251B8B8900723254 /* AlertService.swift in Sources */,
 				9C5486E924E6DDEA002E8408 /* EduViewController.swift in Sources */,
